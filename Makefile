@@ -1,6 +1,6 @@
 NAME = cub3D
 
-SRC = src/main.c
+SRC = src/main.c src/args_check.c src/gen_map.c src/get_next_line.c
 
 LIBFT = ./libft/libft.a
 

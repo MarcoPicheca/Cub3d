@@ -6,7 +6,7 @@
 #    By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/19 17:27:14 by adapassa          #+#    #+#              #
-#    Updated: 2024/12/08 19:05:09 by mapichec         ###   ########.fr        #
+#    Updated: 2024/12/11 18:55:16 by mapichec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,11 +30,12 @@ SRCS = ft_bzero ft_isalnum \
 		ft_split ft_itoa ft_strmapi \
 		ft_striteri ft_putchar_fd ft_putstr_fd \
 		ft_putendl_fd ft_putnbr_fd ft_memcmp \
-		ft_printf ft_utils get_next_line \
+		ft_printf ft_utils \
 		get_next_line_utils \
 		ft_lstnew ft_lstadd_back ft_lstadd_front \
 		ft_lstsize ft_lstdelone ft_lstlast \
 		ft_lstclear ft_lstiter ft_lstmap \
+# get_next_line
 
 SRC = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRCS)))
 OBJ = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRCS)))

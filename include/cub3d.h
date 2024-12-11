@@ -6,7 +6,7 @@
 /*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 18:21:13 by mapichec          #+#    #+#             */
-/*   Updated: 2024/12/10 17:47:01 by mapichec         ###   ########.fr       */
+/*   Updated: 2024/12/11 18:56:17 by mapichec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,35 @@
 // Pi costant
 # define PI 3.141592653
 
-typedef struct s_player
+// typedef struct s_player
+// {
+// 	char	dir_start;
+// 	float	x;
+// 	float	y;
+// }			t_player;
+
+typedef struct s_map
 {
-	char	dir_start;
-	float	x;
-	float	y;
-}			t_player;
+	int		lines_ind;
+	int		cols_ind;
+	int		ht;
+	int		wh;
+	int		fd;
+	int		main_chr;
+	char	**mtx;
+}			t_map;
 
 typedef struct s_game
 {
 	void	*mlx;
 	void	*img;
 	void	*win;
-	char	**map;
+	t_map	map[1];
 }			t_game;
+
+int	ft_is_cub(char *str, int len, char *ext);
+int	file_cub_check(char *str);
+int	map_gen(t_game *game, char *av);
+char	*get_next_line(int fd);
 
 #endif

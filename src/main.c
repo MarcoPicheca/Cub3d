@@ -6,7 +6,7 @@
 /*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 18:16:58 by mapichec          #+#    #+#             */
-/*   Updated: 2024/12/10 17:52:02 by mapichec         ###   ########.fr       */
+/*   Updated: 2024/12/11 18:24:57 by mapichec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ void	init_game(t_game *game)
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
 }
 
-char	**parse_args()
-
 int main(int ac, char **av)
 {
 	t_game	game;
@@ -29,8 +27,11 @@ int main(int ac, char **av)
 	if (ac != 2)
 		return (0);
 	memset(&game, 0, sizeof(t_game));
-	// parse
-	game.map = parse_args(av);
+	memset(&game.map, 0, sizeof(t_map));
+	if (file_cub_check(av[1]))
+		return (1);
+	if (map_gen(&game, av[1]))
+		return (1);
 	init_game(&game);
 	mlx_loop(game.mlx);
 	return (0);
