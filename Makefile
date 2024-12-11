@@ -18,9 +18,12 @@ $(NAME): $(SRC)
 	$(CC) $(CFLAGS) $(SRC) $(LIBFT) $(MLX) -o $(NAME)
 
 download:
-	@wget https://cdn.intra.42.fr/document/document/21656/minilibx-linux.tgz
-	@tar -xf minilibx-linux.tgz
-	@$(RM) minilibx-linux.tgz
+	@git clone git@github.com:42Paris/minilibx-linux.git
+	@echo "Cloned minilibx"
+
+rm_libx:
+	@rm -rf minilibx-linux
+	@echo "removed minilibx"
 
 clean:
 	@make clean -sC libft
