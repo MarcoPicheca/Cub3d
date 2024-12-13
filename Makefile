@@ -17,10 +17,12 @@ $(NAME): $(SRC)
 	@cd minilibx-linux && make
 	$(CC) $(CFLAGS) $(SRC) $(LIBFT) $(MLX) -o $(NAME)
 
+# download repo minilib x 
 download:
 	@git clone git@github.com:42Paris/minilibx-linux.git
 	@echo "Cloned minilibx"
 
+# rm della minilibx da fare sempre prima del push 
 rm_libx:
 	@rm -rf minilibx-linux
 	@echo "removed minilibx"

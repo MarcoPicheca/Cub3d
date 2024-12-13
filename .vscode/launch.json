@@ -1,0 +1,23 @@
+{
+	"configurations": [
+		{
+            "name": "(gdb) Launch",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/cub3D",
+            "args": ["maps/map_mand.cub"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable follow-fork-mode",
+                    "text": "set follow-fork-mode parent",
+                    "ignoreFailures": true
+                }
+            ]
+        }
+    ]
+}

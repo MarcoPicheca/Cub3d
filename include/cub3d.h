@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 18:21:13 by mapichec          #+#    #+#             */
-/*   Updated: 2024/12/11 18:56:17 by mapichec         ###   ########.fr       */
+/*   Updated: 2024/12/13 16:03:03 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CUB3D_H
 # include <stdio.h>
 # include <fcntl.h>
+# include <limits.h>
 # include <stdlib.h>
 # include "./colors.h"
 # include "../libft/libft.h"
@@ -40,15 +41,34 @@
 // 	float	y;
 // }			t_player;
 
+typedef struct s_crdls
+{
+	char	**mtx_crdls;
+	char	*path_SO;
+	char	*path_NO;
+	char	*path_WS;
+	char	*path_EA;
+}			t_crdls;
+
+typedef struct s_txt
+{
+	char	*path_txt_floor;
+	char	*path_txt_ceiling;
+}			t_txt;
+
 typedef struct s_map
 {
-	int		lines_ind;
-	int		cols_ind;
+	int		lines_ind; //da settare quando abbiamo la matrice della mappa effettiva
+	int		cols_ind; //da settare quando abbiamo la matrice della mappa effettiva
+	int		start_map; //da settare quando andiamo a cercare la mappa nel file
+	int		end_map; //da settare quando andiamo a cercare la mappa nel file
 	int		ht;
 	int		wh;
 	int		fd;
 	int		main_chr;
 	char	**mtx;
+	t_crdls	cardinals[1];
+	t_txt	txt[1];
 }			t_map;
 
 typedef struct s_game

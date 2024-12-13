@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 18:16:58 by mapichec          #+#    #+#             */
-/*   Updated: 2024/12/11 18:24:57 by mapichec         ###   ########.fr       */
+/*   Updated: 2024/12/13 16:00:13 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
+// Solo di prova per il momento non effettiva parte del prog
 void	init_game(t_game *game)
 {
 	game->mlx = mlx_init();
