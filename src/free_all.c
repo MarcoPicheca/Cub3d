@@ -6,7 +6,7 @@
 /*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 12:49:30 by mapichec          #+#    #+#             */
-/*   Updated: 2024/12/16 17:00:32 by mapichec         ###   ########.fr       */
+/*   Updated: 2024/12/16 17:11:52 by mapichec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,14 @@ void	free_matrix(char **map)
 
 static	void	free_crlds(t_crdls *cards)
 {
-	
+	if (map->cardinals.path_NO != NULL)
+		free(map->cardinals.path_NO);
+	if (map->cardinals.path_SO != NULL)
+		free(map->cardinals.path_SO);
+	if (map->cardinals.path_EA != NULL)
+		free(map->cardinals.path_EA);
+	if (map->cardinals.path_WS != NULL)
+		free(map->cardinals.path_WS);
 }
 
 // per tutte le allocazioni da freeare alla fine del gioco

@@ -6,7 +6,7 @@
 /*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 18:21:13 by mapichec          #+#    #+#             */
-/*   Updated: 2024/12/16 16:58:44 by mapichec         ###   ########.fr       */
+/*   Updated: 2024/12/16 17:41:03 by mapichec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,22 @@
 // Pi costant
 # define PI 3.141592653
 
-// typedef struct s_player
-// {
-// 	char	dir_start;
-// 	float	x;
-// 	float	y;
-// }			t_player;
+typedef struct s_play
+{
+	char	dir_start;
+	float	x;
+	float	y;
+	// mlx hands image
+	void	*hands;
+}			t_play;
 
 typedef struct s_crdls
 {
+	// mlx hands image
+	void	*wall_NO;
+	void	*wall_SO;
+	void	*wall_EA;
+	void	*wall_WS;
 	char	*path_SO;
 	char	*path_NO;
 	char	*path_WS;
@@ -51,6 +58,9 @@ typedef struct s_crdls
 
 typedef struct s_txt
 {
+	// mlx hands image
+	void	*floor;
+	void	*ceiling;
 	char	*path_txt_floor;
 	char	*path_txt_ceiling;
 }			t_txt;
@@ -75,6 +85,8 @@ typedef struct s_game
 	void	*mlx;
 	void	*img;
 	void	*win;
+	void	*sky;
+	t_play	player;
 	t_map	map;
 }			t_game;
 

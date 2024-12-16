@@ -6,7 +6,7 @@
 /*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:24:58 by mapichec          #+#    #+#             */
-/*   Updated: 2024/12/16 17:02:53 by mapichec         ###   ########.fr       */
+/*   Updated: 2024/12/16 17:16:49 by mapichec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static int	map_cardinal(t_map *map)
 static int	map_div(t_map *map)
 {
 	if (map_cardinal(map))
-		return (1);
+		return (printf("err cardinals\n", 1));
 	// // if (map_texture_f_c(map))
 	// // 	return (free_matrix(map), 1);
 	// // if (map_game(map))
@@ -87,10 +87,21 @@ static int	map_div(t_map *map)
 	return (0);
 }
 
+// conta le linee del file per l'allocazione
 static int	line_count(t_game *game)
 {
-	while (get_next_line(game->map.fd) != NULL)
+	char	*tmp;
+	
+	tmp = get_next_line(game->map.fd);
+	if (tmp != NULL)
 		game->map.lines_ind++;
+	while (tmp != NULL)
+	{
+		free(tmp);
+		tmp = get_next_line(game->map.fd);
+		if (tmp != NULL)
+			game->map.lines_ind++;
+	}
 	close(game->map.fd);
 	return (game->map.lines_ind + 1);
 }
