@@ -6,7 +6,7 @@
 /*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 18:21:13 by mapichec          #+#    #+#             */
-/*   Updated: 2024/12/16 12:08:31 by mapichec         ###   ########.fr       */
+/*   Updated: 2024/12/16 16:58:44 by mapichec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@
 
 typedef struct s_crdls
 {
-	char	**mtx_crdls;
 	char	*path_SO;
 	char	*path_NO;
 	char	*path_WS;
@@ -67,8 +66,8 @@ typedef struct s_map
 	int		fd;
 	int		main_chr;
 	char	**mtx;
-	t_crdls	cardinals[1];
-	t_txt	txt[1];
+	t_crdls	cardinals;
+	t_txt	txt;
 }			t_map;
 
 typedef struct s_game
@@ -79,9 +78,11 @@ typedef struct s_game
 	t_map	map;
 }			t_game;
 
-int	ft_is_cub(char *str, int len, char *ext);
-int	file_cub_check(char *str);
-int	map_gen(t_game *game, char *av);
+int		ft_is_cub(char *str, int len, char *ext);
+int		file_cub_check(char *str);
+int		map_gen(t_game *game, char *av);
+void	free_matrix(char **map);
+void	free_game(t_game *game);
 char	*get_next_line(int fd);
 
 #endif

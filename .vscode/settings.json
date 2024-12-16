@@ -4,7 +4,8 @@
         "minishell.h": "c",
         "libft.h": "c",
         "type_traits": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "cub3d.h": "c"
     },
     "search.useParentIgnoreFiles": false
 }

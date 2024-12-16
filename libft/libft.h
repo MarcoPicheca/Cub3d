@@ -6,7 +6,7 @@
 /*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:27:20 by adapassa          #+#    #+#             */
-/*   Updated: 2024/12/11 19:04:05 by mapichec         ###   ########.fr       */
+/*   Updated: 2024/12/16 12:50:22 by mapichec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,13 +139,7 @@ int			ft_printhex(unsigned long nbr, int maiusc);
 int			ft_putchar(char c);
 int			ft_putstr(char *str);
 //////////////////////////////////////////////
-// char		*get_next_line(int fd);
-char		**ft_minisplit(char *str);
-void		*ft_free_mat(char **mat, char *str);
-void		*ft_custom_function(size_t nmemb, size_t size, char
-				*str, bool flag);
 char		*ft_strjoin_gnl(char *s1, char *s2);
-char		*ft_strdup_gnl(const char *src);
 //////////////////////////////////////////////
 // Minishell
 t_token		*ft_lstnewtoken(t_token_type type, char *content);
