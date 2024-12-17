@@ -3,26 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   gen_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:24:58 by mapichec          #+#    #+#             */
-/*   Updated: 2024/12/17 15:25:39 by tschetti         ###   ########.fr       */
+/*   Updated: 2024/12/17 17:44:57 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-// static 	void	print_map(char **arr, int len)
-// {
-// 	int	i = 0;
+static 	void	print_map(char **arr, int len)
+{
+	int	i = 0;
 
-// 	while(i < len)
-// 	{
-// 		printf("%s", arr[i]);
-// 		i++;
-// 	}
-// }
-	// 	while (map->mtx[map->ht][map->wh] != '\0')
+	while(i < len)
+	{
+		printf("%s", arr[i]);
+		i++;
+	}
+}
 
 // checkka i char '1' e '0' sulla linea
 static int	err_game_card(t_map *map)
@@ -51,10 +50,10 @@ static int map_texture_f_c(t_map *map)
     {
         if (err_game_card(map))
             return (1);
-        if (ft_strncmp(map->mtx[map->ht], "F ", 2) == 0
+        if (ft_strncmp(map->mtx[map->ht], "F ", 1) == 0
         		&& map->txt.path_txt_floor == NULL)
             map->txt.path_txt_floor = ft_strdup((map->mtx[map->ht] + 2));
-        if (ft_strncmp(map->mtx[map->ht], "C ", 2) == 0
+        if (ft_strncmp(map->mtx[map->ht], "C ", 1) == 0
 				&& map->txt.path_txt_ceiling == NULL)
             map->txt.path_txt_ceiling = ft_strdup((map->mtx[map->ht] + 2));
         map->ht++;
@@ -94,16 +93,55 @@ static int	map_cardinal(t_map *map)
 	return (0);
 }
 
+// deve checkare che non ci siano linee vuote 
+// static	int	check_map_tmp(t_map *map, char **tmp)
+// {
+		
+// }
+
+// parse mappa di gioco
+static	int	map_game(t_map *map)
+{
+	char		**tmp;
+	static	int	i = 0;
+
+	while(map->mtx[map->ht] && map->ht < map->lines_ind)
+	{
+		if (err_game_card(map))
+		{
+			map->start_map = map->ht;
+			break ;
+		}
+		map->ht++;
+	}
+	tmp = ft_calloc((map->lines_ind - map->ht), sizeof(char *));
+	if (!tmp)
+		return (perror("malloc tmp map_game"), 1);
+	while(map->mtx[map->ht] && map->ht < map->lines_ind)
+	{
+		if (!err_game_card(map))
+			break ;
+		tmp[i] = ft_strdup(map->mtx[map->ht]);
+		map->ht++;
+		i++;
+	}
+	map->ht = 0;
+	check_map_tmp(map, tmp);
+	return (0);
+}
+
 // divide la mappa in componenti (texture punti cardinali, texture floor e ceiling e mappa di gioco)
 // e fa i vari check su di essi
 static int	map_div(t_map *map)
 {
 	if (map_cardinal(map))
-		return (printf("err cardinals\n", 1));
-	// // if (map_texture_f_c(map))
-	// // 	return (free_matrix(map), 1);
-	// // if (map_game(map))
-	// // 	return (free_matrix(map), 1);
+		return (printf("Error!\nerr cardinals\n"), 1);
+	map->ht = 0;
+	if (map_texture_f_c(map))
+		return (printf("Error!\nerr texture\n"), 1);
+	map->ht = 0;
+	if (map_game(map))
+		return (printf("Error!\nerr gmae map\n"), 1);
 	return (0);
 }
 

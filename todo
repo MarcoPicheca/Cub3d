@@ -14,6 +14,6 @@
 
 		6. La mappa deve essere integra, per cui non separata da righe vuote
 	[x] creazione matrice generale
-	[ ] creazione matrice punti cardinali e check errori
-	[ ] creazione matrice Floor e Ceiling e check errori
-	[ ] creazione matrice mappa di gioco e check errori
+	[x] creazione matrice punti cardinali e check errori
+	[x] creazione matrice Floor e Ceiling e check errori
+	[ ] creazione matrice mappa di gioco e check errori (linee vuote per cui con un carattere '\n' come primo nella linea, che non ci sia più di un carattere diverso da '1' o '0', varie ed eventuali)

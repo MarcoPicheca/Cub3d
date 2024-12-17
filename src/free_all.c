@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 12:49:30 by mapichec          #+#    #+#             */
-/*   Updated: 2024/12/16 17:11:52 by mapichec         ###   ########.fr       */
+/*   Updated: 2024/12/17 16:23:59 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	free_matrix(char **map)
 	map = NULL;
 }
 
-static	void	free_crlds(t_crdls *cards)
+static	void	free_crlds(t_map *map)
 {
 	if (map->cardinals.path_NO != NULL)
 		free(map->cardinals.path_NO);
@@ -48,5 +48,5 @@ void	free_game(t_game *game)
 		free_matrix(game->map.mtx);
 	if (game->map.cardinals.path_NO == NULL || game->map.cardinals.path_SO == NULL
 		|| game->map.cardinals.path_EA == NULL || game->map.cardinals.path_WS == NULL)
-		free_crlds(&game->map.cardinals);
+		free_crlds(&game->map);
 }
