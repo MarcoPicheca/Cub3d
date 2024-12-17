@@ -6,7 +6,7 @@
 /*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 18:21:13 by mapichec          #+#    #+#             */
-/*   Updated: 2024/12/16 19:30:09 by tschetti         ###   ########.fr       */
+/*   Updated: 2024/12/17 15:27:23 by tschetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,6 @@ typedef struct s_map
 	int		fd;
 	int		main_chr;
 	char	**mtx;
-	bool	found_floor;
-	bool	found_ceiling;
 	t_crdls	cardinals;
 	t_txt	txt;
 }			t_map;

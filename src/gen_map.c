@@ -6,62 +6,11 @@
 /*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:24:58 by mapichec          #+#    #+#             */
-/*   Updated: 2024/12/16 19:35:16 by tschetti         ###   ########.fr       */
+/*   Updated: 2024/12/17 15:25:39 by tschetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-
-char *ft_skip_spaces(const char *str)
-{
-	while (*str && (*str == ' ' || *str == '\t'))
-		str++;
-	return (char *)str;
-}
-
-
-const char	ft_is_only_space(const char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] != ' ' && str[i] != '\t')
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-static int map_texture_f_c(t_map *map)
-{
-    while (map->mtx[map->ht])
-    {
-        char *line = map->mtx[map->ht];
-        if (line[0] == '\0' || ft_is_only_spaces(line))
-        {
-            map->ht++;
-            continue;
-        }
-        if (!map->found_floor && ft_strncmp(line, "F ", 2) == 0)
-        {
-            map->txt.path_txt_floor = ft_strdup(ft_skip_spaces(line + 2));
-            map->found_floor = true;
-        }
-        else if (!map->found_ceiling && ft_strncmp(line, "C ", 2) == 0)
-        {
-            map->txt.path_txt_ceiling = ft_strdup(ft_skip_spaces(line + 2));
-            map->found_ceiling = true;
-        }
-        else
-            return (write(2, "error\n", 7) , 1);
-        map->ht++;
-    }
-    if (map->found_floor == false || map->found_ceiling == false)
-        return (write(2, "error2\n", 7), 1);
-    return (0);
-}
 
 // static 	void	print_map(char **arr, int len)
 // {
@@ -93,6 +42,26 @@ static int	err_game_card(t_map *map)
 			return (0);
 	}
 	return (0);
+}
+
+static int map_texture_f_c(t_map *map)
+{
+    while (map->mtx[map->ht] && map->ht < map->lines_ind
+        && (map->txt.path_txt_floor == NULL || map->txt.path_txt_ceiling == NULL))
+    {
+        if (err_game_card(map))
+            return (1);
+        if (ft_strncmp(map->mtx[map->ht], "F ", 2) == 0
+        		&& map->txt.path_txt_floor == NULL)
+            map->txt.path_txt_floor = ft_strdup((map->mtx[map->ht] + 2));
+        if (ft_strncmp(map->mtx[map->ht], "C ", 2) == 0
+				&& map->txt.path_txt_ceiling == NULL)
+            map->txt.path_txt_ceiling = ft_strdup((map->mtx[map->ht] + 2));
+        map->ht++;
+    }
+    if (map->txt.path_txt_floor == NULL || map->txt.path_txt_ceiling == NULL)
+        return (1);
+    return 0;
 }
 
 // cicla finche allmeno una delle map->cardinals.path_* sono NULL e finche' la
