@@ -17,3 +17,5 @@
 	[x] creazione matrice punti cardinali e check errori
 	[x] creazione matrice Floor e Ceiling e check errori
 	[ ] creazione matrice mappa di gioco e check errori (linee vuote per cui con un carattere '\n' come primo nella linea, che non ci sia più di un carattere diverso da '1' o '0', varie ed eventuali)
+	[ ] simil flood fill della mappa vedere se chiusa
+	[ ] check su zero per il personaggio
