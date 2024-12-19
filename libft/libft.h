@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:27:20 by mapichec          #+#    #+#             */
-/*   Updated: 2024/12/17 16:34:29 by marco            ###   ########.fr       */
+/*   Updated: 2024/12/19 18:00:02 by mapichec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int			ft_isalpha(int c);
 int			ft_isascii(int c);
 int			ft_isdigit(int c);
 int			ft_isprint(int c);
+int			ft_isspace(int c);
 int			ft_strlen(const char *str);
 size_t		ft_strlen_2(const char *s, int flag);
 ///////////////////////////////////////////////

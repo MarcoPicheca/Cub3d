@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 10:11:10 by mapichec          #+#    #+#             */
-/*   Updated: 2024/12/17 16:38:06 by marco            ###   ########.fr       */
+/*   Updated: 2024/12/19 17:59:49 by mapichec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 int	ft_isdigit(int c)
 {
 	if ((c <= 57 && c >= 48))
+		return (1);
+	return (0);
+}
+
+int	ft_isspace(int c)
+{
+	if (c == 32 || c == '\t')
 		return (1);
 	return (0);
 }

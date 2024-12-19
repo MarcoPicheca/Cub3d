@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 18:21:13 by mapichec          #+#    #+#             */
-/*   Updated: 2024/12/17 15:27:23 by tschetti         ###   ########.fr       */
+/*   Updated: 2024/12/19 18:40:04 by mapichec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,13 @@ typedef struct s_map
 {
 	int		lines_ind; //da settare quando abbiamo la matrice della mappa effettiva
 	int		cols_ind; //da settare quando abbiamo la matrice della mappa effettiva
+	int		len_map; //da settare quando abbiamo la matrice della mappa effettiva
 	int		start_map; //da settare quando andiamo a cercare la mappa nel file
 	int		end_map; //da settare quando andiamo a cercare la mappa nel file
 	int		ht;
 	int		wh;
+	int		x;
+	int		y;
 	int		fd;
 	int		main_chr;
 	char	**mtx;
@@ -96,5 +99,10 @@ int		map_gen(t_game *game, char *av);
 void	free_matrix(char **map);
 void	free_game(t_game *game);
 char	*get_next_line(int fd);
+int		map_div(t_map *map);
+int		map_game(t_map *map);
+int		map_cardinal(t_map *map);
+int		map_texture_f_c(t_map *map);
+int		err_game_card(t_map *map);
 
 #endif
