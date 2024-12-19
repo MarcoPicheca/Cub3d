@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   gen_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:24:58 by mapichec          #+#    #+#             */
-/*   Updated: 2024/12/17 17:44:57 by marco            ###   ########.fr       */
+/*   Updated: 2024/12/19 18:12:31 by tschetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-static 	void	print_map(char **arr, int len)
-{
-	int	i = 0;
+// static 	void	print_map(char **arr, int len)
+// {
+// 	int	i = 0;
 
-	while(i < len)
-	{
-		printf("%s", arr[i]);
-		i++;
-	}
-}
+// 	while(i < len)
+// 	{
+// 		printf("%s", arr[i]);
+// 		i++;
+// 	}
+// }
 
 // checkka i char '1' e '0' sulla linea
 static int	err_game_card(t_map *map)
@@ -126,7 +126,7 @@ static	int	map_game(t_map *map)
 		i++;
 	}
 	map->ht = 0;
-	check_map_tmp(map, tmp);
+	// check_map_tmp(map, tmp);
 	return (0);
 }
 

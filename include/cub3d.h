@@ -6,7 +6,7 @@
 /*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 18:21:13 by mapichec          #+#    #+#             */
-/*   Updated: 2024/12/17 15:27:23 by tschetti         ###   ########.fr       */
+/*   Updated: 2024/12/19 18:21:50 by tschetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <fcntl.h>
 # include <limits.h>
 # include <stdlib.h>
+# include <math.h>
 # include "./colors.h"
 # include "../libft/libft.h"
 # include "../minilibx-linux/mlx.h"
@@ -30,18 +31,42 @@
 # define A 97
 # define S 115
 # define D 100
+# define ESC 65307
 
 // Pi costant
 # define PI 3.141592653
+# define BLOCK 80
+
+# define LEFT 65361
+# define RIGHT 65363
+
 
 typedef struct s_play
 {
-	char	dir_start;
-	float	x;
-	float	y;
-	// mlx hands image
-	void	*hands;
-}			t_play;
+    char    dir_start;     // Direzione iniziale del giocatore ('N', 'S', 'E', 'W')
+    float   x;             // Posizione X
+    float   y;             // Posizione Y
+    float   angle;         // Angolo di rotazione in radianti
+	float	angle_speed;
+    float   move_speed;    // Velocità di movimento
+    float   rot_speed;     // Velocità di rotazione
+	int     key_up;
+    int     key_down;
+    int     key_left;
+    int     key_right;
+	int     left_rotate;  // Aggiunto
+    int     right_rotate; // Aggiunto
+} t_play;
+
+
+// typedef struct s_play
+// {
+// 	char	dir_start;
+// 	float	x;
+// 	float	y;
+// 	// mlx hands image
+// 	void	*hands;
+// }			t_play;
 
 typedef struct s_crdls
 {
@@ -67,6 +92,12 @@ typedef struct s_txt
 
 typedef struct s_map
 {
+	char **mtx2;
+    int width; 
+    int height;
+    int player_x; 
+    int player_y;  
+    char player_dir; 
 	int		lines_ind; //da settare quando abbiamo la matrice della mappa effettiva
 	int		cols_ind; //da settare quando abbiamo la matrice della mappa effettiva
 	int		start_map; //da settare quando andiamo a cercare la mappa nel file
@@ -85,10 +116,31 @@ typedef struct s_game
 	void	*mlx;
 	void	*img;
 	void	*win;
+	char    *img_data;      // Puntatore ai dati dell'immagine
+    int     bpp;            // Bytes per pixel
+    int     line_size;      // Dimensione di una riga in byte
+    int     endian;         // Endianness (0: little-endian, 1: big-endian)
 	void	*sky;
 	t_play	player;
 	t_map	map;
 }			t_game;
+
+void	put_pixel(int x, int y, int color, t_game *game);
+void	draw_ray_dda(t_game *game, float angle, int color);
+void	draw_square(int x, int y, int size, int color, t_game *game);
+
+int		key_press(int keycode, t_play *player);
+int		key_release(int keycode, t_play *player);
+int		close_window(t_game *game);
+
+void	put_pixel(int x, int y, int color, t_game *game);
+void	clear_image(t_game *game);
+
+void	move_player(t_play *player, t_map *map);
+
+void	render_map(t_game *game);
+void	init_game(t_game *game);
+void	init_map(t_map *map, t_play *player);
 
 int		ft_is_cub(char *str, int len, char *ext);
 int		file_cub_check(char *str);
