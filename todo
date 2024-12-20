@@ -1,0 +1,19 @@
+- [ ] TODO capire raycasting https://permadi.com/1996/05/ray-casting-tutorial-6
+- [ ] trova compare
+- [ ] parser:
+	[ ] regole parser
+		1. Nel file ci devono essere: punti cardinali in versione "NO ./path_to_the_north_texture", RGB di Floor e Ceiling, Mappa stessa
+
+		2. I punti cardinali e gli RGB possono essere misti e possono avere spazi all'interno della riga ma non '\n' o altro, ovvero le scritture devono essere come in esempio map_man.cub
+
+		3. Nella mappa ci possono essere spazi e componenti '1' o '0' all'interno e all'esterno dalla mappa ma non Player
+
+		4. i punti cardinali e ./percorso_texture indicano le texture da porre sui muri nelle varie direzioni cardinali
+
+		5. i punti cardinali e i colori RGB non possono essere in mezzo o dopo la mappa
+
+		6. La mappa deve essere integra, per cui non separata da righe vuote
+	[x] creazione matrice generale
+	[x] creazione matrice punti cardinali e check errori
+	[x] creazione matrice Floor e Ceiling e check errori
+	[ ] creazione matrice mappa di gioco e check errori (linee vuote per cui con un carattere '\n' come primo nella linea, che non ci sia più di un carattere diverso da '1' o '0', varie ed eventuali)
