@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 18:21:13 by mapichec          #+#    #+#             */
-/*   Updated: 2024/12/19 18:40:04 by mapichec         ###   ########.fr       */
+/*   Updated: 2024/12/22 11:29:07 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ typedef struct s_game
 int		ft_is_cub(char *str, int len, char *ext);
 int		file_cub_check(char *str);
 int		map_gen(t_game *game, char *av);
-void	free_matrix(char **map);
+void	free_matrix(char **map, int len);
 void	free_game(t_game *game);
 char	*get_next_line(int fd);
 int		map_div(t_map *map);

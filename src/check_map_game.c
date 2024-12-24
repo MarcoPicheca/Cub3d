@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_game.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 10:29:24 by mapichec          #+#    #+#             */
-/*   Updated: 2024/12/19 19:33:49 by mapichec         ###   ########.fr       */
+/*   Updated: 2024/12/24 15:39:14 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ static	int	line_is_empty(char *line)
 	while (line[i] && (line[i] == 32 || line [i] == '\t'))
 		i++;
 	if (line[i] && line[i] == '\n')
-		return (printf("Error!\nline is empty\n"));
+		return (printf("Error!\nline is empty!\n"));
 	return (0);
 }
 
@@ -110,7 +110,8 @@ static	int	zero_no_wall(char **tmp, t_map *map)
 			if (tmp[map->ht][i + 1] == 32 || tmp[map->ht][i + 1] == '\t'
 				|| tmp[map->ht][i + 1] == '\n' || tmp[map->ht][i + 1] == '\0')
 				return (printf("Error!\nZero_no_wall!\n"));
-			if (tmp[map->ht + 1][i] == 32 || tmp[map->ht + 1][i] == '\t' || tmp[map->ht + 1][i] == '\0')
+			if (tmp[map->ht + 1] && (tmp[map->ht + 1][i] == 32
+				|| tmp[map->ht + 1][i] == '\t' || tmp[map->ht + 1][i] == '\0'))
 				return (printf("Error!\nZero_no_wall!\n"));
 			if (tmp[map->ht - 1][i] == 32 || tmp[map->ht - 1][i] == '\t' || tmp[map->ht - 1][i] == '\0')
 				return (printf("Error!\nZero_no_wall!\n"));
@@ -120,61 +121,99 @@ static	int	zero_no_wall(char **tmp, t_map *map)
 	return (0);
 }
 
-// TODO da rifare
-// int	wrong_spaces(char **tmp, t_map *map)
-// {
-// 	if (tmp[map->x] && map->x < map->len_map && tmp[map->x][map->y] != '\0')
-// 	{
-// 		if (tmp[map->x][map->y] && ft_isspace(tmp[map->x][map->y]))
-// 		{
-// 			if (tmp[map->x][map->y + 1] && ft_isspace(tmp[map->x][map->y + 1]))
-// 			{
-// 				map->y++;
-// 				wrong_spaces(tmp, map);
-// 			}
-// 			if (tmp[map->x + 1][map->y] && ft_isspace(tmp[map->x + 1][map->y]))
-// 			{
-// 				map->x++;
-// 				wrong_spaces(tmp, map);
-// 			}
-// 			if (tmp[map->x][map->y - 1] && ft_isspace(tmp[map->x][map->y - 1]))
-// 			{
-// 				map->y--;
-// 				wrong_spaces(tmp, map);
-// 			}
-// 			if (tmp[map->x - 1][map->y] && ft_isspace(tmp[map->x - 1][map->y]))
-// 			{
-// 				map->x--;
-// 				wrong_spaces(tmp, map);
-// 			}
-// 			else
-// 				return (1);
-// 			map->y++;
-// 		}
-// 		map->x++;
-// 	}
-// 	if (tmp[map->x][map->y] == '\0' && ft_isspace(tmp[map->x][map->y - 1]))
-// 		return (1);
-// 	return (0);
-// }
+int	ft_strchr_2(char *s, int c)
+{
+	int		i;
 
-/**
- *	1111111111111111111111111
-	1000000000110000000000001
-	1011000001110000000000001
-	11111111111111111111111111
-	11111111101100000111000001
-								1
-	100000000011000001110111111111111
-	11110111111111011100000010001
-	11110111111111011101010010001
-	11000000110101011100000010001
-	10000000000000001100000010001
-	10000000000000001101010010001
-	11000001110101011111011110N0111
-	11110111 1110101 101111010001
-	11111111 1111111 111111111111
- */
+	i = 0;
+	if (c == 0)
+		return (0);
+	while (s[i] && s[i] != '\0' && s[i] != (unsigned char)c)
+		i++;
+	if (s[i] != (unsigned char)c)
+		return (0);
+	return (1);
+}
+
+// flood fill
+void	map_isnt_close(int x, int y, char **tmp, int len)
+{
+	if (x < 0 || x > len - 1)
+	    return;
+	if (y < 0)
+	    return;
+	if (!tmp[x])
+	    return;
+	if (!tmp[x][y])
+	    return;
+	if (tmp[x][y] == '\0')
+	    return;
+	if (!ft_strchr_2("10NSEW", tmp[x][y]))
+	    return;
+	tmp[x][y] = 'C';
+	map_isnt_close(x, y + 1, tmp, len);
+	map_isnt_close(x, y - 1, tmp, len);
+	map_isnt_close(x - 1, y, tmp, len);
+	map_isnt_close(x + 1, y, tmp, len);
+}
+
+// TODO to be cancelled at the end or commented
+static 	void	print_map(char **arr, int len)
+{
+	int	i = 0;
+
+	while(i < len)
+	{
+		printf("%s", arr[i]);
+		i++;
+	}
+}
+
+// mi sposta la y della mappa al primo carattere non spazio
+void	move_to_first_char(char **tmp, t_map *map)
+{
+	while (tmp[map->x] && map->x < map->len_map)
+	{
+		map->y = 0;
+		while (tmp[map->x][map->y] && tmp[map->x][map->y] != '\0'
+			&& (ft_isspace(tmp[map->x][map->y]) || tmp[map->x][map->y] == '1'))
+			map->y++;
+		if (ft_strchr_2("0NSEW", tmp[map->x][map->y]))
+			return ;
+		map->x++;
+	}
+}
+
+int	check_flood(char **tmp, int len)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	while (x < len && tmp[x])
+	{
+		while (tmp[x][y] != '\0' && tmp[x][y] != '\n')
+		{
+			if (!ft_isspace(tmp[x][y]) && tmp[x][y] != 'C' && tmp[x][y] != '1')
+				return (printf("Error!\nMap is not closed!\n"));
+			y++;	
+		}
+		x++;
+	}
+	return (0);
+}
+
+static int flood_phil(t_map *map, char **tmp)
+{
+	map->ht = 0;
+	move_to_first_char(tmp, map);
+	map_isnt_close(map->x, map->y, tmp, map->len_map);
+	print_map(tmp, map->len_map);
+	if (check_flood(tmp, map->len_map))
+		return (1);
+	return (0);
+}
 
 // deve checkare che non ci siano linee vuote 
 static	int	check_map_tmp(t_map *map)
@@ -186,29 +225,24 @@ static	int	check_map_tmp(t_map *map)
 	if (!tmp)
 		return (perror("calloc tmp map_game\n"), 1);
 	map->ht = map->start_map;
-	map->len_map = map->end_map - map->start_map + 1;
 	while (i < map->len_map)
 	{
-		tmp[i] = ft_strdup(map->mtx[map->ht]);
-		map->ht++;
+		tmp[i] = ft_strdup(map->mtx[map->ht++]);
 		i++;
 	}
 	map->ht = 0;
 	while (tmp[map->ht] && map->ht < map->len_map)
 	{
-		if (line_is_empty(tmp[map->ht]))
-			return (printf("%s\n", tmp[map->ht]), free_matrix(tmp), 1);
-		if (zero_no_wall(tmp, map))
-			return (free_matrix(tmp), 1);
+		if (line_is_empty(tmp[map->ht]) || zero_no_wall(tmp, map))
+			return (free_matrix(tmp, map->len_map), 1);
 		map->ht++;
 	}
-	map->ht = 0;
-	if (map_isnt_close(tmp, map))
-			return (free_matrix(tmp), 1);
-	return (0);
+	if (flood_phil(map, tmp))
+		return (free_matrix(tmp, map->len_map), 1);
+	return (free_matrix(tmp, map->len_map), 0);
 }
 
-// parse mappa di gioco
+// parse mappa di gioco e definizione misure
 int	map_game(t_map *map)
 {
 	while(map->mtx[map->ht] && map->ht < map->lines_ind)
@@ -224,9 +258,8 @@ int	map_game(t_map *map)
 			break ;
 		map->ht++;
 	}
-	// faccio +2 perche' deve contare sia la linea 
-	// di start_map che quella di end
-	map->end_map = map->lines_ind - map->start_map + 2;
+	map->end_map = map->ht;
+	map->len_map = map->end_map - map->start_map;
 	if (check_map_tmp(map))
 		return (1);
 	return (0);

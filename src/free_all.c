@@ -6,20 +6,20 @@
 /*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 12:49:30 by mapichec          #+#    #+#             */
-/*   Updated: 2024/12/17 16:23:59 by marco            ###   ########.fr       */
+/*   Updated: 2024/12/22 11:30:52 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void	free_matrix(char **map)
+void	free_matrix(char **map, int len)
 {
 	int	i;
 
 	i = 0;
 	if (!map)
 		return ;
-	while (map[i] != NULL && map[i][0] != '\0')
+	while (map[i] != NULL && i < len)
 	{
 		free(map[i]);
 		map[i] = NULL;
@@ -45,7 +45,7 @@ static	void	free_crlds(t_map *map)
 void	free_game(t_game *game)
 {
 	if (game->map.mtx)
-		free_matrix(game->map.mtx);
+		free_matrix(game->map.mtx, game->map.lines_ind);
 	if (game->map.cardinals.path_NO == NULL || game->map.cardinals.path_SO == NULL
 		|| game->map.cardinals.path_EA == NULL || game->map.cardinals.path_WS == NULL)
 		free_crlds(&game->map);
