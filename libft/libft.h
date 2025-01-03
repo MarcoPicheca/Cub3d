@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:27:20 by mapichec          #+#    #+#             */
-/*   Updated: 2024/12/19 18:00:02 by mapichec         ###   ########.fr       */
+/*   Updated: 2024/12/24 15:44:19 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ int			ft_toupper(int c);
 int			ft_tolower(int c);
 //////////////////////////////////////////////
 char		*ft_strchr(const char *s, int c);
+int			ft_strchr_2(char *s, int c);
 char		*ft_strrchr(char *s, int c);
 int			ft_strncmp(char *s1, char *s2, size_t n);
 char		*ft_strnstr(const char *big, const char *little, size_t len);

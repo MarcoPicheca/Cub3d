@@ -1,7 +1,15 @@
 NAME = cub3D
 
-SRC = src/main.c src/args_check.c src/gen_map.c src/get_next_line.c \
-		src/free_all.c src/check_map_game.c \
+SRC =	src/main.c \
+		src/args_check.c \
+		src/gen_map.c \
+		src/get_next_line.c \
+		src/free_all.c \
+		src/check_map_game.c \
+		src/check_map.c \
+		src/flood_fill_check.c \
+		src/check_rgb_f_c.c \
+		src/check_crdls.c \
 
 LIBFT = ./libft/libft.a
 

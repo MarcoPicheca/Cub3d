@@ -6,7 +6,7 @@
 /*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 18:16:25 by mapichec          #+#    #+#             */
-/*   Updated: 2024/12/17 16:37:12 by marco            ###   ########.fr       */
+/*   Updated: 2024/12/24 15:43:57 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,18 @@ char	*ft_strchr(const char *s, int c)
 	if (str[i] != (unsigned char)c)
 		return (NULL);
 	return ((str + i));
+}
+
+int	ft_strchr_2(char *s, int c)
+{
+	int		i;
+
+	i = 0;
+	if (c == 0)
+		return (0);
+	while (s[i] && s[i] != '\0' && s[i] != (unsigned char)c)
+		i++;
+	if (s[i] != (unsigned char)c)
+		return (0);
+	return (1);
 }

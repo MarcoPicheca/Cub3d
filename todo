@@ -1,6 +1,7 @@
-- [ ] TODO capire raycasting https://permadi.com/1996/05/ray-casting-tutorial-6
-- [ ] link a video utile per raycasting: https://www.youtube.com/watch?v=G9i78WoBBIU
-- [ ] trova compare
+TODO capire raycasting https://permadi.com/1996/05/ray-casting-tutorial-6
+
+link a video utile per raycasting: https://www.youtube.com/watch?v=G9i78WoBBIU
+
 - [ ] parser:
 	[ ] regole parser
 		1. Nel file ci devono essere: punti cardinali in versione "NO ./path_to_the_north_texture", RGB di Floor e Ceiling, Mappa stessa
@@ -15,8 +16,11 @@
 
 		6. La mappa deve essere integra, per cui non separata da righe vuote
 	[x] creazione matrice generale
-	[x] creazione matrice punti cardinali e check errori
-	[x] creazione matrice Floor e Ceiling e check errori
-	[ ] creazione matrice mappa di gioco e check errori (linee vuote per cui con un carattere '\n' come primo nella linea, che non ci sia più di un carattere diverso da '1' o '0', varie ed eventuali)
-	[ ] simil flood fill della mappa vedere se chiusa
-	[ ] check su zero per il personaggio
+	[x] creazione matrice punti cardinali
+	[x] creazione matrice Floor e Ceiling
+	[x] creazione matrice mappa di gioco (linee vuote per cui con un carattere '\n' come primo nella linea, che non ci sia più di un carattere diverso da '1' o '0', varie ed eventuali)
+	[x] simil flood fill della mappa vedere se chiusa
+	[x] check sul personaggio (dovrebbero essere già risolti con il flood fill)
+	[x] check errori sugli RGB di floor e ceiling: se sono numeri e se rimangono entro i limiti da 0 a 255
+	[x] check errori cardinali: se i path sono corretti e apribili
+	[ ] check errori sul personaggio

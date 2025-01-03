@@ -6,7 +6,7 @@
 /*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:31:05 by mapichec          #+#    #+#             */
-/*   Updated: 2024/12/17 16:35:43 by marco            ###   ########.fr       */
+/*   Updated: 2024/12/24 17:06:23 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,9 @@ char	*ft_strtrim2(char *s1, char *set)
 		if (s)
 			ft_strlcpy(s, &s1[i], j - i + 1);
 	}
-	free(s1);
+	if (s && s != NULL)
+		free(s1);
+	else
+		return (NULL);
 	return (s);
 }

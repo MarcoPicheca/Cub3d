@@ -6,7 +6,7 @@
 /*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 18:21:13 by mapichec          #+#    #+#             */
-/*   Updated: 2024/12/22 11:29:07 by marco            ###   ########.fr       */
+/*   Updated: 2025/01/03 17:16:47 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,12 @@ typedef struct s_txt
 	// mlx hands image
 	void	*floor;
 	void	*ceiling;
+	int		fl_r;
+	int		fl_g;
+	int		fl_b;
+	int		cl_r;
+	int		cl_g;
+	int		cl_b;
 	char	*path_txt_floor;
 	char	*path_txt_ceiling;
 }			t_txt;
@@ -93,6 +99,7 @@ typedef struct s_game
 	t_map	map;
 }			t_game;
 
+// parsing
 int		ft_is_cub(char *str, int len, char *ext);
 int		file_cub_check(char *str);
 int		map_gen(t_game *game, char *av);
@@ -104,5 +111,12 @@ int		map_game(t_map *map);
 int		map_cardinal(t_map *map);
 int		map_texture_f_c(t_map *map);
 int		err_game_card(t_map *map);
+void	map_isnt_close(int x, int y, char **tmp, int len);
+void	move_to_first_char(char **tmp, t_map *map);
+int		check_flood(char **tmp, int len);
+int		flood_phil(t_map *map, char **tmp);
+int		check_map_tmp(t_map *map);
+int		check_rgb_txt(t_txt *txt);
+int		file_path(char *str);
 
 #endif
