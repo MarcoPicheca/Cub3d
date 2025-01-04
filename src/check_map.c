@@ -6,7 +6,7 @@
 /*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 16:04:54 by marco             #+#    #+#             */
-/*   Updated: 2024/12/24 16:07:18 by marco            ###   ########.fr       */
+/*   Updated: 2025/01/04 11:21:05 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,25 @@ static	int	zero_no_wall(char **tmp, t_map *map)
 	return (0);
 }
 
+static	void	copy_free_mtx(t_map *map)
+{
+	int		i;
+	int		count;
+	char	**tmp;
+
+	count = map->start_map;
+	i = 0;
+	tmp = ft_calloc((map->end_map - map->start_map) + 1, sizeof(char *));
+	while (count <= map->end_map)
+	{
+		tmp[i] = ft_strndup(map->mtx[count], ft_strlen(map->mtx[count]));
+		i++;
+		count++;
+	}
+	free_matrix(map->mtx, map->len_map);
+	map->mtx = tmp;
+}
+
 // deve checkare che non ci siano linee vuote 
 int	check_map_tmp(t_map *map)
 {	
@@ -76,5 +95,6 @@ int	check_map_tmp(t_map *map)
 	}
 	if (flood_phil(map, tmp))
 		return (free_matrix(tmp, map->len_map), 1);
+	copy_free_mtx(map);
 	return (free_matrix(tmp, map->len_map), 0);
 }

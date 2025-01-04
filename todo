@@ -2,8 +2,8 @@ TODO capire raycasting https://permadi.com/1996/05/ray-casting-tutorial-6
 
 link a video utile per raycasting: https://www.youtube.com/watch?v=G9i78WoBBIU
 
-- [ ] parser:
-	[ ] regole parser
+- [x] parser:
+	[x] regole parser
 		1. Nel file ci devono essere: punti cardinali in versione "NO ./path_to_the_north_texture", RGB di Floor e Ceiling, Mappa stessa
 
 		2. I punti cardinali e gli RGB possono essere misti e possono avere spazi all'interno della riga ma non '\n' o altro, ovvero le scritture devono essere come in esempio map_man.cub
@@ -23,4 +23,5 @@ link a video utile per raycasting: https://www.youtube.com/watch?v=G9i78WoBBIU
 	[x] check sul personaggio (dovrebbero essere già risolti con il flood fill)
 	[x] check errori sugli RGB di floor e ceiling: se sono numeri e se rimangono entro i limiti da 0 a 255
 	[x] check errori cardinali: se i path sono corretti e apribili
-	[ ] check errori sul personaggio
+	[x] check errori sul personaggio
+[ ] chiedi a tobia se vuole le new line a fine delle linee della mappa

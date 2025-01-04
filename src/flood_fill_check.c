@@ -6,7 +6,7 @@
 /*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 15:42:59 by marco             #+#    #+#             */
-/*   Updated: 2024/12/24 16:35:17 by marco            ###   ########.fr       */
+/*   Updated: 2025/01/04 11:40:44 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,17 +71,6 @@ int	check_flood(char **tmp, int len)
 }
 
 
-// TODO to be cancelled at the end or commented
-// static 	void	print_map(char **arr, int len)
-// {
-// 	int	i = 0;
-
-// 	while(i < len)
-// 	{
-// 		printf("%s", arr[i]);
-// 		i++;
-// 	}
-// }
 
 // muove le coordinate al primo carattere '0NSWE', flood_fill e check_flood
 int	flood_phil(t_map *map, char **tmp)

@@ -6,7 +6,7 @@
 /*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:24:58 by mapichec          #+#    #+#             */
-/*   Updated: 2024/12/22 11:31:43 by marco            ###   ########.fr       */
+/*   Updated: 2025/01/04 10:39:53 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	map_gen(t_game *game, char *av)
 	close(game->map.fd);
 	game->map.ht = 0;
 	// print_map(game->map.mtx, game->map.lines_ind);
-	if (map_div(&game->map))
+	if (map_div(&game->map, game))
 		return (free_game(game), 1);
 	return (0);
 }

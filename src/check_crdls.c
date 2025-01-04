@@ -6,7 +6,7 @@
 /*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 17:17:40 by marco             #+#    #+#             */
-/*   Updated: 2025/01/03 17:19:05 by marco            ###   ########.fr       */
+/*   Updated: 2025/01/04 10:37:56 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static	int	check_paths_crld(t_crdls *crlds)
 	crlds->path_SO = ft_strtrim2(crlds->path_SO, " \n");
 	crlds->path_EA = ft_strtrim2(crlds->path_EA, " \n");
 	crlds->path_WS = ft_strtrim2(crlds->path_WS, " \n");
-	if (file_path(crlds->path_NO) || file_path(crlds->path_SO)
-		|| file_path(crlds->path_EA) || file_path(crlds->path_WS))
-		return (1);
+	// if (file_path(crlds->path_NO) || file_path(crlds->path_SO)
+	// 	|| file_path(crlds->path_EA) || file_path(crlds->path_WS))
+	// 	return (1);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 18:21:13 by mapichec          #+#    #+#             */
-/*   Updated: 2025/01/03 17:16:47 by marco            ###   ########.fr       */
+/*   Updated: 2025/01/04 10:39:23 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,9 @@
 typedef struct s_play
 {
 	char	dir_start;
-	float	x;
-	float	y;
+	double	pos_x;
+	double	pos_y;
+	int		found;
 	// mlx hands image
 	void	*hands;
 }			t_play;
@@ -106,8 +107,8 @@ int		map_gen(t_game *game, char *av);
 void	free_matrix(char **map, int len);
 void	free_game(t_game *game);
 char	*get_next_line(int fd);
-int		map_div(t_map *map);
-int		map_game(t_map *map);
+int		map_div(t_map *map, t_game *game);
+int		map_game(t_map *map,  t_game *game);
 int		map_cardinal(t_map *map);
 int		map_texture_f_c(t_map *map);
 int		err_game_card(t_map *map);
