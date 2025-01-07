@@ -10,6 +10,7 @@ SRC =	src/main.c \
 		src/flood_fill_check.c \
 		src/check_rgb_f_c.c \
 		src/check_crdls.c \
+		src/mlx_callback_fts.c \
 
 LIBFT = ./libft/libft.a
 
