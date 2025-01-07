@@ -11,6 +11,11 @@ SRC =	src/main.c \
 		src/check_rgb_f_c.c \
 		src/check_crdls.c \
 		src/mlx_callback_fts.c \
+		src/map_init.c \
+		src/movement.c \
+		src/drawing_fts.c \
+		src/render.c \
+		src/game_init.c \
 
 LIBFT = ./libft/libft.a
 
@@ -18,14 +23,16 @@ MLX =  -Lminilibx-linux -lmlx -lX11 -lXext
 
 CC = cc
 
-CFLAGS = -g -lm -Wall -Werror -Wextra
+MATH = -lm
+
+CFLAGS = -Wall -Werror -Wextra -g 
 
 all: $(NAME)
 
 $(NAME): $(SRC)
 	@make -sC libft
 	@cd minilibx-linux && make
-	$(CC) $(CFLAGS) $(SRC) $(LIBFT) $(MLX) -o $(NAME)
+	$(CC) $(CFLAGS) $(SRC) $(LIBFT) $(MLX) $(MATH) -o $(NAME)
 
 # download repo minilib x 
 download:

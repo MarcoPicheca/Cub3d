@@ -3,26 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_callback_fts.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 20:19:23 by tschetti          #+#    #+#             */
-/*   Updated: 2024/12/20 20:39:54 by tschetti         ###   ########.fr       */
+/*   Updated: 2025/01/07 17:16:12 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
+// TODO freeare tutto qua
 int close_window(t_game *game)
 {
     mlx_destroy_window(game->mlx, game->win);
     exit(0);
-}
-
-int game_loop(t_game *game)
-{
-    move_player(&game->player, &game->map);
-    render_map(game);
-    return (0);
 }
 
 int key_press(int keycode, t_play *player)

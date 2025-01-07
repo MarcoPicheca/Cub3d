@@ -6,7 +6,7 @@
 /*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 12:49:30 by mapichec          #+#    #+#             */
-/*   Updated: 2025/01/07 15:05:06 by marco            ###   ########.fr       */
+/*   Updated: 2025/01/07 17:59:28 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,24 @@ void	free_matrix(char **map, int len)
 	i = 0;
 	if (!map)
 		return ;
-	while (map[i] != NULL && i < len)
+	while (map[i] && map[i] != NULL && i < len)
+	{
+		free(map[i]);
+		map[i] = NULL;
+		i++;
+	}
+	free(map);
+	map = NULL;
+}
+
+void	free_matrix2(char **map)
+{
+	int	i;
+
+	i = 0;
+	if (!map)
+		return ;
+	while (map[i] && map[i] != NULL)
 	{
 		free(map[i]);
 		map[i] = NULL;

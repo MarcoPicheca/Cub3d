@@ -6,7 +6,7 @@
 /*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 15:42:59 by marco             #+#    #+#             */
-/*   Updated: 2025/01/04 11:40:44 by marco            ###   ########.fr       */
+/*   Updated: 2025/01/07 17:51:56 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,17 +70,12 @@ int	check_flood(char **tmp, int len)
 	return (0);
 }
 
-
-
 // muove le coordinate al primo carattere '0NSWE', flood_fill e check_flood
 int	flood_phil(t_map *map, char **tmp)
 {
 	map->ht = 0;
 	move_to_first_char(tmp, map);
 	map_isnt_close(map->x, map->y, tmp, map->len_map);
-	// print_map(tmp, map->len_map);
-	printf("%s nord\n%s sud\n%s east\n%s ovest\n%s floor\n%s cieling\n", map->cardinals.path_NO,
-	map->cardinals.path_SO, map->cardinals.path_EA, map->cardinals.path_WS, map->txt.path_txt_floor, map->txt.path_txt_ceiling);
 	if (check_flood(tmp, map->len_map))
 		return (1);
 	return (0);

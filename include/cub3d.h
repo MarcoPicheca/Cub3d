@@ -6,7 +6,7 @@
 /*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 18:21:13 by mapichec          #+#    #+#             */
-/*   Updated: 2025/01/07 15:03:08 by marco            ###   ########.fr       */
+/*   Updated: 2025/01/07 17:53:09 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CUB3D_H
 # include <stdio.h>
 # include <fcntl.h>
+# include <math.h>
 # include <limits.h>
 # include <stdlib.h>
 # include "./colors.h"
@@ -30,6 +31,7 @@
 # define A 97
 # define S 115
 # define D 100
+# define ESC 65307
 
 // Pi costant
 # define PI 3.141592653
@@ -45,35 +47,34 @@ typedef struct s_play
 	double	pos_x;
 	double	pos_y;
 	int		found;
-    float   x;
-    float   y; 
-    float   angle;
+    float	x;
+    float	y; 
+    float	angle;
 	float	angle_speed;
-    float   move_speed;
-    float   rot_speed;
-	int     key_up;
-    int     key_down;
-    int     key_left;
-    int     key_right;
-	int     left_rotate;
-    int     right_rotate;
+    float	move_speed;
+    float	rot_speed;
+	int		key_up;
+    int		key_down;
+    int		key_left;
+    int		key_right;
+	int		left_rotate;
+    int		right_rotate;
 	void	*hands;
-} t_play;
+}			t_play;
 
 typedef struct s_render_2d
 {
-    int square_size;
-    int player_size;
-    int color_wall;
-    int color_player;
-    int color_ray;
-    float fov;
-    int num_rays;
-} t_render_2d;
+    int		square_size;
+    int		player_size;
+    int		color_wall;
+    int		color_player;
+    int		color_ray;
+    float	fov;
+    int		num_rays;
+}			t_render_2d;
 
 typedef struct s_crdls
 {
-	// mlx hands image
 	void	*wall_NO;
 	void	*wall_SO;
 	void	*wall_EA;
@@ -86,7 +87,6 @@ typedef struct s_crdls
 
 typedef struct s_txt
 {
-	// mlx hands image
 	void	*floor;
 	void	*ceiling;
 	int		fl_r;
@@ -157,29 +157,35 @@ int		check_map_tmp(t_map *map);
 int		check_rgb_txt(t_txt *txt);
 int		file_path(char *str);
 
-void	put_pixel(int x, int y, int color, t_game *game);
+// movment
+void	set_angles_on_rotation(t_play *player);
+void	update_position(t_play *player, t_map *map, float move_x, float move_y);
+void	move_player(t_play *player, t_map *map);
+
+// drawing functions
 void	draw_ray_dda(t_game *game, float angle, int color);
 void	draw_square(int x, int y, int size, int color, t_game *game);
+void	draw_map(t_game *game, t_render_2d *params);
+void	draw_player(t_game *game, t_render_2d *params);
+void	draw_rays(t_game *game, t_render_2d *params);
 
+// rendering
+bool	touch(float px, float py, t_game *game);
+void	put_pixel(int x, int y, int color, t_game *game);
+void	clear_image(t_game *game);
+void	init_render_2d(t_render_2d *params);
+void	render_map(t_game *game);
+
+// game init
 int		game_loop(t_game *game);
+void	init_game(t_game *game);
+
+// utils game
 int		key_press(int keycode, t_play *player);
 int		key_release(int keycode, t_play *player);
 int		close_window(t_game *game);
-
-void	put_pixel(int x, int y, int color, t_game *game);
-void	clear_image(t_game *game);
-
-void	move_player(t_play *player, t_map *map);
-
-void	render_map(t_game *game);
-void	init_game(t_game *game);
-void	init_map(t_map *map, t_play *player);
-
-int		ft_is_cub(char *str, int len, char *ext);
-int		file_cub_check(char *str);
-int		map_gen(t_game *game, char *av);
-void	free_matrix(char **map);
-void	free_game(t_game *game);
-char	*get_next_line(int fd);
+char    **copy_map_in_mtx2(t_map *map);
+int		init_map(t_map *map, t_play *player);
+void	free_matrix2(char **map);
 
 #endif
