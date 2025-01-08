@@ -90,6 +90,7 @@ void perform_dda(t_ray_cast_params *params, t_game *game)
     }
 }
 
+// Calcola la distanza effettiva del muro colpito dal raggio e il punto esatto di collisione.
 void calculate_hit_details(t_ray_cast_params *params, t_game *game)
 {
     if (params->side_local == 0)
@@ -101,6 +102,7 @@ void calculate_hit_details(t_ray_cast_params *params, t_game *game)
     params->hit_y = (game->player.y + params->perp_wall_dist * params->ray_dir_y) * BLOCK;
 }
 
+//ritorna la distanza corretta
 float cast_ray_dda_side(t_game *game, float angle, t_ray_result *result)
 {
     t_ray_cast_params params;
