@@ -6,7 +6,7 @@
 /*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 20:19:23 by tschetti          #+#    #+#             */
-/*   Updated: 2024/12/20 20:39:54 by tschetti         ###   ########.fr       */
+/*   Updated: 2025/01/04 12:52:12 by tschetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int key_press(int keycode, t_play *player)
         player->right_rotate = 1;
     if (keycode == ESC)
         exit(0);
+    if (keycode == 118) // Tasto 'v'
+        player->render_mode = !player->render_mode; // Alterna modalità
     return (0);
 }
 
