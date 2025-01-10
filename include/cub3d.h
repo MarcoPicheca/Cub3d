@@ -6,7 +6,7 @@
 /*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 18:21:13 by mapichec          #+#    #+#             */
-/*   Updated: 2025/01/10 13:33:44 by tschetti         ###   ########.fr       */
+/*   Updated: 2025/01/10 17:34:14 by tschetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,14 +243,14 @@ typedef struct s_map
 	char	*path_ea;
 	char	*pathxpm;
 	char	*path_hands;
-	int ceiling_color;
-	int floor_color;
-	char **mtx2;
-    int width; 
-    int height;
-    int player_x; 
-    int player_y;  
-    char player_dir; 
+	int     ceiling_color;
+	int     floor_color;
+	char    **mtx2;
+    int     width; 
+    int     height;
+    int     player_x; 
+    int     player_y;  
+    char    player_dir; 
 	int		lines_ind; //da settare quando abbiamo la matrice della mappa effettiva
 	int		cols_ind; //da settare quando abbiamo la matrice della mappa effettiva
 	int		len_map; //da settare quando abbiamo la matrice della mappa effettiva

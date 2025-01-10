@@ -6,7 +6,7 @@
 /*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 16:41:59 by marco             #+#    #+#             */
-/*   Updated: 2025/01/10 13:56:00 by tschetti         ###   ########.fr       */
+/*   Updated: 2025/01/10 18:21:42 by tschetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,14 @@ void	count_map_dimensions(t_map *map)
 	map->width = max_len;
 }
 
+void 	switch_crdls(t_map *map)
+{
+	map->path_no = map->cardinals.path_NO;
+	map->path_so = map->cardinals.path_SO;
+	map->path_we = map->cardinals.path_WS;
+	map->path_ea = map->cardinals.path_EA;
+}
+
 int	init_map(t_map *map, t_play *player)
 {
 	map->mtx2 = copy_map_in_mtx2(map);
@@ -72,11 +80,18 @@ int	init_map(t_map *map, t_play *player)
     count_map_dimensions(map);
 	// map->x = 0;
 	map->y = 0;
-    map->path_no = "./textures/paint.xpm";
-    map->path_so = "./textures/image.xpm";
-    map->path_we = "./textures/sb.xpm";
-    map->path_ea = "./textures/pb.xpm";
+	switch_crdls(map);
+	// map->path_no = map->cardinals.path_NO;
+	// map->path_so = map->cardinals.path_SO;
+	// map->path_we = map->cardinals.path_WS;
+	// map->path_ea = map->cardinals.path_EA;
+    // map->path_no = "./textures/paint.xpm";
+    // map->path_so = "./textures/image.xpm";
+    // map->path_we = "./textures/sb.xpm";
+    // map->path_ea = "./textures/pb.xpm";
     map->path_hands = "./textures/gun5.xpm";
+	map->ceiling_color = (map->txt.cl_r << 16 | map->txt.cl_g << 8 | map->txt.cl_b);
+    map->floor_color = (map->txt.fl_r << 16 | map->txt.fl_g << 8 | map->txt.fl_b);
 	while (map->mtx2[map->y] && map->y < map->len_map)
 	{
 		while (map->mtx2[map->y][map->x] != '\0')

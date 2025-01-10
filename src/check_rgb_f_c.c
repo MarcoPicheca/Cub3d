@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_rgb_f_c.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 12:27:35 by marco             #+#    #+#             */
-/*   Updated: 2025/01/03 17:27:33 by marco            ###   ########.fr       */
+/*   Updated: 2025/01/10 17:54:49 by tschetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,12 @@ static void fill_txt(t_txt *txt, char **cl, char **fl)
 	txt->fl_r = ft_atoi(fl[0]);
 	txt->fl_g = ft_atoi(fl[1]);
 	txt->fl_b = ft_atoi(fl[2]);
+	// printf("%d\n", txt->cl_r);
+	// printf("%d\n", txt->cl_g);
+	// printf("%d\n", txt->cl_b);
+	// printf("%d\n", txt->fl_r);
+	// printf("%d\n", txt->fl_g);
+	// printf("%d\n", txt->fl_b);
 }
 
 int	check_rgb_txt(t_txt *txt)
