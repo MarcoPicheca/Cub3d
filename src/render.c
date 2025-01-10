@@ -6,7 +6,7 @@
 /*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 02:20:15 by tschetti          #+#    #+#             */
-/*   Updated: 2025/01/08 16:12:31 by tschetti         ###   ########.fr       */
+/*   Updated: 2025/01/10 14:01:38 by tschetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ fov = field of view
 */
 void    init_render_2d(t_render_2d *params, t_game *game)
 {
+    (void)game;
     params->scale_x = (float)WIN_WIDTH  / (float)game->map.width;
     params->scale_y = (float)WIN_HEIGHT / (float)game->map.height;
     params->player_size = 14;
@@ -87,7 +88,7 @@ void render_map(t_game *game)
     }
     else
     {
-        // clear_image(game);
+        clear_image(game);
         render_3d_view(game);
     }
     mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);

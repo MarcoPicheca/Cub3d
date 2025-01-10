@@ -6,7 +6,7 @@
 /*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 01:35:27 by tschetti          #+#    #+#             */
-/*   Updated: 2025/01/08 01:36:32 by tschetti         ###   ########.fr       */
+/*   Updated: 2025/01/10 14:09:24 by tschetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,12 @@ void perform_dda(t_ray_cast_params *params, t_game *game)
             params->map_y += params->step_y;
             params->side_local = 1;
         }
+        // if (params->map_x < 0 || params->map_x >= game->map.width ||
+        //     params->map_y < 0 || params->map_y >= game->map.height)
+        // {
+        //     printf("bug here\n");
+        //     return;
+        // }
         if (game->map.mtx2[params->map_y][params->map_x] == '1')
             hit = 1;
     }

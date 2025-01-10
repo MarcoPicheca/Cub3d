@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 16:41:59 by marco             #+#    #+#             */
-/*   Updated: 2025/01/07 17:59:05 by marco            ###   ########.fr       */
+/*   Updated: 2025/01/10 13:56:00 by tschetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,47 @@ static	void	player_angle(float ang, t_play *player, t_map *map)
 	player->angle = ang * PI;
 }
 
+void print_map_mtx2(t_map *map)
+{
+    int y = 0;
+    while (map->mtx2[y] != NULL)
+    {
+        printf("[%d] %s\n", y, map->mtx2[y]);
+        y++;
+    }
+}
+
+void	count_map_dimensions(t_map *map)
+{
+	int	y;
+	int	row_len;
+	int	max_len;
+
+	y = 0;
+	max_len = 0;
+	while(map->mtx2[y])
+	{
+		row_len = ft_strlen(map->mtx2[y]);
+		if (row_len > max_len)
+			max_len = row_len;
+		y++;
+	}
+	map->height = y;
+	map->width = max_len;
+}
+
 int	init_map(t_map *map, t_play *player)
 {
 	map->mtx2 = copy_map_in_mtx2(map);
-	map->x = 0;
+	print_map_mtx2(map);
+    count_map_dimensions(map);
+	// map->x = 0;
 	map->y = 0;
+    map->path_no = "./textures/paint.xpm";
+    map->path_so = "./textures/image.xpm";
+    map->path_we = "./textures/sb.xpm";
+    map->path_ea = "./textures/pb.xpm";
+    map->path_hands = "./textures/gun5.xpm";
 	while (map->mtx2[map->y] && map->y < map->len_map)
 	{
 		while (map->mtx2[map->y][map->x] != '\0')
@@ -55,6 +91,7 @@ int	init_map(t_map *map, t_play *player)
 				return (player_angle(2, player, map), 0);
 			map->x++;
 		}
+		map->x = 0;
 		map->y++;
 	}
 	return (0);

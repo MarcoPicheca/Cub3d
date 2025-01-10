@@ -18,7 +18,7 @@ SRC =	src/main.c \
 		src/game_init.c \
 		src/raycast_3d.c src/wall2_xpm.c \
 		src/draw_2d.c src/draw_3d.c src/utils_4_minilibx.c src/move_player.c \
-		src/control.c src/get_color.c src/about_textures.c src/render.c
+		src/control.c src/get_color.c src/about_textures.c 
 
 LIBFT = ./libft/libft.a
 
@@ -39,7 +39,7 @@ $(NAME): $(SRC)
 
 # download repo minilib x 
 download:
-	@git clone git@github.com:42Paris/minilibx-linux.git
+	@git clone https://github.com/42Paris/minilibx-linux.git
 	@echo "Cloned minilibx"
 
 # rm della minilibx da fare sempre prima del push 

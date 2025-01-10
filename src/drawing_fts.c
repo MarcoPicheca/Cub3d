@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   drwing_fts.c                                       :+:      :+:    :+:   */
+/*   drawing_fts.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 17:01:40 by marco             #+#    #+#             */
-/*   Updated: 2025/01/07 17:02:28 by marco            ###   ########.fr       */
+/*   Updated: 2025/01/10 11:17:48 by tschetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,55 +44,55 @@ void draw_square(int x, int y, int size, int color, t_game *game)
 	}
 }
 
-void draw_map(t_game *game, t_render_2d *params)
-{
-	int y = 0;
-	int x;
+// void draw_map(t_game *game, t_render_2d *params)
+// {
+// 	int y = 0;
+// 	int x;
 
-	while (y < game->map.height)
-	{
-		x = 0;
-		while (x < game->map.width)
-		{
-			if (game->map.mtx2[y][x] == '1')
-				draw_square(x * params->square_size, y * params->square_size, params->square_size, params->color_wall, game);
-			x++;
-		}
-		y++;
-	}
-}
+// 	while (y < game->map.height)
+// 	{
+// 		x = 0;
+// 		while (x < game->map.width)
+// 		{
+// 			if (game->map.mtx2[y][x] == '1')
+// 				draw_square(x * params->square_size, y * params->square_size, params->square_size, params->color_wall, game);
+// 			x++;
+// 		}
+// 		y++;
+// 	}
+// }
 
-void draw_player(t_game *game, t_render_2d *params)
-{
-	int square_size;
-	int player_size;
-	int color_player;
-	int px;
-	int py;
+// void draw_player(t_game *game, t_render_2d *params)
+// {
+// 	int square_size;
+// 	int player_size;
+// 	int color_player;
+// 	int px;
+// 	int py;
 
-	square_size = params->square_size;
-	color_player = params->color_player;
-	player_size = params->player_size;
-	px = game->player.x * square_size;
-	py = game->player.y * square_size;
-	draw_square(px - player_size / 2, py - player_size / 2, player_size, color_player, game);
-}
+// 	square_size = params->square_size;
+// 	color_player = params->color_player;
+// 	player_size = params->player_size;
+// 	px = game->player.x * square_size;
+// 	py = game->player.y * square_size;
+// 	draw_square(px - player_size / 2, py - player_size / 2, player_size, color_player, game);
+// }
 
-void draw_rays(t_game *game, t_render_2d *params)
-{
-	float angle_step;
-	float start_angle;
-	float ray_angle;
-	int i;
+// void draw_rays(t_game *game, t_render_2d *params)
+// {
+// 	float angle_step;
+// 	float start_angle;
+// 	float ray_angle;
+// 	int i;
 
-	angle_step = params->fov / params->num_rays;
-	start_angle = game->player.angle - params->fov / 2;
-	i = 0;
-	while (i < params->num_rays)
-	{
-		ray_angle = start_angle + i * angle_step;
-		draw_ray_dda(game, ray_angle, params->color_ray);
-		i++;
-	}
-}
+// 	angle_step = params->fov / params->num_rays;
+// 	start_angle = game->player.angle - params->fov / 2;
+// 	i = 0;
+// 	while (i < params->num_rays)
+// 	{
+// 		ray_angle = start_angle + i * angle_step;
+// 		draw_ray_dda(game, ray_angle, params->color_ray);
+// 		i++;
+// 	}
+// }
 

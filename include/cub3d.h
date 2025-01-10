@@ -6,7 +6,7 @@
 /*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 18:21:13 by mapichec          #+#    #+#             */
-/*   Updated: 2025/01/08 16:10:19 by tschetti         ###   ########.fr       */
+/*   Updated: 2025/01/10 13:33:44 by tschetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 
 // Pi costant
 # define PI 3.141592653
-# define BLOCK 41
+# define BLOCK 81
 
 # define LEFT 65361
 # define RIGHT 65363
@@ -195,6 +195,7 @@ typedef struct s_render_2d
     int color_wall2d;
     int color_player;
     int color_ray;
+    int color_wall;
     float fov;
     int num_rays;
 } t_render_2d;
@@ -314,7 +315,7 @@ void	move_player(t_play *player, t_map *map);
 // drawing functions
 void	draw_ray_dda(t_game *game, float angle, int color);
 void	draw_square(int x, int y, int size, int color, t_game *game);
-void	draw_map(t_game *game, t_render_2d *params);
+// void	draw_map(t_game *game, t_render_2d *params);
 void	draw_player(t_game *game, t_render_2d *params);
 void	draw_rays(t_game *game, t_render_2d *params);
 
@@ -322,7 +323,8 @@ void	draw_rays(t_game *game, t_render_2d *params);
 bool	touch(float px, float py, t_game *game);
 void	put_pixel(int x, int y, int color, t_game *game);
 void	clear_image(t_game *game);
-void	init_render_2d(t_render_2d *params);
+// void	init_render_2d(t_render_2d *params);
+void    init_render_2d(t_render_2d *params, t_game *game);
 void	render_map(t_game *game);
 
 // game init
@@ -340,19 +342,19 @@ void	free_matrix2(char **map);
 void	put_pixel(int x, int y, int color, t_game *game);
 void	clear_image(t_game *game);
 
-void	move_player(t_play *player, t_map *map);
+// void	move_player(t_play *player, t_map *map);
 
 bool 	touch(float px, float py, t_game *game);
 void	normalize_angle(float *angle);
 
 void	render_map(t_game *game);
 void	init_game(t_game *game);
-void	init_map(t_map *map, t_play *player);
+// void	init_map(t_map *map, t_play *player);
 
 int		ft_is_cub(char *str, int len, char *ext);
 int		file_cub_check(char *str);
 int		map_gen(t_game *game, char *av);
-void	free_matrix(char **map);
+// void	free_matrix(char **map);
 void	free_game(t_game *game);
 char	*get_next_line(int fd);
 
