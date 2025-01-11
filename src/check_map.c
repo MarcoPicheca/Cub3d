@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 16:04:54 by marco             #+#    #+#             */
-/*   Updated: 2025/01/04 11:21:05 by marco            ###   ########.fr       */
+/*   Updated: 2025/01/11 14:48:54 by mapichec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,18 @@ static	int	zero_no_wall(char **tmp, t_map *map)
 	{
 		if (tmp[map->ht][i] == '0')
 		{
-			if (i == 0)
+			if (i == 0 || map->ht == 0 || map->ht == (map->len_map - 1))
 				return (printf("Error!\nZero_no_wall!\n"));
 			if (tmp[map->ht][i - 1] == 32 || tmp[map->ht][i - 1] == '\t' || tmp[map->ht][i - 1] == '\0')
 				return (printf("Error!\nZero_no_wall!\n"));
 			if (tmp[map->ht][i + 1] == 32 || tmp[map->ht][i + 1] == '\t'
 				|| tmp[map->ht][i + 1] == '\n' || tmp[map->ht][i + 1] == '\0')
 				return (printf("Error!\nZero_no_wall!\n"));
-			if (tmp[map->ht + 1] && (tmp[map->ht + 1][i] == 32
+			if (tmp[map->ht + 1] && (tmp[map->ht + 1][i] == 32 || tmp[map->ht + 1][i] == '\n'
 				|| tmp[map->ht + 1][i] == '\t' || tmp[map->ht + 1][i] == '\0'))
 				return (printf("Error!\nZero_no_wall!\n"));
-			if (tmp[map->ht - 1][i] == 32 || tmp[map->ht - 1][i] == '\t' || tmp[map->ht - 1][i] == '\0')
+			if (tmp[map->ht - 1] && (tmp[map->ht - 1][i] == 32 || tmp[map->ht - 1][i] == '\t'
+				|| tmp[map->ht - 1][i] == '\0' || tmp[map->ht + 1][i] == '\n'))
 				return (printf("Error!\nZero_no_wall!\n"));
 		}
 		i++;
@@ -61,7 +62,7 @@ static	void	copy_free_mtx(t_map *map)
 	count = map->start_map;
 	i = 0;
 	tmp = ft_calloc((map->end_map - map->start_map) + 1, sizeof(char *));
-	while (count <= map->end_map)
+	while (map->mtx[count] && count < map->end_map)
 	{
 		tmp[i] = ft_strndup(map->mtx[count], ft_strlen(map->mtx[count]));
 		i++;

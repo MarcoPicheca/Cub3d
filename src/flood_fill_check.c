@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill_check.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 15:42:59 by marco             #+#    #+#             */
-/*   Updated: 2025/01/07 17:51:56 by marco            ###   ########.fr       */
+/*   Updated: 2025/01/11 14:15:40 by mapichec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,20 +49,31 @@ void	move_to_first_char(char **tmp, t_map *map)
 	}
 }
 
+static 	void	print_map(char **arr, int len)
+{
+	int	i = 0;
+
+	while(i < len)
+	{
+		printf("%s", arr[i]);
+		i++;
+	}
+}
+
 int	check_flood(char **tmp, int len)
 {
 	int	x;
 	int	y;
 
 	x = 0;
-	y = 0;
 	while (x < len && tmp[x])
 	{
+		y = 0;
 		while (tmp[x][y] != '\0' && tmp[x][y] != '\n')
 		{
-			if (!ft_isspace(tmp[x][y])
+			if (!ft_isspace(tmp[x][y]) && tmp[x][y] != '\0'
 				&& tmp[x][y] != 'C' && tmp[x][y] != '1')
-				return (printf("Error!\nMap is not closed!\n"));
+				return (print_map(tmp, len), printf("Error!\nMap is not closed!\n"));
 			y++;	
 		}
 		x++;

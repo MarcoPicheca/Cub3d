@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_game.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 10:29:24 by mapichec          #+#    #+#             */
-/*   Updated: 2025/01/04 11:28:57 by marco            ###   ########.fr       */
+/*   Updated: 2025/01/11 14:07:23 by mapichec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,16 +58,6 @@ int	err_game_card(t_map *map)
 
 
 // TODO to be cancelled at the end or commented
-static 	void	print_map(char **arr, int len)
-{
-	int	i = 0;
-
-	while(i < len)
-	{
-		printf("%s", arr[i]);
-		i++;
-	}
-}
 
 // TODO to be finished
 int	check_main(t_map *map, t_game *game)
@@ -93,7 +83,7 @@ int	check_main(t_map *map, t_game *game)
 	}
 	if (game->player.found > 1 || game->player.found == 0)
 		return (1);
-	print_map(map->mtx, map->len_map);
+	// print_map(map->mtx, map->len_map);
 	return (0);
 }
 
