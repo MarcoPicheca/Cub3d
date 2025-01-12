@@ -6,7 +6,7 @@
 /*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 02:20:15 by tschetti          #+#    #+#             */
-/*   Updated: 2025/01/10 14:01:38 by tschetti         ###   ########.fr       */
+/*   Updated: 2025/01/11 16:34:14 by tschetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,63 @@ void    init_render_2d(t_render_2d *params, t_game *game)
     params->num_rays = 242;
 }
 
+// void draw_minimap(t_game *game)
+// {
+//     int map_size = 12;  // Numero di celle visibili nella minimappa
+//     int cell_size = 12;  // Dimensione di una cella nella minimappa (in pixel)
+//     int offset_x = WIN_WIDTH - map_size * cell_size - 42;  // Margine destro
+//     int offset_y = 20;  // Margine alto
+//     int x, y;
+
+//     // Loop sulla porzione di mappa centrata sul giocatore
+//     for (y = -map_size / 2; y <= map_size / 2; y++)
+//     {
+//         for (x = -map_size / 2; x <= map_size / 2; x++)
+//         {
+//             int map_x = (int)game->player.x + x;
+//             int map_y = (int)game->player.y + y;
+
+//             // Controllo limiti della mappa
+//             if (map_x >= 0 && map_x < game->map.width && map_y >= 0 && map_y < game->map.height)
+//             {
+//                 int color;
+
+//                 if (game->map.mtx2[map_y][map_x] == '1') // Muri
+//                     color = 0xFFFFFF;  // Bianco
+//                 else
+//                     color = 0x333333;  // Grigio
+
+//                 // Disegna il rettangolo corrispondente alla cella
+//                 t_rectangle_params rect = {
+//                     .start_x = offset_x + (x + map_size / 2) * cell_size,
+//                     .start_y = offset_y + (y + map_size / 2) * cell_size,
+//                     .width = cell_size,
+//                     .height = cell_size,
+//                     .color = color
+//                 };
+//                 draw_rectangle(&rect, game);
+//             }
+//         }
+//     }
+
+//     // Disegna il giocatore al centro della minimappa
+//     t_rectangle_params player_rect = {
+//         .start_x = offset_x + (map_size / 2) * cell_size,
+//         .start_y = offset_y + (map_size / 2) * cell_size,
+//         .width = cell_size / 2,
+//         .height = cell_size / 2,
+//         .color = 0xFF0000  // Rosso
+//     };
+//     draw_rectangle(&player_rect, game);
+// }
+
 /*
 con il tasto 'v' cambiamo modalita'
 viene chiamata da game_loop che sta in mlx_loop_hook
 */
 void render_map(t_game *game)
 {
-    t_render_2d values; 
+    t_render_2d values;
 
     if (game->player.render_mode == 0)
     {
@@ -88,8 +138,10 @@ void render_map(t_game *game)
     }
     else
     {
-        clear_image(game);
+        // clear_image(game);
         render_3d_view(game);
+        if (game->player.minimap_view == 0)
+            draw_minimap(game);
     }
     mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
 }
