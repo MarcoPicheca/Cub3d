@@ -1,0 +1,73 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_minimap.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/11 16:24:51 by tschetti          #+#    #+#             */
+/*   Updated: 2025/01/11 19:57:24 by tschetti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../include/cub3d.h"
+
+void    init_minimap_values(t_game *game)
+{
+    game->minimap.minimap_size = 12;
+    game->minimap.cell_size = 10;
+    game->minimap.offset_x = WIN_WIDTH - game->minimap.minimap_size * game->minimap.cell_size - 42;
+    game->minimap.offset_y = 20;
+}
+
+void    set_minimap_values(t_game *game, t_rectangle_params *values, int *x, int *y)
+{
+    values->start_x = game->minimap.offset_x + (*x + game->minimap.minimap_size / 2) * game->minimap.cell_size;
+    values->start_y = game->minimap.offset_y + (*y + game->minimap.minimap_size / 2) * game->minimap.cell_size;
+    values->width = game->minimap.cell_size;
+    values->height = game->minimap.cell_size;
+    values->color = game->minimap.minimap_colors; 
+    
+}
+
+void draw_minimap_core(t_game *game, t_rectangle_params *rect, int x, int y)
+{
+    int minimap_x;
+    int minimap_y;
+
+    minimap_x = (int)game->player.x + x;
+    minimap_y = (int)game->player.y + y;
+    if (minimap_x >= 0 && minimap_x < game->map.width && minimap_y >= 0 && minimap_y < game->map.height)
+    {
+        if (game->map.mtx2[minimap_y][minimap_x] == '1')
+            game->minimap.minimap_colors = 0x0000FF;
+        else
+            game->minimap.minimap_colors = 0x55FF55;
+        set_minimap_values(game, rect, &x, &y);
+        draw_rectangle(rect, game);
+    }
+}
+
+void draw_minimap(t_game *game)
+{
+    int x;
+    int y;
+    t_rectangle_params rect;
+
+    y = -game->minimap.minimap_size / 2;
+    init_minimap_values(game);
+    while (y <= game->minimap.minimap_size / 2)
+    {
+        x = -game->minimap.minimap_size / 2;
+        while (x <= game->minimap.minimap_size / 2)
+        {
+            draw_minimap_core(game, &rect, x, y);
+            x++;
+        }
+        y++;
+    }
+    rect.start_x = game->minimap.offset_x + (game->minimap.minimap_size / 2) * game->minimap.cell_size;
+    rect.start_y = game->minimap.offset_y + (game->minimap.minimap_size / 2) * game->minimap.cell_size;
+    rect.color = 0xFF0000;
+    draw_rectangle(&rect, game);
+}

@@ -18,7 +18,7 @@ SRC =	src/main.c \
 		src/game_init.c \
 		src/raycast_3d.c src/wall2_xpm.c \
 		src/draw_2d.c src/draw_3d.c src/utils_4_minilibx.c src/move_player.c \
-		src/control.c src/get_color.c src/about_textures.c 
+		src/control.c src/get_color.c src/about_textures.c src/draw_minimap.c
 
 LIBFT = ./libft/libft.a
 

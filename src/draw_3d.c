@@ -6,7 +6,7 @@
 /*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 01:45:51 by tschetti          #+#    #+#             */
-/*   Updated: 2025/01/08 01:56:09 by tschetti         ###   ########.fr       */
+/*   Updated: 2025/01/11 20:38:47 by tschetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void draw_hands(t_game *game)
     int color;
 
     x = (WIN_WIDTH / 2) - (game->tex_hands.width / 2);
-    y = WIN_HEIGHT - game->tex_hands.height - 20;
+    y = WIN_HEIGHT - game->tex_hands.height - 24;
     h = 0;
     while (h < game->tex_hands.height)
     {
@@ -30,7 +30,7 @@ void draw_hands(t_game *game)
         while (w < game->tex_hands.width)
         {
             color = get_tex_color(&game->tex_hands, w, h);
-            if ((color & 0x00FFFFFF) != 0)
+            if (color)
                 put_pixel(x + w, y + h, get_tex_color(&game->tex_hands, w, h), game);
             w++;
         }

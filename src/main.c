@@ -6,7 +6,7 @@
 /*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 18:16:58 by mapichec          #+#    #+#             */
-/*   Updated: 2025/01/11 16:25:43 by mapichec         ###   ########.fr       */
+/*   Updated: 2025/01/12 15:47:38 by mapichec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,9 +142,10 @@ void  init_params_for_draw_single_3d_ray(t_draw_data *dd, t_3d_properties *prop,
 
 void init_player(t_play *player)
 {
-	player->angle_speed = 0.042; //radianti * (iterazioni mlx_loop) -- 0.042 = 3°circa -- velocita angolare
-	player->move_speed = 7.42;    //pixel * (iterazioni mlx_loop) 
-	player->render_mode = 1;
+    player->angle_speed = 0.042; //radianti * (iterazioni mlx_loop) -- 0.042 = 3°circa -- velocita angolare
+    player->move_speed = 7.42;    //pixel * (iterazioni mlx_loop) 
+    player->render_mode = 1;
+    player->minimap_view = 0;
 }
 
 //bpp e' bit per pixel

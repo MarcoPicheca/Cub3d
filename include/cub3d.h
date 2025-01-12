@@ -6,7 +6,7 @@
 /*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 18:21:13 by mapichec          #+#    #+#             */
-/*   Updated: 2025/01/11 15:59:22 by mapichec         ###   ########.fr       */
+/*   Updated: 2025/01/12 15:48:11 by mapichec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@
 # define D 100
 # define ESC 65307
 
+// GAME OPTIONS
+# define V 118
+# define M 109
 // Pi costant
 # define PI 3.141592653
 # define BLOCK 81
@@ -184,6 +187,7 @@ typedef struct s_play
 	int		right_rotate;
 	void	*hands;
 	int		render_mode;
+    int     minimap_view;
 } t_play;
 
 typedef struct s_render_2d
@@ -225,6 +229,20 @@ typedef struct s_txt
 	char	*path_txt_floor;
 	char	*path_txt_ceiling;
 }			t_txt;
+
+
+typedef struct s_minimap
+{
+    int minimap_size;
+    int cell_size;
+    int offset_x;
+    int offset_y;
+    int x;
+    int y;
+    int minimap_x;
+    int minimap_y;
+    int minimap_colors;
+}   t_minimap;
 
 typedef struct s_map
 {
@@ -275,6 +293,7 @@ typedef struct s_game
 	t_tex  tex_ea;
 	t_play	player;
 	t_map	map;
+    t_minimap minimap;
 	t_tex   my_tex; 
 }			t_game;
 
@@ -332,6 +351,7 @@ void	free_matrix2(char **map);
 
 void	put_pixel(int x, int y, int color, t_game *game);
 void	clear_image(t_game *game);
+void draw_minimap(t_game *game);
 
 // void	move_player(t_play *player, t_map *map);
 
@@ -341,6 +361,7 @@ void	normalize_angle(float *angle);
 void	render_map(t_game *game);
 void	init_game(t_game *game);
 // void	init_map(t_map *map, t_play *player);
+void draw_rectangle(t_rectangle_params *params, t_game *game);
 
 int		ft_is_cub(char *str, int len, char *ext);
 int		file_cub_check(char *str);
