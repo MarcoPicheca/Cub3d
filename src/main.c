@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 18:16:58 by mapichec          #+#    #+#             */
-/*   Updated: 2025/01/10 18:25:13 by tschetti         ###   ########.fr       */
+/*   Updated: 2025/01/11 16:25:43 by mapichec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ distance servira per la prospettiva
 */
 void init_cast(t_ray *ray, t_game *game, float *angle)
 {
-    ray->x = game->player.x * BLOCK; 
-    ray->y = game->player.y * BLOCK;
-    ray->step_size = 0.5f;
-    ray->delta_x = cosf(*angle) * ray->step_size;
-    ray->delta_y = sinf(*angle) * ray->step_size;
-    ray->distance = 0.0f;
+	ray->x = game->player.x * BLOCK; 
+	ray->y = game->player.y * BLOCK;
+	ray->step_size = 0.5f;
+	ray->delta_x = cosf(*angle) * ray->step_size;
+	ray->delta_y = sinf(*angle) * ray->step_size;
+	ray->distance = 0.0f;
 }
 
 /*
@@ -35,23 +35,23 @@ salvo le coordinate in cui tocca il muro
 */
 float cast_ray_dda(t_game *game, float angle, float *hit_x, float *hit_y)
 {
-    t_ray ray;
+	t_ray ray;
 
-    init_cast(&ray, game, &angle);
-    while (!touch(ray.x, ray.y, game))
-    {
-        ray.x += ray.delta_x;
-        ray.y += ray.delta_y;
-        ray.distance += ray.step_size;
-        // if (ray.distance > 50) 
-        //     break;
-    }
-    if (hit_x && hit_y)
-    {
-        *hit_x = ray.x;
-        *hit_y = ray.y;
-    }
-    return ray.distance;
+	init_cast(&ray, game, &angle);
+	while (!touch(ray.x, ray.y, game))
+	{
+		ray.x += ray.delta_x;
+		ray.y += ray.delta_y;
+		ray.distance += ray.step_size;
+		// if (ray.distance > 50) 
+		//     break;
+	}
+	if (hit_x && hit_y)
+	{
+		*hit_x = ray.x;
+		*hit_y = ray.y;
+	}
+	return ray.distance;
 }
 
 /*
@@ -66,21 +66,21 @@ il passo/step del raggio (per avanzare in modo proporzionato)
 */
 void init_rays_2d(t_rays_2d *rays, t_game *game, t_render_2d *values, int ray_index)
 {
-    rays->angle_step = values->fov / values->num_rays;
-    rays->start_angle = game->player.angle - values->fov * 0.5f;
-    rays->ray_angle = rays->start_angle + ray_index * rays->angle_step;
-    rays->start_x = game->player.x * values->scale_x;
-    rays->start_y = game->player.y * values->scale_y;
-    rays->hit_x = 0;
-    rays->hit_y = 0;
-    rays->distance = cast_ray_dda(game, rays->ray_angle, &rays->hit_x, &rays->hit_y);
-    rays->end_x = rays->hit_x / BLOCK * values->scale_x;
-    rays->end_y = rays->hit_y / BLOCK * values->scale_y;
-    // rays->steps = (int)rays->distance;
-    rays->stepx = (rays->end_x - rays->start_x) / rays->distance;
-    rays->stepy = (rays->end_y - rays->start_y) / rays->distance;
-    rays->cx = rays->start_x;
-    rays->cy = rays->start_y;
+	rays->angle_step = values->fov / values->num_rays;
+	rays->start_angle = game->player.angle - values->fov * 0.5f;
+	rays->ray_angle = rays->start_angle + ray_index * rays->angle_step;
+	rays->start_x = game->player.x * values->scale_x;
+	rays->start_y = game->player.y * values->scale_y;
+	rays->hit_x = 0;
+	rays->hit_y = 0;
+	rays->distance = cast_ray_dda(game, rays->ray_angle, &rays->hit_x, &rays->hit_y);
+	rays->end_x = rays->hit_x / BLOCK * values->scale_x;
+	rays->end_y = rays->hit_y / BLOCK * values->scale_y;
+	// rays->steps = (int)rays->distance;
+	rays->stepx = (rays->end_x - rays->start_x) / rays->distance;
+	rays->stepy = (rays->end_y - rays->start_y) / rays->distance;
+	rays->cx = rays->start_x;
+	rays->cy = rays->start_y;
 }
 
 /*
@@ -89,12 +89,12 @@ il suo punto di impatto e il suo muro colpito
 */
 void init_render_3d_prop(t_3d_properties *prop, float angle)
 {
-    prop->ray_angle = angle;
-    prop->ray_dir_x = cosf(angle);
-    prop->ray_dir_y = sinf(angle);
-    prop->hit_x = 0.0f;
-    prop->hit_y = 0.0f;
-    prop->side_local = 0;
+	prop->ray_angle = angle;
+	prop->ray_dir_x = cosf(angle);
+	prop->ray_dir_y = sinf(angle);
+	prop->hit_x = 0.0f;
+	prop->hit_y = 0.0f;
+	prop->side_local = 0;
 }
 
 /*
@@ -105,9 +105,9 @@ x_screen e' la colonna centrale, gli diamo - 7 per avere un po di offset per il 
 */
 void init_draw_crosshair_params(t_crosshair_params *params, int x_screen, int wall_top, int wall_bot)
 {
-    params->size = 7;
-    params->py = (wall_top + wall_bot) / 2;
-    params->px = x_screen - 7; 
+	params->size = 7;
+	params->py = (wall_top + wall_bot) / 2;
+	params->px = x_screen - 7; 
 }
 
 /*
@@ -124,44 +124,44 @@ step e' quanto avanzare nella texture in pixel per ogni riga del muro[puo dare s
 */
 void  init_params_for_draw_single_3d_ray(t_draw_data *dd, t_3d_properties *prop, t_game *game)
 {
-    t_ray_result    result;
+	t_ray_result    result;
 
-    dd->dist = cast_ray_dda_side(game, prop->ray_angle, &result);
-    prop->hit_x = result.hit_x;
-    prop->hit_y = result.hit_y;
-    prop->side_local = result.side;
-    dd->correct_dist = dd->dist * cosf(prop->ray_angle - game->player.angle);
-    dd->wall_height = (int)((BLOCK * 420.0f) / dd->correct_dist);
-    dd->wall_top = (WIN_HEIGHT / 2) - (dd->wall_height / 2);
-    dd->wall_bot = dd->wall_top + dd->wall_height;
-    dd->used_tex = pick_texture(game, prop);
-    dd->tex_x = compute_tex_x(dd->used_tex, prop);
-    dd->step = (float)dd->used_tex->height / (float)dd->wall_height;
+	dd->dist = cast_ray_dda_side(game, prop->ray_angle, &result);
+	prop->hit_x = result.hit_x;
+	prop->hit_y = result.hit_y;
+	prop->side_local = result.side;
+	dd->correct_dist = dd->dist * cosf(prop->ray_angle - game->player.angle);
+	dd->wall_height = (int)((BLOCK * 420.0f) / dd->correct_dist);
+	dd->wall_top = (WIN_HEIGHT / 2) - (dd->wall_height / 2);
+	dd->wall_bot = dd->wall_top + dd->wall_height;
+	dd->used_tex = pick_texture(game, prop);
+	dd->tex_x = compute_tex_x(dd->used_tex, prop);
+	dd->step = (float)dd->used_tex->height / (float)dd->wall_height;
 }  
 
 
 void init_player(t_play *player)
 {
-    player->angle_speed = 0.042; //radianti * (iterazioni mlx_loop) -- 0.042 = 3°circa -- velocita angolare
-    player->move_speed = 7.42;    //pixel * (iterazioni mlx_loop) 
-    player->render_mode = 1;
+	player->angle_speed = 0.042; //radianti * (iterazioni mlx_loop) -- 0.042 = 3°circa -- velocita angolare
+	player->move_speed = 7.42;    //pixel * (iterazioni mlx_loop) 
+	player->render_mode = 1;
 }
 
 //bpp e' bit per pixel
 //line_size e' larghezza in byte della riga
 void init_game(t_game *game)
 {
-    init_player(&game->player);
-    game->mlx = mlx_init();//server grafico
-    game->win = mlx_new_window(game->mlx, WIN_WIDTH, WIN_HEIGHT, "Cub3D");
-    game->img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
-    game->img_data = mlx_get_data_addr(game->img, &game->bpp, &game->line_size, &game->endian);//gestione pixel
-    load_textures(game);
-    mlx_hook(game->win, 2, 1L << 0, key_press, &game->player);
-    mlx_hook(game->win, 3, 1L << 1, key_release, &game->player);
-    mlx_hook(game->win, 17, 0, close_window, game);
-    mlx_loop_hook(game->mlx, game_loop, game);
-    mlx_loop(game->mlx);
+	init_player(&game->player);
+	game->mlx = mlx_init(); //server grafico
+	game->win = mlx_new_window(game->mlx, WIN_WIDTH, WIN_HEIGHT, "Cub3D");
+	game->img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
+	game->img_data = mlx_get_data_addr(game->img, &game->bpp, &game->line_size, &game->endian);//gestione pixel
+	load_textures(game);
+	mlx_hook(game->win, 2, 1L << 0, key_press, &game->player);
+	mlx_hook(game->win, 3, 1L << 1, key_release, &game->player);
+	mlx_hook(game->win, 17, 0, close_window, game);
+	mlx_loop_hook(game->mlx, game_loop, game);
+	mlx_loop(game->mlx);
 }
 
 // void init_map(t_map *map, t_play *player)
@@ -227,6 +227,25 @@ void init_game(t_game *game)
 //             }
 //         }
 //     }
+// }
+
+// int	look_for_width(t_map map)
+// {
+// 	int	result;
+	
+// 	map.x = 0;
+// 	map.y = 0;
+// 	result = 0;
+// 	while (map.mtx2[map.x])
+// 	{
+// 		map.y = ft_strlen(map.mtx2[map.x]);
+// 		if (map.y > result)
+// 			result = map.y;
+// 		map.x++;
+// 	}
+// 	map.x = 0;
+// 	map.y = 0;
+// 	return (result);
 // }
 
 int main(int ac, char **av)

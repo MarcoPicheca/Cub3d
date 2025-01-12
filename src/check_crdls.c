@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_crdls.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 17:17:40 by marco             #+#    #+#             */
-/*   Updated: 2025/01/10 17:10:53 by tschetti         ###   ########.fr       */
+/*   Updated: 2025/01/11 16:17:13 by mapichec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ static	int	check_paths_crld(t_crdls *crlds)
 	crlds->path_EA = ft_strtrim2(crlds->path_EA, " \n");
 	crlds->path_WS = ft_strtrim2(crlds->path_WS, " \n");
 	// printf("NO: %s\n", crlds->path_NO);
-	// if (file_path(crlds->path_NO) || file_path(crlds->path_SO)
-	// 	|| file_path(crlds->path_EA) || file_path(crlds->path_WS))
-	// 	return (1);
+	if (file_path(crlds->path_NO) || file_path(crlds->path_SO)
+		|| file_path(crlds->path_EA) || file_path(crlds->path_WS))
+		return (1);
 	return (0);
 }
 

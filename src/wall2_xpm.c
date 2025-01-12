@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall2_xpm.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 16:45:19 by tschetti          #+#    #+#             */
-/*   Updated: 2025/01/02 18:20:50 by tschetti         ###   ########.fr       */
+/*   Updated: 2025/01/11 15:57:15 by mapichec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void load_a_texture(t_game *game, t_tex *texture, char *path)
 {
     texture->img = mlx_xpm_file_to_image(
         game->mlx, path,
+        // (int *)64, (int *)64
         &texture->width, &texture->height
     );
     if (!texture->img)

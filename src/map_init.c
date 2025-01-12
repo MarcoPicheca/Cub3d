@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 16:41:59 by marco             #+#    #+#             */
-/*   Updated: 2025/01/10 18:21:42 by tschetti         ###   ########.fr       */
+/*   Updated: 2025/01/12 15:37:56 by mapichec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ char    **copy_map_in_mtx2(t_map *map)
 		mtx2[i] = ft_strtrim(map->mtx[i], "\n");
 		i++;
 	}
-	mtx2[i] = NULL;
     free_matrix2(map->mtx);
 	return (mtx2);
 }
@@ -36,34 +35,35 @@ static	void	player_angle(float ang, t_play *player, t_map *map)
 	player->angle = ang * PI;
 }
 
-void print_map_mtx2(t_map *map)
-{
-    int y = 0;
-    while (map->mtx2[y] != NULL)
-    {
-        printf("[%d] %s\n", y, map->mtx2[y]);
-        y++;
-    }
-}
+// void print_map_mtx2(t_map *map)
+// {
+//     int y = 0;
+//     while (map->mtx2[y] != NULL)
+//     {
+//         printf("[%d] %s\n", y, map->mtx2[y]);
+//         y++;
+//     }
+// }
 
-void	count_map_dimensions(t_map *map)
-{
-	int	y;
-	int	row_len;
-	int	max_len;
+//TODO usless sunction
+// void	count_map_dimensions(t_map *map)
+// {
+// 	int	y;
+// 	int	row_len;
+// 	int	max_len;
 
-	y = 0;
-	max_len = 0;
-	while(map->mtx2[y])
-	{
-		row_len = ft_strlen(map->mtx2[y]);
-		if (row_len > max_len)
-			max_len = row_len;
-		y++;
-	}
-	map->height = y;
-	map->width = max_len;
-}
+// 	y = 0;
+// 	max_len = 0;
+// 	while(map->mtx2[y])
+// 	{
+// 		row_len = ft_strlen(map->mtx2[y]);
+// 		if (row_len > max_len)
+// 			max_len = row_len;
+// 		y++;
+// 	}
+// 	map->height = y;
+// 	map->width = max_len;
+// }
 
 void 	switch_crdls(t_map *map)
 {
@@ -76,15 +76,10 @@ void 	switch_crdls(t_map *map)
 int	init_map(t_map *map, t_play *player)
 {
 	map->mtx2 = copy_map_in_mtx2(map);
-	print_map_mtx2(map);
-    count_map_dimensions(map);
+	// print_map_mtx2(map);
 	// map->x = 0;
 	map->y = 0;
 	switch_crdls(map);
-	// map->path_no = map->cardinals.path_NO;
-	// map->path_so = map->cardinals.path_SO;
-	// map->path_we = map->cardinals.path_WS;
-	// map->path_ea = map->cardinals.path_EA;
     // map->path_no = "./textures/paint.xpm";
     // map->path_so = "./textures/image.xpm";
     // map->path_we = "./textures/sb.xpm";

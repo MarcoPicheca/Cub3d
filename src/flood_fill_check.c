@@ -6,7 +6,7 @@
 /*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 15:42:59 by marco             #+#    #+#             */
-/*   Updated: 2025/01/11 14:15:40 by mapichec         ###   ########.fr       */
+/*   Updated: 2025/01/12 15:35:30 by mapichec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	map_isnt_close(int x, int y, char **tmp, int len)
 	    return;
 	if (!tmp[x])
 	    return;
+	if (y >= ft_strlen(tmp[x]))
+		return;
 	if (!tmp[x][y])
 	    return;
 	if (tmp[x][y] == '\0')

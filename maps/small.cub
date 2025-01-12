@@ -1,0 +1,11 @@
+NO         ./textures/tt.xpm
+SO ./textures/paint.xpm        
+EA        ./textures/rp.xpm
+
+F 33,33,33
+WE ./textures/pb.xpm
+C 155,206,255
+
+111
+1N1
+111

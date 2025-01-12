@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 18:21:13 by mapichec          #+#    #+#             */
-/*   Updated: 2025/01/10 17:34:14 by tschetti         ###   ########.fr       */
+/*   Updated: 2025/01/11 15:59:22 by mapichec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,36 +42,36 @@
 
 typedef struct s_ray_result
 {
-    float hit_x; 
-    float hit_y; 
-    int   side;
+	float hit_x; 
+	float hit_y; 
+	int   side;
 } t_ray_result;
 
 typedef struct s_ray_cast_params
 {
-    float ray_dir_x;
-    float ray_dir_y;
-    float delta_dist_x;
-    float delta_dist_y;
-    float side_dist_x;
-    float side_dist_y;
-    int   step_x;
-    int   step_y;
-    int   map_x;
-    int   map_y;
-    int   side_local;
-    float perp_wall_dist;
-    float hit_x;
-    float hit_y;
+	float ray_dir_x;
+	float ray_dir_y;
+	float delta_dist_x;
+	float delta_dist_y;
+	float side_dist_x;
+	float side_dist_y;
+	int   step_x;
+	int   step_y;
+	int   map_x;
+	int   map_y;
+	int   side_local;
+	float perp_wall_dist;
+	float hit_x;
+	float hit_y;
 } t_ray_cast_params;
 
 typedef struct s_rectangle_params
 {
-    float start_x;
-    float start_y;
-    float width;
-    float height;
-    int color;
+	float start_x;
+	float start_y;
+	float width;
+	float height;
+	int color;
 } t_rectangle_params;
 
 // typedef struct s_map_draw_params
@@ -85,83 +85,83 @@ typedef struct s_rectangle_params
 
 typedef struct s_render_3d_settings
 {
-    float fov;
-    int   num_rays;
-    float angle_step;
-    int   center_ray;
+	float fov;
+	int   num_rays;
+	float angle_step;
+	int   center_ray;
 } t_render_3d_settings;
 
 typedef struct s_3d_properties
 {
-    float ray_angle;
-    float ray_dir_x;
-    float ray_dir_y;
-    float hit_x;
-    float hit_y;
-    int   side_local; 
+	float ray_angle;
+	float ray_dir_x;
+	float ray_dir_y;
+	float hit_x;
+	float hit_y;
+	int   side_local; 
 } t_3d_properties;
 
 typedef struct s_crosshair_params
 {
-    int size;
-    // int point_y;
-    int dy;
-    int dx;
-    int px;
-    int py;
+	int size;
+	// int point_y;
+	int dy;
+	int dx;
+	int px;
+	int py;
 }   t_crosshair_params;
 
 typedef struct s_tex
 {
-    void    *img;
-    char    *addr;
-    int     width;
-    int     height;
-    int     bpp;
-    int     line_size;
-    int     endian;
+	void    *img;
+	char    *addr;
+	int     width;
+	int     height;
+	int     bpp;
+	int     line_size;
+	int     endian;
 }   t_tex;
 
 typedef struct s_draw_data
 {
-    float dist;
-    float correct_dist;
-    float wall_height_f;
-    int   wall_height;
-    int   wall_top;
-    int   wall_bot;
-    t_tex *used_tex;
-    int   tex_x;
-    float step;
+	float dist;
+	float correct_dist;
+	float wall_height_f;
+	int   wall_height;
+	int   wall_top;
+	int   wall_bot;
+	t_tex *used_tex;
+	int   tex_x;
+	float step;
 }   t_draw_data;
 
 typedef struct s_ray
 {
-    float x;
-    float y;
-    float delta_x;
-    float delta_y;
-    float step_size;
-    float distance;
+	float x;
+	float y;
+	float delta_x;
+	float delta_y;
+	float step_size;
+	float distance;
 } t_ray;
 
 typedef struct s_rays_2d
 {
-    float angle_step;
-    float start_angle;
-    float ray_angle;
-    float hit_x;
-    float hit_y;
-    float distance;
-    float end_x;
-    float end_y;
-    float start_x;
-    float start_y;
-    float stepx;
-    float stepy;
-    float cx;
-    float cy;
-    // int steps;
+	float angle_step;
+	float start_angle;
+	float ray_angle;
+	float hit_x;
+	float hit_y;
+	float distance;
+	float end_x;
+	float end_y;
+	float start_x;
+	float start_y;
+	float stepx;
+	float stepy;
+	float cx;
+	float cy;
+	// int steps;
 } t_rays_2d;
 
 typedef struct s_play
@@ -170,44 +170,35 @@ typedef struct s_play
 	double	pos_x;
 	double	pos_y;
 	int		found;
-    float	x;
-    float	y; 
-    float	angle;
+	float	x;
+	float	y; 
+	float	angle;
 	float	angle_speed;
-    float	move_speed;
-    float	rot_speed;
+	float	move_speed;
+	float	rot_speed;
 	int		key_up;
-    int		key_down;
-    int		key_left;
-    int		key_right;
+	int		key_down;
+	int		key_left;
+	int		key_right;
 	int		left_rotate;
-    int		right_rotate;
+	int		right_rotate;
 	void	*hands;
 	int		render_mode;
 } t_play;
 
 typedef struct s_render_2d
 {
-    float scale_x;       // quanti pixel in orizzontale per 1 cella
-    float scale_y;  
-    int square_size;
-    int player_size;
-    int color_wall2d;
-    int color_player;
-    int color_ray;
-    int color_wall;
-    float fov;
-    int num_rays;
+	float scale_x;       // quanti pixel in orizzontale per 1 cella
+	float scale_y;  
+	int square_size;
+	int player_size;
+	int color_wall2d;
+	int color_player;
+	int color_ray;
+	int color_wall;
+	float fov;
+	int num_rays;
 } t_render_2d;
-
-// typedef struct s_play
-// {
-// 	char	dir_start;
-// 	float	x;
-// 	float	y;
-// 	// mlx hands image
-// 	void	*hands;
-// }			t_play;
 
 typedef struct s_crdls
 {
@@ -246,11 +237,11 @@ typedef struct s_map
 	int     ceiling_color;
 	int     floor_color;
 	char    **mtx2;
-    int     width; 
-    int     height;
-    int     player_x; 
-    int     player_y;  
-    char    player_dir; 
+	int     width; 
+	int     height;
+	int     player_x; 
+	int     player_y;  
+	char    player_dir; 
 	int		lines_ind; //da settare quando abbiamo la matrice della mappa effettiva
 	int		cols_ind; //da settare quando abbiamo la matrice della mappa effettiva
 	int		len_map; //da settare quando abbiamo la matrice della mappa effettiva
@@ -273,15 +264,15 @@ typedef struct s_game
 	void	*img;
 	void	*win;
 	char    *img_data;      // Puntatore ai dati dell'immagine
-    int     bpp;            // Bytes per pixel
-    int     line_size;      // Dimensione di una riga in byte
-    int     endian;         // Endianness (0: little-endian, 1: big-endian)
+	int     bpp;            // Bytes per pixel
+	int     line_size;      // Dimensione di una riga in byte
+	int     endian;         // Endianness (0: little-endian, 1: big-endian)
 	void	*sky;
 	t_tex	tex_hands;
-    t_tex  tex_no;
-    t_tex  tex_so;
-    t_tex  tex_we;
-    t_tex  tex_ea;
+	t_tex  tex_no;
+	t_tex  tex_so;
+	t_tex  tex_we;
+	t_tex  tex_ea;
 	t_play	player;
 	t_map	map;
 	t_tex   my_tex; 

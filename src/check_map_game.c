@@ -6,7 +6,7 @@
 /*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 10:29:24 by mapichec          #+#    #+#             */
-/*   Updated: 2025/01/11 14:07:23 by mapichec         ###   ########.fr       */
+/*   Updated: 2025/01/11 16:17:42 by mapichec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,31 +33,28 @@ int	err_game_card(t_map *map)
 }
 
 // check se il file passato è una repo e check se il file è apriibile
-// int	file_path(char *str)
-// {
-// 	int	fd;
+int	file_path(char *str)
+{
+	int	fd;
 
-// 	fd = open(str, O_RDONLY | __O_DIRECTORY);
-// 	if (fd != -1)
-// 	{
-// 		ft_printf("Error\nInvalid file!\n");
-// 		close(fd);
-// 		return (1);
-// 	}
-// 	close(fd);
-// 	fd = open(str, O_RDONLY);
-// 	if (fd < 0)
-// 	{
-// 		ft_printf("Error\nInvalid open!\n");
-// 		close(fd);
-// 		return (1);
-// 	}
-// 	close(fd);
-// 	return (0);
-// }
-
-
-// TODO to be cancelled at the end or commented
+	fd = open(str, O_RDONLY | __O_DIRECTORY);
+	if (fd != -1)
+	{
+		ft_printf("Error\nInvalid file!\n");
+		close(fd);
+		return (1);
+	}
+	close(fd);
+	fd = open(str, O_RDONLY);
+	if (fd < 0)
+	{
+		ft_printf("Error\nInvalid open!\n");
+		close(fd);
+		return (1);
+	}
+	close(fd);
+	return (0);
+}
 
 // TODO to be finished
 int	check_main(t_map *map, t_game *game)
