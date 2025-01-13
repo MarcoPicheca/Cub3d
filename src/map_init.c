@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 16:41:59 by marco             #+#    #+#             */
-/*   Updated: 2025/01/12 15:47:54 by mapichec         ###   ########.fr       */
+/*   Updated: 2025/01/13 11:01:22 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ static	void	player_angle(float ang, t_play *player, t_map *map)
 // 	map->width = max_len;
 // }
 
+
 void 	switch_crdls(t_map *map)
 {
 	map->path_no = map->cardinals.path_NO;
@@ -80,6 +81,7 @@ int	init_map(t_map *map, t_play *player)
 	// map->x = 0;
 	map->y = 0;
 	switch_crdls(map);
+	// free_crlds(map);
     // map->path_no = "./textures/paint.xpm";
     // map->path_so = "./textures/image.xpm";
     // map->path_we = "./textures/sb.xpm";

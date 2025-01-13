@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_2d.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 01:40:03 by tschetti          #+#    #+#             */
-/*   Updated: 2025/01/10 14:00:46 by tschetti         ###   ########.fr       */
+/*   Updated: 2025/01/13 09:19:51 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void draw_rays(t_game *game, t_render_2d *values)
 disegna il giocatore in mod 2d
 usa cooridnate relative e assolute (x e y , start_x e start_y)
 */
+
+// TODO conditional jump di params->height
 void draw_rectangle(t_rectangle_params *params, t_game *game)
 {
     int y;

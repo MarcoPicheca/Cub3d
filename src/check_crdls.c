@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_crdls.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 17:17:40 by marco             #+#    #+#             */
-/*   Updated: 2025/01/11 16:17:13 by mapichec         ###   ########.fr       */
+/*   Updated: 2025/01/13 12:08:43 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,11 @@
 // check sui percorsi dei cardinali
 static	int	check_paths_crld(t_crdls *crlds)
 {
-	crlds->path_NO = ft_strtrim2(crlds->path_NO, " \n");
+	char	*tmp;
+
+	tmp = crlds->path_NO;
+	crlds->path_NO = ft_strtrim(crlds->path_NO, " \n");
+	free(tmp);
 	crlds->path_SO = ft_strtrim2(crlds->path_SO, " \n");
 	crlds->path_EA = ft_strtrim2(crlds->path_EA, " \n");
 	crlds->path_WS = ft_strtrim2(crlds->path_WS, " \n");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_rgb_f_c.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 12:27:35 by marco             #+#    #+#             */
-/*   Updated: 2025/01/10 17:54:49 by tschetti         ###   ########.fr       */
+/*   Updated: 2025/01/13 12:22:26 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,52 @@ static	int	count_colors(char **tmp)
 		return (1);
 	return (0);
 }
+
+// char	*ft_strtrim2(char *s1, char *set)
+// {
+// 	char	*s;
+
+// 	s = ft_strtrim(s1, set);
+// 	if (s && s != NULL)
+// 	{
+// 		free(s1);
+// 		s1 = NULL;		
+// 	}
+// 	else
+// 		return (NULL);
+// 	return (s);
+// }
+
+// TODO to be fixed 
+char	*ft_strtrim2(char *s1, char *set)
+{
+	size_t	i;
+	size_t	j;
+	char	*s;
+
+	s = NULL;
+	if (s1 && set)
+	{
+		i = 0;
+		j = ft_strlen(s1);
+		while (s1[i] && ft_strchr(set, s1[i]))
+			i++;
+		while (s1[j - 1] && ft_strchr(set, s1[j - 1]) && j > i)
+			j--;
+		s = (char *)ft_calloc(sizeof(char), (j - i + 1));
+		if (s)
+			ft_strlcpy(s, &s1[i], j - i + 1);
+	}
+	if (s && s != NULL)
+	{
+		free(s1);
+		s1 = NULL;		
+	}
+	else
+		return (NULL);
+	return (s);
+}
+
 
 // riempie i campi rgb delle texture
 static void fill_txt(t_txt *txt, char **cl, char **fl)

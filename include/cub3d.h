@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 18:21:13 by mapichec          #+#    #+#             */
-/*   Updated: 2025/01/12 15:48:11 by mapichec         ###   ########.fr       */
+/*   Updated: 2025/01/13 11:43:07 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,9 +167,12 @@ typedef struct s_rays_2d
 	// int steps;
 } t_rays_2d;
 
+typedef struct s_game t_game;
+
 typedef struct s_play
 {
 	char	dir_start;
+	t_game	*game;
 	double	pos_x;
 	double	pos_y;
 	int		found;
@@ -206,10 +209,6 @@ typedef struct s_render_2d
 
 typedef struct s_crdls
 {
-	void	*wall_NO;
-	void	*wall_SO;
-	void	*wall_EA;
-	void	*wall_WS;
 	char	*path_SO;
 	char	*path_NO;
 	char	*path_WS;
@@ -218,8 +217,6 @@ typedef struct s_crdls
 
 typedef struct s_txt
 {
-	void	*floor;
-	void	*ceiling;
 	int		fl_r;
 	int		fl_g;
 	int		fl_b;
@@ -285,7 +282,6 @@ typedef struct s_game
 	int     bpp;            // Bytes per pixel
 	int     line_size;      // Dimensione di una riga in byte
 	int     endian;         // Endianness (0: little-endian, 1: big-endian)
-	void	*sky;
 	t_tex	tex_hands;
 	t_tex  tex_no;
 	t_tex  tex_so;
@@ -298,11 +294,13 @@ typedef struct s_game
 }			t_game;
 
 // parsing
+char	*ft_strtrim2(char *s1, char *set);
 int		ft_is_cub(char *str, int len, char *ext);
 int		file_cub_check(char *str);
 int		map_gen(t_game *game, char *av);
 void	free_matrix(char **map, int len);
 void	free_game(t_game *game);
+void	free_crlds(t_map *map);
 char	*get_next_line(int fd);
 int		map_div(t_map *map, t_game *game);
 int		map_game(t_map *map,  t_game *game);
@@ -366,8 +364,6 @@ void draw_rectangle(t_rectangle_params *params, t_game *game);
 int		ft_is_cub(char *str, int len, char *ext);
 int		file_cub_check(char *str);
 int		map_gen(t_game *game, char *av);
-// void	free_matrix(char **map);
-void	free_game(t_game *game);
 char	*get_next_line(int fd);
 
 void load_textures(t_game *game);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gen_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:24:58 by mapichec          #+#    #+#             */
-/*   Updated: 2025/01/08 16:11:51 by tschetti         ###   ########.fr       */
+/*   Updated: 2025/01/13 11:26:15 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,13 @@ static int	line_count(t_game *game)
 	while (tmp != NULL)
 	{
 		free(tmp);
+		tmp = NULL;
 		tmp = get_next_line(game->map.fd);
 		if (tmp != NULL)
 			game->map.lines_ind++;
 	}
+	if (tmp != NULL)
+		free(tmp);
 	close(game->map.fd);
 	return (game->map.lines_ind + 1);
 }
@@ -48,9 +51,9 @@ int	map_gen(t_game *game, char *av)
 	map_1->mtx[map_1->ht] = get_next_line(map_1->fd);
 	if (!map_1->mtx[map_1->ht])
 		return (free_matrix(map_1->mtx, map_1->lines_ind), 1);
-	while (map_1->mtx[map_1->ht++] && map_1->ht < map_1->lines_ind)
+	while (map_1->mtx[map_1->ht++] && map_1->ht < map_1->lines_ind + 1)
 		map_1->mtx[map_1->ht] = get_next_line(map_1->fd);
-	close(game->map.fd);
+	close(map_1->fd);
 	game->map.ht = 0;
 	// print_map(game->map.mtx, game->map.lines_ind);
 	if (map_div(&game->map, game))

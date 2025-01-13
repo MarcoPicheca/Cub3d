@@ -6,7 +6,7 @@
 /*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 12:49:30 by mapichec          #+#    #+#             */
-/*   Updated: 2025/01/07 17:59:28 by marco            ###   ########.fr       */
+/*   Updated: 2025/01/13 11:13:27 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	free_matrix(char **map, int len)
 	i = 0;
 	if (!map)
 		return ;
-	while (map[i] && map[i] != NULL && i < len)
+	while (i < len && map[i] && map[i] != NULL)
 	{
 		free(map[i]);
 		map[i] = NULL;
@@ -36,25 +36,24 @@ void	free_matrix2(char **map)
 	i = 0;
 	if (!map)
 		return ;
-	while (map[i] && map[i] != NULL)
+	while (map + i && map[i] && map[i] != NULL)
 	{
 		free(map[i]);
 		map[i] = NULL;
 		i++;
 	}
-	free(map);
 	map = NULL;
 }
 
-static	void	free_crlds(t_map *map)
+void	free_crlds(t_map *map)
 {
-	if (map->cardinals.path_NO != NULL)
+	if (map->cardinals.path_NO && map->cardinals.path_NO != NULL)
 		free(map->cardinals.path_NO);
-	if (map->cardinals.path_SO != NULL)
+	if (map->cardinals.path_SO && map->cardinals.path_SO != NULL)
 		free(map->cardinals.path_SO);
-	if (map->cardinals.path_EA != NULL)
+	if (map->cardinals.path_EA && map->cardinals.path_EA != NULL)
 		free(map->cardinals.path_EA);
-	if (map->cardinals.path_WS != NULL)
+	if (map->cardinals.path_WS && map->cardinals.path_WS != NULL)
 		free(map->cardinals.path_WS);
 }
 

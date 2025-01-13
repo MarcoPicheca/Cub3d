@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_game.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 10:29:24 by mapichec          #+#    #+#             */
-/*   Updated: 2025/01/11 16:17:42 by mapichec         ###   ########.fr       */
+/*   Updated: 2025/01/13 09:20:52 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,10 @@ int	file_path(char *str)
 		close(fd);
 		return (1);
 	}
-	close(fd);
 	fd = open(str, O_RDONLY);
 	if (fd < 0)
 	{
 		ft_printf("Error\nInvalid open!\n");
-		close(fd);
 		return (1);
 	}
 	close(fd);

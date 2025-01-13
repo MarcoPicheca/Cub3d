@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 16:04:54 by marco             #+#    #+#             */
-/*   Updated: 2025/01/11 14:48:54 by mapichec         ###   ########.fr       */
+/*   Updated: 2025/01/13 11:29:29 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static	void	copy_free_mtx(t_map *map)
 		i++;
 		count++;
 	}
-	free_matrix(map->mtx, map->len_map);
+	free_matrix(map->mtx, map->lines_ind);
 	map->mtx = tmp;
 }
 
