@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 16:41:59 by marco             #+#    #+#             */
-/*   Updated: 2025/01/13 11:01:22 by marco            ###   ########.fr       */
+/*   Updated: 2025/01/13 14:14:14 by tschetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,15 @@ char    **copy_map_in_mtx2(t_map *map)
 	static  int i = 0;
 	char		**mtx2;
 
-	mtx2 = ft_calloc(map->len_map, sizeof(char *));
+	mtx2 = ft_calloc(map->len_map + 1, sizeof(char *));
+	if (!mtx2)
+		return (NULL);
 	while (map->mtx[i] && i < map->len_map)
 	{
 		mtx2[i] = ft_strtrim(map->mtx[i], "\n");
 		i++;
 	}
+	mtx2[i] = NULL;
     free_matrix2(map->mtx);
 	return (mtx2);
 }
@@ -46,24 +49,24 @@ static	void	player_angle(float ang, t_play *player, t_map *map)
 // }
 
 //TODO usless sunction
-// void	count_map_dimensions(t_map *map)
-// {
-// 	int	y;
-// 	int	row_len;
-// 	int	max_len;
+void	count_map_dimensions(t_map *map)
+{
+	int	y;
+	int	row_len;
+	int	max_len;
 
-// 	y = 0;
-// 	max_len = 0;
-// 	while(map->mtx2[y])
-// 	{
-// 		row_len = ft_strlen(map->mtx2[y]);
-// 		if (row_len > max_len)
-// 			max_len = row_len;
-// 		y++;
-// 	}
-// 	map->height = y;
-// 	map->width = max_len;
-// }
+	y = 0;
+	max_len = 0;
+	while(map->mtx2[y])
+	{
+		row_len = ft_strlen(map->mtx2[y]);
+		if (row_len > max_len)
+			max_len = row_len;
+		y++;
+	}
+	map->height = y;
+	map->width = max_len;
+}
 
 
 void 	switch_crdls(t_map *map)
@@ -77,6 +80,7 @@ void 	switch_crdls(t_map *map)
 int	init_map(t_map *map, t_play *player)
 {
 	map->mtx2 = copy_map_in_mtx2(map);
+	count_map_dimensions(map);
 	// print_map_mtx2(map);
 	// map->x = 0;
 	map->y = 0;
