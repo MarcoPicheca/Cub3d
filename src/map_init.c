@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 16:41:59 by marco             #+#    #+#             */
-/*   Updated: 2025/01/13 14:14:14 by tschetti         ###   ########.fr       */
+/*   Updated: 2025/01/14 16:21:55 by mapichec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char    **copy_map_in_mtx2(t_map *map)
 	mtx2 = ft_calloc(map->len_map + 1, sizeof(char *));
 	if (!mtx2)
 		return (NULL);
-	while (map->mtx[i] && i < map->len_map)
+	while (i < map->len_map && map->mtx[i])
 	{
 		mtx2[i] = ft_strtrim(map->mtx[i], "\n");
 		i++;
