@@ -1,24 +1,10 @@
 NAME = cub3D
 
-SRC =	src/main.c \
-		src/args_check.c \
-		src/gen_map.c \
-		src/get_next_line.c \
-		src/free_all.c \
-		src/check_map_game.c \
-		src/check_map.c \
-		src/flood_fill_check.c \
-		src/check_rgb_f_c.c \
-		src/check_crdls.c \
-		src/mlx_callback_fts.c \
-		src/map_init.c \
-		src/movement.c \
-		src/drawing_fts.c \
-		src/render.c \
-		src/game_init.c \
-		src/raycast_3d.c src/wall2_xpm.c \
-		src/draw_2d.c src/draw_3d.c src/utils_4_minilibx.c src/move_player.c \
-		src/control.c src/get_color.c src/about_textures.c src/draw_minimap.c
+BONUS_NAME = cub3D_bonus
+
+SRC =	$(wildcard src/*.c)
+
+BONUS_SRC = $(wildcard src_bonus/*.c)
 
 LIBFT = ./libft/libft.a
 
@@ -47,12 +33,23 @@ rm_libx:
 	@rm -rf minilibx-linux
 	@echo "removed minilibx"
 
+bonus: CFLAGS += -DBONUS
+bonus: $(BONUS_NAME)
+
+$(BONUS_NAME): $(SRC) $(BONUS_SRC)
+	@make -sC libft
+	@cd minilibx-linux && make
+	$(CC) $(CFLAGS) $(SRC) $(BONUS_SRC) $(LIBFT) $(MLX) -o $(BONUS_NAME) $(MATH)
+
 clean:
 	@make clean -sC libft
 	@cd minilibx-linux && make clean
 
 fclean: clean
 	@make fclean -sC libft
-	rm $(NAME)
+	rm -f $(NAME)
+	rm -f $(BONUS_NAME)
 
 re: fclean all
+
+.PHONY: all clean fclean re bonus download rm_libx

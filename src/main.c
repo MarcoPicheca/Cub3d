@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 18:16:58 by mapichec          #+#    #+#             */
-/*   Updated: 2025/01/13 10:06:56 by marco            ###   ########.fr       */
+/*   Updated: 2025/01/14 11:27:02 by tschetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,16 +98,34 @@ void init_render_3d_prop(t_3d_properties *prop, float angle)
 }
 
 /*
-inizializza i valori per il mirino
-size e' la grandezze del lato
-py e' il punto centrale lungo l'asse y [come win_height / 2]
-x_screen e' la colonna centrale, gli diamo - 7 per avere un po di offset per il disegno del mirino [*nota]
+solita operazione di normalizzazione, divido le grandezze della finestra
+per la dimensione della griglia, per capire come mappare il gioco sulla finestra
+fov = field of view
 */
-void init_draw_crosshair_params(t_crosshair_params *params, int x_screen, int wall_top, int wall_bot)
+void    init_render_2d(t_render_2d *params, t_game *game)
 {
-	params->size = 7;
-	params->py = (wall_top + wall_bot) / 2;
-	params->px = x_screen - 7; 
+    (void)game;
+    params->scale_x = (float)WIN_WIDTH  / (float)game->map.width;
+    params->scale_y = (float)WIN_HEIGHT / (float)game->map.height;
+    params->player_size = 14;
+    params->color_wall2d = 0x0000FF;
+    params->color_ray = 0x00F00F;
+    params->fov = PI * 0.33;
+    params->num_rays = 242;
+}
+
+/*
+inizializzazione del rendering 3d
+center_ray ci serve per il mirino
+num_ray e' WIN_WIDTH perche ogni colonna rappresenta un raggio
+angle_step e' la differena in radianti tra due raggi
+*/
+void init_render_3d_view(t_render_3d_settings *settings)
+{
+    settings->fov = PI * 0.33f;
+    settings->num_rays = WIN_WIDTH;
+    settings->angle_step = settings->fov / (float)settings->num_rays;
+    settings->center_ray = settings->num_rays * 0.5f;
 }
 
 /*
@@ -255,9 +273,9 @@ int main(int ac, char **av)
 	t_game game;
 
 	if (ac != 2)
-		return (0);
+		return (printf("Usage: run it with a map\n"), 1);
 	memset(&game, 0, sizeof(t_game));
-	memset(&game.map, 0, sizeof(t_map));
+	// memset(&game.map, 0, sizeof(t_map));
 	if (file_cub_check(av[1]))
 		return (1);
 	if (map_gen(&game, av[1]))

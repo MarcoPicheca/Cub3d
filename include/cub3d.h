@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 18:21:13 by mapichec          #+#    #+#             */
-/*   Updated: 2025/01/13 11:43:07 by marco            ###   ########.fr       */
+/*   Updated: 2025/01/14 10:00:30 by tschetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -334,6 +334,7 @@ void	clear_image(t_game *game);
 // void	init_render_2d(t_render_2d *params);
 void    init_render_2d(t_render_2d *params, t_game *game);
 void	render_map(t_game *game);
+void	init_render_3d_view(t_render_3d_settings *settings);
 
 // game init
 int		game_loop(t_game *game);
@@ -349,7 +350,7 @@ void	free_matrix2(char **map);
 
 void	put_pixel(int x, int y, int color, t_game *game);
 void	clear_image(t_game *game);
-void draw_minimap(t_game *game);
+// void draw_minimap(t_game *game);
 
 // void	move_player(t_play *player, t_map *map);
 
@@ -378,7 +379,7 @@ void draw_rays(t_game *game, t_render_2d *values);
 void init_rays_2d(t_rays_2d *rays, t_game *game, t_render_2d *values, int ray_index);
 
 void draw_wall_column(t_game *game, t_draw_data *dd, int screen_x);
-void draw_crosshair(t_game *game, t_crosshair_params *params);
+// void draw_crosshair(t_game *game, t_crosshair_params *params);
 void draw_floor_and_ceiling(t_game *game);
 void draw_single_3d_ray(t_game *game, int screen_col, float ray_angle, t_render_3d_settings *settings);
 
@@ -390,8 +391,14 @@ int compute_tex_x(t_tex *used_tex, t_3d_properties *prop);
 
 void init_render_3d_prop(t_3d_properties *prop, float angle);
 void  init_params_for_draw_single_3d_ray(t_draw_data *dd, t_3d_properties *prop, t_game *game);
-void init_draw_crosshair_params(t_crosshair_params *params, int x_screen, int wall_top, int wall_bot);
+// void init_draw_crosshair_params(t_crosshair_params *params, int x_screen, int wall_top, int wall_bot);
 
 float cast_ray_dda_side(t_game *game, float angle, t_ray_result *result);
+
+// FUNZIONI BONUS
+// void init_draw_crosshair_params(t_crosshair_params *params, int x_screen, int wall_top, int wall_bot);
+// void draw_crosshair(t_game *game, t_crosshair_params *params);
+// void draw_minimap(t_game *game);
+
 
 #endif

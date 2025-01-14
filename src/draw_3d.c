@@ -6,65 +6,12 @@
 /*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 01:45:51 by tschetti          #+#    #+#             */
-/*   Updated: 2025/01/11 20:38:47 by tschetti         ###   ########.fr       */
+/*   Updated: 2025/01/14 09:55:15 by tschetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-
-
-void draw_hands(t_game *game)
-{
-    int x;
-    int y;
-    int h;
-    int w;
-    int color;
-
-    x = (WIN_WIDTH / 2) - (game->tex_hands.width / 2);
-    y = WIN_HEIGHT - game->tex_hands.height - 24;
-    h = 0;
-    while (h < game->tex_hands.height)
-    {
-        w = 0;
-        while (w < game->tex_hands.width)
-        {
-            color = get_tex_color(&game->tex_hands, w, h);
-            if (color)
-                put_pixel(x + w, y + h, get_tex_color(&game->tex_hands, w, h), game);
-            w++;
-        }
-        h++;
-    }
-}
-
-/*
-disegna il mirino
-nel secondo while spostiamo le coordinate dal centro dell'area verso
-il punto in alto a sinistra
-*/
-void draw_crosshair(t_game *game, t_crosshair_params *params)
-{
-    int dy;
-    int dx;
-    int x;
-    int y;
-
-    dy = 0;
-    while (dy < params->size)
-    {
-        dx = 0;
-        while (dx < params->size)
-        {
-            x = params->px - (params->size / 2) + dx;
-            y = params->py - (params->size / 2) + dy;
-            // if (px >= 0 && px < WIN_WIDTH && py >= 0 && py < WIN_HEIGHT)
-            put_pixel(x, y, 0xFF8800, game);
-            dx++;
-        }
-        dy++;
-    }
-}
+#include "../include/cub3d_bonus.h"
 
 /*
 disegna soffitto e pavimento.
@@ -129,6 +76,8 @@ void draw_wall_column(t_game *game, t_draw_data *dd, int screen_x)
     }
 }
 
+#ifdef BONUS
+
 /*
 viene chiamata per ogni singolo raggio in render_3d_view, inizializza il necessario,
 disegna una colonna per volta.
@@ -149,3 +98,31 @@ void draw_single_3d_ray(t_game *game, int screen_col, float ray_angle, t_render_
         draw_crosshair(game, &params);
     }
 }
+
+#endif
+
+#ifndef BONUS
+
+/*
+viene chiamata per ogni singolo raggio in render_3d_view, inizializza il necessario,
+disegna una colonna per volta.
+se la colonna e' quella centrale chiama le funzioni per disegnare il mirino.
+*/
+void draw_single_3d_ray(t_game *game, int screen_col, float ray_angle, t_render_3d_settings *settings)
+{
+    t_3d_properties prop;
+    t_draw_data     dd;
+    // t_crosshair_params params;
+    (void)settings;
+    
+    init_render_3d_prop(&prop, ray_angle);
+    init_params_for_draw_single_3d_ray(&dd, &prop, game);
+    draw_wall_column(game, &dd, screen_col);
+    // if (screen_col == settings->center_ray)
+    // {
+    //     init_draw_crosshair_params(&params, screen_col, dd.wall_top, dd.wall_bot);
+    //     draw_crosshair(game, &params);
+    // }
+}
+
+#endif
