@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_2d.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 01:40:03 by tschetti          #+#    #+#             */
-/*   Updated: 2025/01/13 09:19:51 by marco            ###   ########.fr       */
+/*   Updated: 2025/01/14 15:22:16 by tschetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void draw_map(t_game *game, t_render_2d *values)
     while (y < game->map.height)
     {
         x = 0;
-        while (x < game->map.width)
+        while (x < ft_strlen(game->map.mtx2[y]))
         {
             if (game->map.mtx2[y][x] == '1')
             {

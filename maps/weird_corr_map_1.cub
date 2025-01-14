@@ -1,13 +1,13 @@
-NO                                      ./path_to_the_north_texture
-EA ./path_to_the_east_texture
+NO                                      ./textures/paint.xpm 
+EA ./textures/pb.xpm 
 
 
 
 
-WE                                                                                   ./path_to_the_west_texture
+WE                                                                                   ./textures/rp.xpm 
 
 F 220,100,0
-SO ./path_to_the_south_texture
+SO ./textures/tt.xpm 
 
 
 

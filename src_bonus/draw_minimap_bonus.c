@@ -6,7 +6,7 @@
 /*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 16:24:51 by tschetti          #+#    #+#             */
-/*   Updated: 2025/01/14 11:23:01 by tschetti         ###   ########.fr       */
+/*   Updated: 2025/01/14 16:29:07 by tschetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,21 @@ void	draw_minimap_core(t_game *game, t_rectangle_params *rect, int x, int y)
 	minimap_x = (int)game->player.x + x;
 	minimap_y = (int)game->player.y + y;
 	if (minimap_x >= 0 && minimap_x < game->map.width
-		&& minimap_y >= 0 && minimap_y < game->map.height)
+		&& minimap_y >= 0 && minimap_y < game->map.height
+		&& game->map.mtx2[minimap_y]
+		&& minimap_x < ft_strlen(game->map.mtx2[minimap_y]))
 	{
 		if (game->map.mtx2[minimap_y][minimap_x] == '1')
 			game->minimap.minimap_colors = 0x0000FF;
 		else
 			game->minimap.minimap_colors = 0x55FF55;
-		set_minimap_values(game, rect, &x, &y);
-		draw_rectangle(rect, game);
 	}
+	else
+		game->minimap.minimap_colors = 0XAAAAAA;
+	set_minimap_values(game, rect, &x, &y);
+	draw_rectangle(rect, game);
 }
+
 
 void	draw_minimap(t_game *game)
 {
@@ -60,7 +65,7 @@ void	draw_minimap(t_game *game)
 
 	y = -game->minimap.minimap_size / 2;
 	init_minimap_values(game);
-	while (y <= game->minimap.minimap_size / 2)
+	while (y <= game->minimap.minimap_size / 2 )
 	{
 		x = -game->minimap.minimap_size / 2;
 		while (x <= game->minimap.minimap_size / 2)
