@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_rgb_f_c.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 12:27:35 by marco             #+#    #+#             */
-/*   Updated: 2025/01/13 12:22:26 by marco            ###   ########.fr       */
+/*   Updated: 2025/01/14 17:58:44 by mapichec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static	int	count_colors(char **tmp)
 			return (1);
 		i++;
 	}
-	if (i > 3)
+	if (i != 3)
 		return (1);
 	return (0);
 }
@@ -66,6 +66,82 @@ static	int	count_colors(char **tmp)
 // 		return (NULL);
 // 	return (s);
 // }
+
+
+// TODO da togliere
+static size_t	count_c_s(char const *s1, char const *set)
+{
+	size_t	i;
+	size_t	res;
+	size_t	x;
+
+	i = 0;
+	res = 0;
+	x = 0;
+	while (set[x])
+	{
+		if (s1[i] == set[x])
+		{
+			res++;
+			x = 0;
+			i++;
+		}
+		else
+			x++;
+	}
+	return (res);
+}
+
+static size_t	count_c_e(char const *s1, char const *set)
+{
+	size_t	i;
+	size_t	x;
+	size_t	res;
+
+	x = 0;
+	i = ft_strlen(s1) - 1;
+	res = ft_strlen(s1);
+	while (set[x])
+	{
+		if (s1[i] == set[x])
+		{
+			res--;
+			x = 0;
+			i--;
+		}
+		else
+			x++;
+	}
+	return (res);
+}
+
+char	*ft_strtrim(char const *s1, char const *set)
+{
+	char		*newstr;
+	size_t		i;
+	size_t		last;
+	size_t		first;
+
+	i = 0;
+	first = count_c_s(s1, set);
+	last = count_c_e(s1, set);
+	if (s1[first] == '\0')
+	{
+		first = 0;
+		last = 0;
+	}
+	newstr = (char *) malloc(sizeof(char) * (last - first + 1));
+	if (!newstr)
+		return (NULL);
+	while (first < last)
+	{
+		newstr[i] = s1[first];
+		i++;
+		first++;
+	}
+	newstr[i] = '\0';
+	return (newstr);
+}
 
 // TODO to be fixed 
 char	*ft_strtrim2(char *s1, char *set)
@@ -92,8 +168,6 @@ char	*ft_strtrim2(char *s1, char *set)
 		free(s1);
 		s1 = NULL;		
 	}
-	else
-		return (NULL);
 	return (s);
 }
 
@@ -139,7 +213,21 @@ int	check_rgb_txt(t_txt *txt)
 	txt->path_txt_ceiling = ft_strtrim2(txt->path_txt_ceiling, "\n");
 	txt->path_txt_floor = ft_strtrim2(txt->path_txt_floor, "\n");
 	tmp_cl = ft_split(txt->path_txt_ceiling, 32);
+	if (!tmp_cl || *tmp_cl == NULL)
+	{
+		if (!tmp_cl)
+			return (1);
+		if (*tmp_cl == NULL)
+			return (free(tmp_cl), 1);
+	}
 	tmp_fl = ft_split(txt->path_txt_floor, 32);
+	if (!tmp_fl || *tmp_fl == NULL)
+	{
+		if (!tmp_fl)
+		return (free_matrix(tmp_cl, 3), 1);
+		if (*tmp_cl == NULL)
+			return (free_matrix(tmp_cl, 3), free(tmp_fl), 1);
+	}
 	if (count_colors(tmp_cl) || count_colors(tmp_fl))
 		return (free_matrix(tmp_cl, 3), free_matrix(tmp_fl, 3), 1);
 	return (fill_txt(txt, tmp_cl, tmp_fl), free_matrix(tmp_cl, 3), free_matrix(tmp_fl, 3), 0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 12:49:30 by mapichec          #+#    #+#             */
-/*   Updated: 2025/01/13 11:13:27 by marco            ###   ########.fr       */
+/*   Updated: 2025/01/14 17:43:45 by mapichec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,21 @@ void	free_crlds(t_map *map)
 		free(map->cardinals.path_WS);
 }
 
+void	free_txt(t_txt *txt)
+{
+	if (txt->path_txt_ceiling)	
+		free(txt->path_txt_ceiling);
+	if (txt->path_txt_floor)
+		free(txt->path_txt_floor);
+}
+
 // per tutte le allocazioni da freeare alla fine del gioco
 void	free_game(t_game *game)
 {
 	if (game->map.mtx)
 		free_matrix(game->map.mtx, game->map.lines_ind);
-	if (game->map.cardinals.path_NO == NULL || game->map.cardinals.path_SO == NULL
-		|| game->map.cardinals.path_EA == NULL || game->map.cardinals.path_WS == NULL)
+	if (game->map.cardinals.path_NO != NULL || game->map.cardinals.path_SO != NULL
+		|| game->map.cardinals.path_EA != NULL || game->map.cardinals.path_WS != NULL)
 		free_crlds(&game->map);
+	free_txt(&game->map.txt);
 }

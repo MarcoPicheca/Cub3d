@@ -1,19 +1,18 @@
-NO                                      ./path_to_the_north_texture
-EA ./path_to_the_east_texture
+NO         ./textures/tt.xpm
+
+
+SO ./textures/paint.xpm        
+EA        ./textures/rp.xpm
+
+F 33,33,33
+
+
+WE ./textures/pb.xpm
 
 
 
 
-WE                                                                                   ./path_to_the_west_texture
-
-F 220,100,0
-SO ./path_to_the_south_texture
-
-
-
-
-
-C 225,30,0
+C                     155,206,255
 
 
 

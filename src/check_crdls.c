@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_crdls.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 17:17:40 by marco             #+#    #+#             */
-/*   Updated: 2025/01/13 12:08:43 by marco            ###   ########.fr       */
+/*   Updated: 2025/01/14 17:31:40 by mapichec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,10 @@
 // check sui percorsi dei cardinali
 static	int	check_paths_crld(t_crdls *crlds)
 {
-	char	*tmp;
-
-	tmp = crlds->path_NO;
-	crlds->path_NO = ft_strtrim(crlds->path_NO, " \n");
-	free(tmp);
+	crlds->path_NO = ft_strtrim2(crlds->path_NO, " \n");
 	crlds->path_SO = ft_strtrim2(crlds->path_SO, " \n");
 	crlds->path_EA = ft_strtrim2(crlds->path_EA, " \n");
 	crlds->path_WS = ft_strtrim2(crlds->path_WS, " \n");
-	// printf("NO: %s\n", crlds->path_NO);
 	if (file_path(crlds->path_NO) || file_path(crlds->path_SO)
 		|| file_path(crlds->path_EA) || file_path(crlds->path_WS))
 		return (1);
@@ -32,7 +27,7 @@ static	int	check_paths_crld(t_crdls *crlds)
 
 // cicla finche allmeno una delle map->cardinals.path_* sono NULL e finche' la
 // la mtx esiste, controllando che non ci sia l'inizio della mappa di gioco
-int	map_cardinal(t_map *map)
+int	 map_cardinal(t_map *map)
 {
 	while(map->mtx[map->ht] && map->ht < map->lines_ind
 		&& (map->cardinals.path_NO == NULL || map->cardinals.path_SO == NULL

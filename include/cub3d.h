@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 18:21:13 by mapichec          #+#    #+#             */
-/*   Updated: 2025/01/14 10:00:30 by tschetti         ###   ########.fr       */
+/*   Updated: 2025/01/14 17:43:09 by mapichec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -294,6 +294,8 @@ typedef struct s_game
 }			t_game;
 
 // parsing
+void	free_txt(t_txt *txt);
+char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_strtrim2(char *s1, char *set);
 int		ft_is_cub(char *str, int len, char *ext);
 int		file_cub_check(char *str);
