@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   map_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 16:41:59 by marco             #+#    #+#             */
-/*   Updated: 2025/01/14 16:21:55 by mapichec         ###   ########.fr       */
+/*   Updated: 2025/01/15 17:44:11 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
+//ho aggiunto + 1
 char    **copy_map_in_mtx2(t_map *map)
 {
-	static  int i = 0;
+	int i = 0;
 	char		**mtx2;
 
 	mtx2 = ft_calloc(map->len_map + 1, sizeof(char *));
@@ -48,7 +49,7 @@ static	void	player_angle(float ang, t_play *player, t_map *map)
 //     }
 // }
 
-//TODO usless sunction
+
 void	count_map_dimensions(t_map *map)
 {
 	int	y;
@@ -57,7 +58,7 @@ void	count_map_dimensions(t_map *map)
 
 	y = 0;
 	max_len = 0;
-	while(map->mtx2[y])
+	while(map->mtx2[y] != NULL)
 	{
 		row_len = ft_strlen(map->mtx2[y]);
 		if (row_len > max_len)

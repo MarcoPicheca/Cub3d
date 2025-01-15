@@ -3,21 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_callback_fts.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 20:19:23 by tschetti          #+#    #+#             */
-/*   Updated: 2025/01/15 15:50:38 by tschetti         ###   ########.fr       */
+/*   Updated: 2025/01/15 17:43:58 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-// TODO freeare tutto qua
-int close_window(t_game *game)
-{
-	mlx_destroy_window(game->mlx, game->win);
-	exit(0);
-}
 
 void    exit_game(t_game *game)
 {
@@ -45,10 +39,19 @@ void    exit_game(t_game *game)
 		mlx_destroy_window(game->mlx, game->win);
 	if (game->win)
 		mlx_destroy_display(game->mlx);
+	if (game->mlx)//aggiunta
+		free(game->mlx);
 	free_crlds(&game->map);
 	free_txt(&game->map.txt);
-	free(game->mlx);
 	exit(0);
+}
+
+int close_window(t_game *game)
+{
+	// mlx_destroy_window(game->mlx, game->win);
+	// exit(0);
+	exit_game(game);
+	return(0);
 }
 
 int key_press(int keycode, t_play *player)
@@ -68,8 +71,8 @@ int key_press(int keycode, t_play *player)
 	else if (keycode == ESC)
 		exit_game(player->game);
 		// exit (0);
-	else if (keycode == V) // Tasto 'v'
-		player->render_mode = !player->render_mode; // Alterna modalità
+	else if (keycode == V)
+		player->render_mode = !player->render_mode;
 	else if (keycode == M)
 		player->minimap_view = !player->minimap_view;
 	return (0);

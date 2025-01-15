@@ -1,4 +1,5 @@
-NO         ./textures/tt.xpm
+NO                                      ./textures/paint.xpm 
+EA ./textures/pb.xpm 
 
 
 SO ./textures/paint.xpm        
@@ -7,7 +8,10 @@ EA        ./textures/rp.xpm
 F 33,33,33
 
 
-WE ./textures/pb.xpm
+WE                                                                                   ./textures/rp.xpm 
+
+F 220,100,0
+SO ./textures/tt.xpm 
 
 
 

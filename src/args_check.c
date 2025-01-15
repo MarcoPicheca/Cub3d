@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   args_check.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:13:27 by mapichec          #+#    #+#             */
-/*   Updated: 2025/01/15 15:52:55 by tschetti         ###   ########.fr       */
+/*   Updated: 2025/01/15 17:39:36 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	ft_is_cub(char *str, int len, char *ext)
 	return (1);
 }
 
+//TODO correggere fd, credo ci sia un problema qua
 // check se il file passato è una repo e check se il file ha un estensione di tipo .cub
 int	file_cub_check(char *str)
 {
@@ -40,6 +41,13 @@ int	file_cub_check(char *str)
 	if (!ft_is_cub(str, i, ".cub") && fd != -1)
 	{
 		ft_printf("Error\nInvalid file!\n");
+		if(fd>=0)
+			close(fd);
+		return (1);
+	}
+	if (fd != -1)//cosi dovrebbe andare
+	{
+		ft_printf("Error\nInvalid file (is a directory)!\n");
 		close(fd);
 		return (1);
 	}
