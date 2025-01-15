@@ -12,8 +12,7 @@
 
 #include "../include/cub3d.h"
 
-
-void    exit_game(t_game *game)
+void	exit_game(t_game *game)
 {
 	if (game->player.hands != NULL)
 		mlx_destroy_image(game->mlx, game->player.hands);
@@ -46,15 +45,13 @@ void    exit_game(t_game *game)
 	exit(0);
 }
 
-int close_window(t_game *game)
+int	close_window(t_game *game)
 {
-	// mlx_destroy_window(game->mlx, game->win);
-	// exit(0);
 	exit_game(game);
-	return(0);
+	return (0);
 }
 
-int key_press(int keycode, t_play *player)
+int	key_press(int keycode, t_play *player)
 {
 	if (keycode == W)
 		player->key_up = 1;
@@ -70,7 +67,6 @@ int key_press(int keycode, t_play *player)
 		player->right_rotate = 1;
 	else if (keycode == ESC)
 		exit_game(player->game);
-		// exit (0);
 	else if (keycode == V)
 		player->render_mode = !player->render_mode;
 	else if (keycode == M)
@@ -78,7 +74,7 @@ int key_press(int keycode, t_play *player)
 	return (0);
 }
 
-int key_release(int keycode, t_play *player)
+int	key_release(int keycode, t_play *player)
 {
 	if (keycode == W)
 		player->key_up = 0;

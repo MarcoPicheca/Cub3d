@@ -6,19 +6,23 @@
 /*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 17:01:40 by marco             #+#    #+#             */
-/*   Updated: 2025/01/10 11:17:48 by tschetti         ###   ########.fr       */
+/*   Updated: 2025/01/15 21:09:01 by tschetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void draw_ray_dda(t_game *game, float angle, int color)
+void	draw_ray_dda(t_game *game, float angle, int color)
 {
-	float ray_x = game->player.x * BLOCK; 
-	float ray_y = game->player.y * BLOCK;
-	float delta_x = cos(angle) * 0.5;
-	float delta_y = sin(angle) * 0.5;
+	float	ray_x;
+	float	ray_y;
+	float	delta_x;
+	float	delta_y;
 
+	ray_x = game->player.x * BLOCK;
+	ray_y = game->player.y * BLOCK;
+	delta_x = cos(angle) * 0.5;
+	delta_y = sin(angle) * 0.5;
 	while (!touch(ray_x, ray_y, game))
 	{
 		put_pixel(ray_x, ray_y, color, game);
@@ -27,14 +31,15 @@ void draw_ray_dda(t_game *game, float angle, int color)
 	}
 }
 
-void draw_square(int x, int y, int size, int color, t_game *game)
+void	draw_square(int x, int y, int size, int color, t_game *game)
 {
-	int i = 0;
-	int j;
+	int	i;
+	int	j;
 
+	i = 0;
 	while (i < size)
 	{
-		j = 0; 
+		j = 0;
 		while (j < size)
 		{
 			put_pixel(x + j, y + i, color, game);
@@ -55,7 +60,8 @@ void draw_square(int x, int y, int size, int color, t_game *game)
 // 		while (x < game->map.width)
 // 		{
 // 			if (game->map.mtx2[y][x] == '1')
-// 				draw_square(x * params->square_size, y * params->square_size, params->square_size, params->color_wall, game);
+// 				draw_square(x * params->square_size,y *
+//	params->square_size, params->square_size, params->color_wall, game);
 // 			x++;
 // 		}
 // 		y++;
@@ -75,7 +81,8 @@ void draw_square(int x, int y, int size, int color, t_game *game)
 // 	player_size = params->player_size;
 // 	px = game->player.x * square_size;
 // 	py = game->player.y * square_size;
-// 	draw_square(px - player_size / 2, py - player_size / 2, player_size, color_player, game);
+// 	draw_square(px - player_size / 2, py - player_size / 2,
+//			player_size, color_player, game);
 // }
 
 // void draw_rays(t_game *game, t_render_2d *params)
@@ -95,4 +102,3 @@ void draw_square(int x, int y, int size, int color, t_game *game)
 // 		i++;
 // 	}
 // }
-

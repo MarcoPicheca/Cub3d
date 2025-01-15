@@ -13,11 +13,12 @@
 #include "../include/cub3d.h"
 
 //ho aggiunto + 1
-char    **copy_map_in_mtx2(t_map *map)
+char	**copy_map_in_mtx2(t_map *map)
 {
-	int i = 0;
+	int			i;
 	char		**mtx2;
 
+	i = 0;
 	mtx2 = ft_calloc(map->len_map + 1, sizeof(char *));
 	if (!mtx2)
 		return (NULL);
@@ -27,7 +28,7 @@ char    **copy_map_in_mtx2(t_map *map)
 		i++;
 	}
 	mtx2[i] = NULL;
-    free_matrix2(map->mtx);
+	free_matrix2(map->mtx);
 	return (mtx2);
 }
 
@@ -49,7 +50,6 @@ static	void	player_angle(float ang, t_play *player, t_map *map)
 //     }
 // }
 
-
 void	count_map_dimensions(t_map *map)
 {
 	int	y;
@@ -58,7 +58,7 @@ void	count_map_dimensions(t_map *map)
 
 	y = 0;
 	max_len = 0;
-	while(map->mtx2[y] != NULL)
+	while (map->mtx2[y] != NULL)
 	{
 		row_len = ft_strlen(map->mtx2[y]);
 		if (row_len > max_len)
@@ -69,8 +69,7 @@ void	count_map_dimensions(t_map *map)
 	map->width = max_len;
 }
 
-
-void 	switch_crdls(t_map *map)
+void	switch_crdls(t_map *map)
 {
 	map->path_no = map->cardinals.path_NO;
 	map->path_so = map->cardinals.path_SO;
@@ -82,18 +81,13 @@ int	init_map(t_map *map, t_play *player)
 {
 	map->mtx2 = copy_map_in_mtx2(map);
 	count_map_dimensions(map);
-	// print_map_mtx2(map);
-	// map->x = 0;
 	map->y = 0;
 	switch_crdls(map);
-	// free_crlds(map);
-    // map->path_no = "./textures/paint.xpm";
-    // map->path_so = "./textures/image.xpm";
-    // map->path_we = "./textures/sb.xpm";
-    // map->path_ea = "./textures/pb.xpm";
-    map->path_hands = "./textures/gun5.xpm";
-	map->ceiling_color = (map->txt.cl_r << 16 | map->txt.cl_g << 8 | map->txt.cl_b);
-    map->floor_color = (map->txt.fl_r << 16 | map->txt.fl_g << 8 | map->txt.fl_b);
+	map->path_hands = "./textures/gun5.xpm";
+	map->ceiling_color = (map->txt.cl_r << 16 | map->txt.cl_g << 8
+			| map->txt.cl_b);
+	map->floor_color = (map->txt.fl_r << 16 | map->txt.fl_g << 8
+			| map->txt.fl_b);
 	while (map->mtx2[map->y] && map->y < map->len_map)
 	{
 		while (map->mtx2[map->y][map->x] != '\0')

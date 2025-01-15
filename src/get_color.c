@@ -27,27 +27,18 @@ r << 16 sposta il valore di r di 16 bit a sinistra, nei bit 16-23
 g << 8 di 8 bit a sinistra, nei bit 8-15
 b rimane nei bit meno significativi 0-7
 */
-int get_tex_color(t_tex *tex, int tx, int ty)
+int	get_tex_color(t_tex *tex, int tx, int ty)
 {
-    int go_to;
-    char *dst;
-    int r;
-    int g;
-    int b;
+	int		go_to;
+	char	*dst;
+	int		r;
+	int		g;
+	int		b;
 
-    // if (tx < 0)
-    //     tx = 0;
-    // if (tx >= tex->width)
-    //     tx = tex->width - 1;
-    // if (ty < 0)
-    //     ty = 0;
-    // if (ty >= tex->height)
-    //     ty = tex->height - 1;
-    go_to = ty * tex->line_size + tx * (tex->bpp / 8);
-    dst = tex->addr + go_to;
-    b = (unsigned char)dst[0];
-    g = (unsigned char)dst[1];
-    r = (unsigned char)dst[2];
-
-    return ((r << 16) | (g << 8) | (b));
+	go_to = ty * tex->line_size + tx * (tex->bpp / 8);
+	dst = tex->addr + go_to;
+	b = (unsigned char)dst[0];
+	g = (unsigned char)dst[1];
+	r = (unsigned char)dst[2];
+	return ((r << 16) | (g << 8) | (b));
 }

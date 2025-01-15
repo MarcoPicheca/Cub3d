@@ -16,12 +16,12 @@
 moltiplico posizione giocatore * BLOCK per sapere da dove deve partire il raggio
 0.5 e' quanto deve avanzare il raggio ad ogni iterazione per il suo tracciamento
 coseno-> quanto ci spostiamo nella componente orizzontale x
-seno-> quanto in quella verticale --- per entrambe usiamo step_size (i.e. quanto avanzare)
+seno-> quanto in quella verticale. per entrambe usiamo step_size(quanto avanzare)
 distance servira per la prospettiva
 */
-void init_cast(t_ray *ray, t_game *game, float *angle)
+void	init_cast(t_ray *ray, t_game *game, float *angle)
 {
-	ray->x = game->player.x * BLOCK; 
+	ray->x = game->player.x * BLOCK;
 	ray->y = game->player.y * BLOCK;
 	ray->step_size = 0.5f;
 	ray->delta_x = cosf(*angle) * ray->step_size;
@@ -33,9 +33,9 @@ void init_cast(t_ray *ray, t_game *game, float *angle)
 Finche non tocca il muro il raggio avanza
 salvo le coordinate in cui tocca il muro
 */
-float cast_ray_dda(t_game *game, float angle, float *hit_x, float *hit_y)
+float	cast_ray_dda(t_game *game, float angle, float *hit_x, float *hit_y)
 {
-	t_ray ray;
+	t_ray	ray;
 
 	init_cast(&ray, game, &angle);
 	while (!touch(ray.x, ray.y, game))
@@ -43,28 +43,29 @@ float cast_ray_dda(t_game *game, float angle, float *hit_x, float *hit_y)
 		ray.x += ray.delta_x;
 		ray.y += ray.delta_y;
 		ray.distance += ray.step_size;
-		// if (ray.distance > 50) 
-		//     break;
 	}
 	if (hit_x && hit_y)
 	{
 		*hit_x = ray.x;
 		*hit_y = ray.y;
 	}
-	return ray.distance;
+	return (ray.distance);
 }
 
 /*
 angle_step creazione di raggi equidistanti in termini di angolo (fov / num_rays)
-start_angle ovvero l'angolo a sinistra e' l'angolo centrale (visione frontale del giocatore) meno meta del fov
-ray_angle e' l'angolo del raggio corrente, parte dal primo a sinitra e si sposta a destra seguendo l'indice
-che viene moltiplicato per angle_step ovvero di quanto si sposta l'angolo in radianti
-end_x e end_y sono le coordinate in cui il raggio colpisce il muro, divido per block per capire
-in che punto della griglia sono, moltiplico per scale per il rendering sulla finestra
-infine c'e il delta delle componenti orizzontali e verticali divisi per la distanza per normalizzare
-il passo/step del raggio (per avanzare in modo proporzionato)
+start_angle ovvero l'angolo a sinistra e' l'angolo centrale (visione frontale del
+ giocatore) meno meta del fov ray_angle e' l'angolo del raggio corrente, parte 
+dal primo a sinitra e si sposta a destra seguendo l'indice che viene moltiplicato
+per angle_step ovvero di quanto si sposta l'angolo in radianti end_x e end_y sono
+le coordinate in cui il raggio colpisce il muro, divido per block per capire in 
+che punto della griglia sono, moltiplico per scale per il rendering sulla
+finestrainfine c'e il delta delle componenti orizzontali e verticali divisi per
+la distanza per normalizzare il passo/step del raggio (per avanzare in modo
+proporzionato)
 */
-void init_rays_2d(t_rays_2d *rays, t_game *game, t_render_2d *values, int ray_index)
+void	init_rays_2d(t_rays_2d *rays, t_game *game, t_render_2d *values,
+			int ray_index)
 {
 	rays->angle_step = values->fov / values->num_rays;
 	rays->start_angle = game->player.angle - values->fov * 0.5f;
@@ -73,10 +74,10 @@ void init_rays_2d(t_rays_2d *rays, t_game *game, t_render_2d *values, int ray_in
 	rays->start_y = game->player.y * values->scale_y;
 	rays->hit_x = 0;
 	rays->hit_y = 0;
-	rays->distance = cast_ray_dda(game, rays->ray_angle, &rays->hit_x, &rays->hit_y);
+	rays->distance = cast_ray_dda(game, rays->ray_angle, &rays->hit_x,
+			&rays->hit_y);
 	rays->end_x = rays->hit_x / BLOCK * values->scale_x;
 	rays->end_y = rays->hit_y / BLOCK * values->scale_y;
-	// rays->steps = (int)rays->distance;
 	rays->stepx = (rays->end_x - rays->start_x) / rays->distance;
 	rays->stepy = (rays->end_y - rays->start_y) / rays->distance;
 	rays->cx = rays->start_x;
@@ -87,7 +88,7 @@ void init_rays_2d(t_rays_2d *rays, t_game *game, t_render_2d *values, int ray_in
 ogni raggio ha il suo angolo, la sua direzione data da cos e sin,
 il suo punto di impatto e il suo muro colpito
 */
-void init_render_3d_prop(t_3d_properties *prop, float angle)
+void	init_render_3d_prop(t_3d_properties *prop, float angle)
 {
 	prop->ray_angle = angle;
 	prop->ray_dir_x = cosf(angle);
@@ -102,16 +103,16 @@ solita operazione di normalizzazione, divido le grandezze della finestra
 per la dimensione della griglia, per capire come mappare il gioco sulla finestra
 fov = field of view
 */
-void    init_render_2d(t_render_2d *params, t_game *game)
+void	init_render_2d(t_render_2d *params, t_game *game)
 {
-    (void)game;
-    params->scale_x = (float)WIN_WIDTH  / (float)game->map.width;
-    params->scale_y = (float)WIN_HEIGHT / (float)game->map.height;
-    params->player_size = 14;
-    params->color_wall2d = 0x0000FF;
-    params->color_ray = 0x00F00F;
-    params->fov = PI * 0.33;
-    params->num_rays = 242;
+	(void)game;
+	params->scale_x = (float)WIN_WIDTH / (float)game->map.width;
+	params->scale_y = (float)WIN_HEIGHT / (float)game->map.height;
+	params->player_size = 14;
+	params->color_wall2d = 0x0000FF;
+	params->color_ray = 0x00F00F;
+	params->fov = PI * 0.33;
+	params->num_rays = 242;
 }
 
 /*
@@ -120,12 +121,12 @@ center_ray ci serve per il mirino
 num_ray e' WIN_WIDTH perche ogni colonna rappresenta un raggio
 angle_step e' la differena in radianti tra due raggi
 */
-void init_render_3d_view(t_render_3d_settings *settings)
+void	init_render_3d_view(t_render_3d_settings *settings)
 {
-    settings->fov = PI * 0.33f;
-    settings->num_rays = WIN_WIDTH;
-    settings->angle_step = settings->fov / (float)settings->num_rays;
-    settings->center_ray = settings->num_rays * 0.5f;
+	settings->fov = PI * 0.33f;
+	settings->num_rays = WIN_WIDTH;
+	settings->angle_step = settings->fov / (float)settings->num_rays;
+	settings->center_ray = settings->num_rays * 0.5f;
 }
 
 /*
@@ -133,16 +134,18 @@ inizializza valori.
 calcola la distanza, inoltre cast_ray_dda_side calcola i punti x e y
 di collisione col muro [per singolo raggio] e il lato colpito.
 correzione della distanza.
-calcola l'altezza del muro (proporzionale alla distanza [divisione per correct_dist])
-[420 e' un valore arbitrario, piu e' grande piu il muro si alza],
-e top e bottom del muro.
+calcola l'altezza del muro (proporzionale alla distanza [divisione
+ per correct_dist])[420 e' un valore arbitrario, piu e' grande 
+piu il muro si alza], e top e bottom del muro.
 sceglie la texture(nord,sud,ovest,est).
 calcola la componente orizzontale della texture da mappare sul muro
-step e' quanto avanzare nella texture in pixel per ogni riga del muro[puo dare sgranature]
+step e' quanto avanzare nella texture in pixel per ogni riga del
+ muro[puo dare sgranature]
 */
-void  init_params_for_draw_single_3d_ray(t_draw_data *dd, t_3d_properties *prop, t_game *game)
+void	init_params_for_draw_single_3d_ray(t_draw_data *dd,
+			t_3d_properties *prop, t_game *game)
 {
-	t_ray_result    result;
+	t_ray_result	result;
 
 	dd->dist = cast_ray_dda_side(game, prop->ray_angle, &result);
 	prop->hit_x = result.hit_x;
@@ -155,26 +158,26 @@ void  init_params_for_draw_single_3d_ray(t_draw_data *dd, t_3d_properties *prop,
 	dd->used_tex = pick_texture(game, prop);
 	dd->tex_x = compute_tex_x(dd->used_tex, prop);
 	dd->step = (float)dd->used_tex->height / (float)dd->wall_height;
-}  
+}
 
-
-void init_player(t_play *player)
+void	init_player(t_play *player)
 {
-    player->angle_speed = 0.042; //radianti * (iterazioni mlx_loop) -- 0.042 = 3°circa -- velocita angolare
-    player->move_speed = 7.42;    //pixel * (iterazioni mlx_loop) 
-    player->render_mode = 1;
-    player->minimap_view = 0;
+	player->angle_speed = 0.042;
+	player->move_speed = 7.42;
+	player->render_mode = 1;
+	player->minimap_view = 0;
 }
 
 //bpp e' bit per pixel
 //line_size e' larghezza in byte della riga
-void init_game(t_game *game)
+void	init_game(t_game *game)
 {
 	init_player(&game->player);
-	game->mlx = mlx_init(); //server grafico
+	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, WIN_WIDTH, WIN_HEIGHT, "Cub3D");
 	game->img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
-	game->img_data = mlx_get_data_addr(game->img, &game->bpp, &game->line_size, &game->endian);//gestione pixel
+	game->img_data = mlx_get_data_addr(game->img, &game->bpp,
+			&game->line_size, &game->endian);
 	load_textures(game);
 	game->player.game = game;
 	mlx_hook(game->win, 2, 1L << 0, key_press, &game->player);
@@ -184,14 +187,13 @@ void init_game(t_game *game)
 	mlx_loop(game->mlx);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	t_game game;
+	t_game	game;
 
 	if (ac != 2)
 		return (printf("Usage: run it with a map\n"), 1);
 	memset(&game, 0, sizeof(t_game));
-	// memset(&game.map, 0, sizeof(t_map));
 	if (file_cub_check(av[1]))
 		return (1);
 	if (map_gen(&game, av[1]))
@@ -200,17 +202,6 @@ int main(int ac, char **av)
 	init_game(&game);
 	return (0);
 }
-
-
-
-
-
-
-
-
-
-
-
 
 // void init_map(t_map *map, t_play *player)
 // {
@@ -279,8 +270,7 @@ int main(int ac, char **av)
 
 // int	look_for_width(t_map map)
 // {
-// 	int	result;
-	
+// 	int	result;	
 // 	map.x = 0;
 // 	map.y = 0;
 // 	result = 0;
