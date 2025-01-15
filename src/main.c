@@ -6,7 +6,7 @@
 /*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 18:16:58 by mapichec          #+#    #+#             */
-/*   Updated: 2025/01/14 11:27:02 by tschetti         ###   ########.fr       */
+/*   Updated: 2025/01/15 15:47:47 by tschetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,6 +184,34 @@ void init_game(t_game *game)
 	mlx_loop(game->mlx);
 }
 
+int main(int ac, char **av)
+{
+	t_game game;
+
+	if (ac != 2)
+		return (printf("Usage: run it with a map\n"), 1);
+	memset(&game, 0, sizeof(t_game));
+	// memset(&game.map, 0, sizeof(t_map));
+	if (file_cub_check(av[1]))
+		return (1);
+	if (map_gen(&game, av[1]))
+		return (1);
+	init_map(&game.map, &game.player);
+	init_game(&game);
+	return (0);
+}
+
+
+
+
+
+
+
+
+
+
+
+
 // void init_map(t_map *map, t_play *player)
 // {
 //     const char *static_map[] = 
@@ -267,20 +295,3 @@ void init_game(t_game *game)
 // 	map.y = 0;
 // 	return (result);
 // }
-
-int main(int ac, char **av)
-{
-	t_game game;
-
-	if (ac != 2)
-		return (printf("Usage: run it with a map\n"), 1);
-	memset(&game, 0, sizeof(t_game));
-	// memset(&game.map, 0, sizeof(t_map));
-	if (file_cub_check(av[1]))
-		return (1);
-	if (map_gen(&game, av[1]))
-		return (1);
-	init_map(&game.map, &game.player);
-	init_game(&game);
-	return (0);
-}

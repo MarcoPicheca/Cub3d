@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   args_check.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:13:27 by mapichec          #+#    #+#             */
-/*   Updated: 2024/12/13 16:01:06 by marco            ###   ########.fr       */
+/*   Updated: 2025/01/15 15:52:55 by tschetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ int	file_cub_check(char *str)
 
 	i = ft_strlen(str);
 	fd = open(str, O_RDONLY | __O_DIRECTORY);
-	if (!ft_is_cub(str, i, ".cub") || fd != -1)
+	if (!ft_is_cub(str, i, ".cub") && fd != -1)
 	{
 		ft_printf("Error\nInvalid file!\n");
 		close(fd);
 		return (1);
 	}
-	close(fd);
+	// close(fd);
 	fd = open(str, O_RDONLY);
 	if (fd < 0)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_callback_fts.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 20:19:23 by tschetti          #+#    #+#             */
-/*   Updated: 2025/01/14 17:43:19 by mapichec         ###   ########.fr       */
+/*   Updated: 2025/01/15 15:50:38 by tschetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void    exit_game(t_game *game)
 		mlx_destroy_display(game->mlx);
 	free_crlds(&game->map);
 	free_txt(&game->map.txt);
+	free(game->mlx);
 	exit(0);
 }
 
