@@ -59,7 +59,7 @@ void	free_crlds(t_map *map)
 
 void	free_txt(t_txt *txt)
 {
-	if (txt->path_txt_ceiling)	
+	if (txt->path_txt_ceiling)
 		free(txt->path_txt_ceiling);
 	if (txt->path_txt_floor)
 		free(txt->path_txt_floor);
@@ -70,8 +70,10 @@ void	free_game(t_game *game)
 {
 	if (game->map.mtx)
 		free_matrix(game->map.mtx, game->map.lines_ind);
-	if (game->map.cardinals.path_NO != NULL || game->map.cardinals.path_SO != NULL
-		|| game->map.cardinals.path_EA != NULL || game->map.cardinals.path_WS != NULL)
+	if (game->map.cardinals.path_NO != NULL
+		|| game->map.cardinals.path_SO != NULL
+		|| game->map.cardinals.path_EA != NULL
+		|| game->map.cardinals.path_WS != NULL)
 		free_crlds(&game->map);
 	free_txt(&game->map.txt);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_minimap_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 16:24:51 by tschetti          #+#    #+#             */
-/*   Updated: 2025/01/15 17:44:42 by marco            ###   ########.fr       */
+/*   Updated: 2025/01/16 11:13:38 by tschetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,9 @@ void	draw_minimap_core(t_game *game, t_rectangle_params *rect, int x, int y)
 		&& game->map.mtx2[minimap_y]
 		&& minimap_x < ft_strlen(game->map.mtx2[minimap_y]))
 	{
-		if (minimap_x < ft_strlen(game->map.mtx2[minimap_y]) 
-			&& game->map.mtx2[minimap_y][minimap_x] && game->map.mtx2[minimap_y][minimap_x] == '1')
+		if (minimap_x < ft_strlen(game->map.mtx2[minimap_y])
+			&& game->map.mtx2[minimap_y][minimap_x]
+			&& game->map.mtx2[minimap_y][minimap_x] == '1')
 			game->minimap.minimap_colors = 0x0000FF;
 		else
 			game->minimap.minimap_colors = 0x55FF55;
@@ -57,7 +58,6 @@ void	draw_minimap_core(t_game *game, t_rectangle_params *rect, int x, int y)
 	draw_rectangle(rect, game);
 }
 
-
 void	draw_minimap(t_game *game)
 {
 	int					x;
@@ -66,7 +66,7 @@ void	draw_minimap(t_game *game)
 
 	y = -game->minimap.minimap_size / 2;
 	init_minimap_values(game);
-	while (y <= game->minimap.minimap_size / 2 )
+	while (y <= game->minimap.minimap_size / 2)
 	{
 		x = -game->minimap.minimap_size / 2;
 		while (x <= game->minimap.minimap_size / 2)
@@ -81,5 +81,11 @@ void	draw_minimap(t_game *game)
 	rect.start_y = game->minimap.offset_y
 		+ (game->minimap.minimap_size / 2) * game->minimap.cell_size;
 	rect.color = 0xFF0000;
+	draw_rectangle(&rect, game);
+	rect.start_x += 2;
+	rect.start_y += 2;
+	rect.width -= 4;
+	rect.height -= 4;
+	rect.color = 0x55FF55;
 	draw_rectangle(&rect, game);
 }
