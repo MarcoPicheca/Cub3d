@@ -6,11 +6,24 @@
 /*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 20:19:23 by tschetti          #+#    #+#             */
-/*   Updated: 2025/01/15 19:02:50 by tschetti         ###   ########.fr       */
+/*   Updated: 2025/01/17 17:07:49 by tschetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+void	end_clean(t_game *game)
+{
+	if (game->win)
+		mlx_destroy_window(game->mlx, game->win);
+	if (game->win)
+		mlx_destroy_display(game->mlx);
+	if (game->mlx)
+		free(game->mlx);
+	free_crlds(&game->map);
+	free_txt(&game->map.txt);
+	exit(0);
+}
 
 void	exit_game(t_game *game)
 {
@@ -34,15 +47,7 @@ void	exit_game(t_game *game)
 		free_matrix(game->map.mtx2, game->map.len_map);
 	if (game->map.mtx != NULL)
 		free_matrix2(game->map.mtx);
-	if (game->win)
-		mlx_destroy_window(game->mlx, game->win);
-	if (game->win)
-		mlx_destroy_display(game->mlx);
-	if (game->mlx)
-		free(game->mlx);
-	free_crlds(&game->map);
-	free_txt(&game->map.txt);
-	exit(0);
+	end_clean(game);
 }
 
 int	close_window(t_game *game)

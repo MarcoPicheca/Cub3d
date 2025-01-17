@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 18:21:13 by mapichec          #+#    #+#             */
-/*   Updated: 2025/01/15 17:36:39 by marco            ###   ########.fr       */
+/*   Updated: 2025/01/17 17:34:21 by tschetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -349,6 +349,7 @@ int		close_window(t_game *game);
 char    **copy_map_in_mtx2(t_map *map);
 int		init_map(t_map *map, t_play *player);
 void	free_matrix2(char **map);
+void	count_map_dimensions(t_map *map);
 
 void	put_pixel(int x, int y, int color, t_game *game);
 void	clear_image(t_game *game);

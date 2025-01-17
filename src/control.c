@@ -6,11 +6,30 @@
 /*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 02:07:51 by tschetti          #+#    #+#             */
-/*   Updated: 2025/01/15 20:42:37 by tschetti         ###   ########.fr       */
+/*   Updated: 2025/01/17 17:33:53 by tschetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+void	count_map_dimensions(t_map *map)
+{
+	int	y;
+	int	row_len;
+	int	max_len;
+
+	y = 0;
+	max_len = 0;
+	while (map->mtx2[y] != NULL)
+	{
+		row_len = ft_strlen(map->mtx2[y]);
+		if (row_len > max_len)
+			max_len = row_len;
+		y++;
+	}
+	map->height = y;
+	map->width = max_len;
+}
 
 /*
  Verifica se una posizione continua (coordinate in pixel o mondo)

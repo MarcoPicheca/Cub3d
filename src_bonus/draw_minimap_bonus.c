@@ -6,7 +6,7 @@
 /*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 16:24:51 by tschetti          #+#    #+#             */
-/*   Updated: 2025/01/16 11:13:38 by tschetti         ###   ########.fr       */
+/*   Updated: 2025/01/17 17:48:43 by tschetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,26 @@ void	draw_minimap_core(t_game *game, t_rectangle_params *rect, int x, int y)
 	draw_rectangle(rect, game);
 }
 
+void	draw_minimap_player(t_game *game)
+{
+	t_rectangle_params	rect;
+
+	rect.start_x = game->minimap.offset_x
+		+ (game->minimap.minimap_size / 2) * game->minimap.cell_size;
+	rect.start_y = game->minimap.offset_y
+		+ (game->minimap.minimap_size / 2) * game->minimap.cell_size;
+	rect.color = 0xFF0000;
+	rect.width = game->minimap.cell_size;
+	rect.height = game->minimap.cell_size;
+	draw_rectangle(&rect, game);
+	rect.start_x += 2;
+	rect.start_y += 2;
+	rect.width -= 4;
+	rect.height -= 4;
+	rect.color = 0x55FF55;
+	draw_rectangle(&rect, game);
+}
+
 void	draw_minimap(t_game *game)
 {
 	int					x;
@@ -76,16 +96,5 @@ void	draw_minimap(t_game *game)
 		}
 		y++;
 	}
-	rect.start_x = game->minimap.offset_x
-		+ (game->minimap.minimap_size / 2) * game->minimap.cell_size;
-	rect.start_y = game->minimap.offset_y
-		+ (game->minimap.minimap_size / 2) * game->minimap.cell_size;
-	rect.color = 0xFF0000;
-	draw_rectangle(&rect, game);
-	rect.start_x += 2;
-	rect.start_y += 2;
-	rect.width -= 4;
-	rect.height -= 4;
-	rect.color = 0x55FF55;
-	draw_rectangle(&rect, game);
+	draw_minimap_player(game);
 }

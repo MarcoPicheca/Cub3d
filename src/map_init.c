@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 16:41:59 by marco             #+#    #+#             */
-/*   Updated: 2025/01/15 17:44:11 by marco            ###   ########.fr       */
+/*   Updated: 2025/01/17 17:33:48 by tschetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,25 +50,6 @@ static	void	player_angle(float ang, t_play *player, t_map *map)
 //     }
 // }
 
-void	count_map_dimensions(t_map *map)
-{
-	int	y;
-	int	row_len;
-	int	max_len;
-
-	y = 0;
-	max_len = 0;
-	while (map->mtx2[y] != NULL)
-	{
-		row_len = ft_strlen(map->mtx2[y]);
-		if (row_len > max_len)
-			max_len = row_len;
-		y++;
-	}
-	map->height = y;
-	map->width = max_len;
-}
-
 void	switch_crdls(t_map *map)
 {
 	map->path_no = map->cardinals.path_NO;
@@ -77,7 +58,7 @@ void	switch_crdls(t_map *map)
 	map->path_ea = map->cardinals.path_EA;
 }
 
-int	init_map(t_map *map, t_play *player)
+void	set_map_utils(t_map *map)
 {
 	map->mtx2 = copy_map_in_mtx2(map);
 	count_map_dimensions(map);
@@ -88,6 +69,11 @@ int	init_map(t_map *map, t_play *player)
 			| map->txt.cl_b);
 	map->floor_color = (map->txt.fl_r << 16 | map->txt.fl_g << 8
 			| map->txt.fl_b);
+}
+
+int	init_map(t_map *map, t_play *player)
+{
+	set_map_utils(map);
 	while (map->mtx2[map->y] && map->y < map->len_map)
 	{
 		while (map->mtx2[map->y][map->x] != '\0')

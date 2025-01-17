@@ -6,11 +6,27 @@
 /*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 01:35:27 by tschetti          #+#    #+#             */
-/*   Updated: 2025/01/15 22:44:15 by tschetti         ###   ########.fr       */
+/*   Updated: 2025/01/17 17:24:16 by tschetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+void	init_ray_params2(t_ray_cast_params *params, t_game *game, float angle)
+{
+	params->ray_dir_x = cosf(angle);
+	params->ray_dir_y = sinf(angle);
+	params->map_x = (int)game->player.x;
+	params->map_y = (int)game->player.y;
+	if (params->ray_dir_x == 0)
+		params->delta_dist_x = 1e30;
+	else
+		params->delta_dist_x = fabsf(1.0f / params->ray_dir_x);
+	if (params->ray_dir_y == 0)
+		params->delta_dist_y = 1e30;
+	else
+		params->delta_dist_y = fabsf(1.0f / params->ray_dir_y);
+}
 
 /*
 inizializza parametri per ray casting
@@ -27,18 +43,7 @@ side_dist = distanza_dal_bordo * (tempo per attraversare una cella)
 */
 void	init_ray_params(t_ray_cast_params *params, t_game *game, float angle)
 {
-	params->ray_dir_x = cosf(angle);
-	params->ray_dir_y = sinf(angle);
-	params->map_x = (int)game->player.x;
-	params->map_y = (int)game->player.y;
-	if (params->ray_dir_x == 0)
-		params->delta_dist_x = 1e30;
-	else
-		params->delta_dist_x = fabsf(1.0f / params->ray_dir_x);
-	if (params->ray_dir_y == 0)
-		params->delta_dist_y = 1e30;
-	else
-		params->delta_dist_y = fabsf(1.0f / params->ray_dir_y);
+	init_ray_params2(params, game, angle);
 	if (params->ray_dir_x < 0)
 	{
 		params->step_x = -1;
