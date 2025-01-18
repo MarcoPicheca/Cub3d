@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   args_check.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:13:27 by mapichec          #+#    #+#             */
-/*   Updated: 2025/01/15 19:02:14 by tschetti         ###   ########.fr       */
+/*   Updated: 2025/01/18 17:37:51 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int	ft_is_cub(char *str, int len, char *ext)
 	return (1);
 }
 
-// check se il file passato è una repo e check se il file ha un estensione di tipo .cub
+// check se il file passato è una repo e 
+// check se il file ha un estensione di tipo .cub
 int	file_cub_check(char *str)
 {
 	int	i;
@@ -39,14 +40,14 @@ int	file_cub_check(char *str)
 	fd = open(str, O_RDONLY | __O_DIRECTORY);
 	if (!ft_is_cub(str, i, ".cub") && fd != -1)
 	{
-		ft_printf("Error\nInvalid file!\n");
+		ft_printf("Error\n");
 		close(fd);
 		return (1);
 	}
 	fd = open(str, O_RDONLY);
 	if (fd < 0)
 	{
-		ft_printf("Error\nInvalid open!\n");
+		ft_printf("Error\n");
 		close(fd);
 		return (1);
 	}

@@ -6,7 +6,7 @@
 #    By: marco <marco@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/19 17:27:14 by mapichec          #+#    #+#              #
-#    Updated: 2024/12/17 16:34:22 by marco            ###   ########.fr        #
+#    Updated: 2025/01/18 17:45:21 by marco            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRCS = ft_bzero ft_isalnum \
 		ft_putendl_fd ft_putnbr_fd ft_memcmp \
 		ft_printf ft_utils \
 		get_next_line_utils \
+		get_next_line \
 		ft_lstnew ft_lstadd_back ft_lstadd_front \
 		ft_lstsize ft_lstdelone ft_lstlast \
 		ft_lstclear ft_lstiter ft_lstmap \

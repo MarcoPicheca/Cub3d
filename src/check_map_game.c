@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_game.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 10:29:24 by mapichec          #+#    #+#             */
-/*   Updated: 2025/01/14 16:32:17 by tschetti         ###   ########.fr       */
+/*   Updated: 2025/01/18 18:05:24 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int	err_game_card(t_map *map)
 {
 	int	i;
-	
+
 	i = 0;
 	while (map->mtx[map->ht][i] != '\0')
 	{
@@ -54,7 +54,7 @@ int	file_path(char *str)
 	return (0);
 }
 
-// TODO to be finished
+// check on main char in the map
 int	check_main(t_map *map, t_game *game)
 {
 	char	**tmp;
@@ -65,7 +65,8 @@ int	check_main(t_map *map, t_game *game)
 	while (tmp[map->x] && map->x < map->len_map)
 	{
 		map->y = 0;
-		while (tmp[map->x][map->y] != '\0' && !ft_strchr_2("NSEW", tmp[map->x][map->y]))
+		while (tmp[map->x][map->y] != '\0'
+			&& !ft_strchr_2("NSEW", tmp[map->x][map->y]))
 			map->y++;
 		if (ft_strchr_2("NSEW", tmp[map->x][map->y]))
 		{
@@ -78,21 +79,20 @@ int	check_main(t_map *map, t_game *game)
 	}
 	if (game->player.found > 1 || game->player.found == 0)
 		return (1);
-	// print_map(map->mtx, map->len_map);
 	return (0);
 }
 
 // parse mappa di gioco e definizione misure
-int	map_game(t_map *map,  t_game *game)
+int	map_game(t_map *map, t_game *game)
 {
-	while(map->mtx[map->ht] && map->ht < map->lines_ind)
+	while (map->mtx[map->ht] && map->ht < map->lines_ind)
 	{
 		if (err_game_card(map))
 			break ;
 		map->ht++;
 	}
 	map->start_map = map->ht;
-	while(map->mtx[map->ht] && map->ht < map->lines_ind)
+	while (map->mtx[map->ht] && map->ht < map->lines_ind)
 	{
 		if (!err_game_card(map))
 			break ;
@@ -105,7 +105,8 @@ int	map_game(t_map *map,  t_game *game)
 	return (0);
 }
 
-// divide la mappa in componenti (texture punti cardinali, texture floor e ceiling e mappa di gioco)
+// divide la mappa in componenti
+// (texture punti cardinali, texture floor e ceiling e mappa di gioco)
 // e fa i vari check su di essi
 int	map_div(t_map *map, t_game *game)
 {

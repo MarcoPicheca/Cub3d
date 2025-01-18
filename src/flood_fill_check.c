@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill_check.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 15:42:59 by marco             #+#    #+#             */
-/*   Updated: 2025/01/12 15:35:30 by mapichec         ###   ########.fr       */
+/*   Updated: 2025/01/18 17:42:24 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,19 @@
 void	map_isnt_close(int x, int y, char **tmp, int len)
 {
 	if (x < 0 || x > len - 1)
-	    return;
+		return ;
 	if (y < 0)
-	    return;
+		return ;
 	if (!tmp[x])
-	    return;
+		return ;
 	if (y >= ft_strlen(tmp[x]))
-		return;
+		return ;
 	if (!tmp[x][y])
-	    return;
+		return ;
 	if (tmp[x][y] == '\0')
-	    return;
+		return ;
 	if (!ft_strchr_2("10NSEW", tmp[x][y]))
-	    return;
+		return ;
 	tmp[x][y] = 'C';
 	map_isnt_close(x, y + 1, tmp, len);
 	map_isnt_close(x, y - 1, tmp, len);
@@ -51,17 +51,6 @@ void	move_to_first_char(char **tmp, t_map *map)
 	}
 }
 
-static 	void	print_map(char **arr, int len)
-{
-	int	i = 0;
-
-	while(i < len)
-	{
-		printf("%s", arr[i]);
-		i++;
-	}
-}
-
 int	check_flood(char **tmp, int len)
 {
 	int	x;
@@ -75,8 +64,8 @@ int	check_flood(char **tmp, int len)
 		{
 			if (!ft_isspace(tmp[x][y]) && tmp[x][y] != '\0'
 				&& tmp[x][y] != 'C' && tmp[x][y] != '1')
-				return (print_map(tmp, len), printf("Error!\nMap is not closed!\n"));
-			y++;	
+				return (printf("Error!\n"));
+			y++;
 		}
 		x++;
 	}

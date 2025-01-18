@@ -6,7 +6,7 @@
 /*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 16:04:54 by marco             #+#    #+#             */
-/*   Updated: 2025/01/13 11:29:29 by marco            ###   ########.fr       */
+/*   Updated: 2025/01/18 18:39:14 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static	int	line_is_empty(char *line)
 	while (line[i] && (line[i] == 32 || line [i] == '\t'))
 		i++;
 	if (line[i] && line[i] == '\n')
-		return (printf("Error!\nline is empty!\n"));
+		return (printf("Error!\n"));
 	return (0);
 }
 
@@ -35,18 +35,19 @@ static	int	zero_no_wall(char **tmp, t_map *map)
 		if (tmp[map->ht][i] == '0')
 		{
 			if (i == 0 || map->ht == 0 || map->ht == (map->len_map - 1))
-				return (printf("Error!\nZero_no_wall!\n"));
-			if (tmp[map->ht][i - 1] == 32 || tmp[map->ht][i - 1] == '\t' || tmp[map->ht][i - 1] == '\0')
-				return (printf("Error!\nZero_no_wall!\n"));
-			if (tmp[map->ht][i + 1] == 32 || tmp[map->ht][i + 1] == '\t'
-				|| tmp[map->ht][i + 1] == '\n' || tmp[map->ht][i + 1] == '\0')
-				return (printf("Error!\nZero_no_wall!\n"));
-			if (tmp[map->ht + 1] && (tmp[map->ht + 1][i] == 32 || tmp[map->ht + 1][i] == '\n'
-				|| tmp[map->ht + 1][i] == '\t' || tmp[map->ht + 1][i] == '\0'))
-				return (printf("Error!\nZero_no_wall!\n"));
-			if (tmp[map->ht - 1] && (tmp[map->ht - 1][i] == 32 || tmp[map->ht - 1][i] == '\t'
+				return (printf("Error!\n"));
+			if (ft_isspace(tmp[map->ht][i - 1]) || tmp[map->ht][i - 1] == '\0')
+				return (printf("Error!\n"));
+			if (ft_isspace(tmp[map->ht][i + 1]) || tmp[map->ht][i + 1] == '\n'
+				|| tmp[map->ht][i + 1] == '\0')
+				return (printf("Error!\n"));
+			if (tmp[map->ht + 1] && (tmp[map->ht + 1][i] == '\n'
+				|| ft_isspace(tmp[map->ht + 1][i])
+				|| tmp[map->ht + 1][i] == '\0'))
+				return (printf("Error!\n"));
+			if (tmp[map->ht - 1] && (ft_isspace(tmp[map->ht - 1][i])
 				|| tmp[map->ht - 1][i] == '\0' || tmp[map->ht + 1][i] == '\n'))
-				return (printf("Error!\nZero_no_wall!\n"));
+				return (printf("Error!\n"));
 		}
 		i++;
 	}
@@ -74,9 +75,9 @@ static	void	copy_free_mtx(t_map *map)
 
 // deve checkare che non ci siano linee vuote 
 int	check_map_tmp(t_map *map)
-{	
+{
 	char		**tmp;
-	static	int	i = 0;
+	static int	i = 0;
 
 	tmp = ft_calloc((map->end_map - map->start_map) + 1, sizeof(char *));
 	if (!tmp)

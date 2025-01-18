@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_3d.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 01:45:51 by tschetti          #+#    #+#             */
-/*   Updated: 2025/01/15 21:00:00 by tschetti         ###   ########.fr       */
+/*   Updated: 2025/01/18 17:37:07 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ void	draw_floor_and_ceiling(t_game *game)
 	y = 0;
 	while (y < WIN_HEIGHT * 0.5f)
 	{
-		x = 0;
-		while (x < WIN_WIDTH)
+		x = -1;
+		while (++x < WIN_WIDTH)
 		{
-			put_pixel(x, y, game->map.ceiling_color, game);
-			x++;
+			put_pixel(x, y,
+				game->map.ceiling_color, game);
 		}
 		y++;
 	}

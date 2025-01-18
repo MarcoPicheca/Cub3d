@@ -6,7 +6,7 @@
 /*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 17:27:20 by mapichec          #+#    #+#             */
-/*   Updated: 2025/01/13 11:42:15 by marco            ###   ########.fr       */
+/*   Updated: 2025/01/18 17:44:52 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ char		*ft_strjoin(char const *s1, char const *s2);
 char		*ft_strjoin_gnl(char *buff, char *tmp);
 char		*ft_strjoin_free(char *s1, char *s2);
 char		*ft_strtrim(char const *s1, char const *set);
-// char		*ft_strtrim2(char *s1, char *set);
+char		*ft_strtrim2(char *s1, char *set);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
 //////////////////////////////////////////////
 int			ft_atoi(const char *str);
@@ -143,6 +143,7 @@ int			ft_putstr(char *str);
 //////////////////////////////////////////////
 char		*ft_strjoin_gnl(char *s1, char *s2);
 //////////////////////////////////////////////
+char		*get_next_line(int fd);
 // Minishell
 t_token		*ft_lstnewtoken(t_token_type type, char *content);
 void		ft_tokenadd_back(t_token **lst, t_token *new);

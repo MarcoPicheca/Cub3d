@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 11:58:24 by adapassa          #+#    #+#             */
-/*   Updated: 2024/12/11 19:01:52 by mapichec         ###   ########.fr       */
+/*   Updated: 2025/01/18 17:49:06 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,29 +23,6 @@ static int	rd_check(int i, char *buff, char *tmp)
 	return (1);
 }
 
-static char	*ft_strchr2(const char *s, int c)
-{
-	int		i;
-	char	*str;
-
-	str = (char *)s;
-	i = 0;
-	if (!str)
-		return (NULL);
-	if (c == 0)
-		return (str + ft_strlen(s));
-	while (s[i] != (unsigned char)c)
-	{
-		if (!str[i])
-			break ;
-		else
-			i++;
-	}
-	if (str[i] != (unsigned char)c)
-		return (NULL);
-	return ((str + i));
-}
-
 static char	*ft_read(char *buff, int fd)
 {
 	int		i;
@@ -55,7 +32,7 @@ static char	*ft_read(char *buff, int fd)
 	if (!tmp)
 		return (NULL);
 	i = 1;
-	while (!ft_strchr2(buff, '\n') && i != 0)
+	while (!ft_strchr(buff, '\n') && i != 0)
 	{
 		i = read(fd, tmp, BUFFER_SIZE);
 		if (rd_check(i, buff, tmp) == 0)

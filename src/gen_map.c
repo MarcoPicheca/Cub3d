@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gen_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:24:58 by mapichec          #+#    #+#             */
-/*   Updated: 2025/01/14 13:01:33 by tschetti         ###   ########.fr       */
+/*   Updated: 2025/01/18 17:36:07 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 static int	line_count(t_game *game)
 {
 	char	*tmp;
-	
+
 	tmp = get_next_line(game->map.fd);
 	if (tmp != NULL)
 		game->map.lines_ind++;
@@ -55,7 +55,6 @@ int	map_gen(t_game *game, char *av)
 		map_1->mtx[map_1->ht] = get_next_line(map_1->fd);
 	close(map_1->fd);
 	game->map.ht = 0;
-	// print_map(game->map.mtx, game->map.lines_ind);
 	if (map_div(&game->map, game))
 		return (free_game(game), 1);
 	return (0);

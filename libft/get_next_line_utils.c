@@ -6,12 +6,11 @@
 /*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:19:19 by mapichec          #+#    #+#             */
-/*   Updated: 2024/12/17 16:34:35 by marco            ###   ########.fr       */
+/*   Updated: 2025/01/18 17:31:30 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
 
 static char	*ft_strjoin2(char *s1, char *s2)
 {

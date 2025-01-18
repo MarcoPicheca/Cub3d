@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 12:49:30 by mapichec          #+#    #+#             */
-/*   Updated: 2025/01/14 17:43:45 by mapichec         ###   ########.fr       */
+/*   Updated: 2025/01/18 17:01:02 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ void	free_matrix2(char **map)
 
 void	free_crlds(t_map *map)
 {
-	if (map->cardinals.path_NO && map->cardinals.path_NO != NULL)
-		free(map->cardinals.path_NO);
-	if (map->cardinals.path_SO && map->cardinals.path_SO != NULL)
-		free(map->cardinals.path_SO);
-	if (map->cardinals.path_EA && map->cardinals.path_EA != NULL)
-		free(map->cardinals.path_EA);
-	if (map->cardinals.path_WS && map->cardinals.path_WS != NULL)
-		free(map->cardinals.path_WS);
+	if (map->cardinals.path_n && map->cardinals.path_n != NULL)
+		free(map->cardinals.path_n);
+	if (map->cardinals.path_s && map->cardinals.path_s != NULL)
+		free(map->cardinals.path_s);
+	if (map->cardinals.path_e && map->cardinals.path_e != NULL)
+		free(map->cardinals.path_e);
+	if (map->cardinals.path_w && map->cardinals.path_w != NULL)
+		free(map->cardinals.path_w);
 }
 
 void	free_txt(t_txt *txt)
@@ -70,10 +70,10 @@ void	free_game(t_game *game)
 {
 	if (game->map.mtx)
 		free_matrix(game->map.mtx, game->map.lines_ind);
-	if (game->map.cardinals.path_NO != NULL
-		|| game->map.cardinals.path_SO != NULL
-		|| game->map.cardinals.path_EA != NULL
-		|| game->map.cardinals.path_WS != NULL)
+	if (game->map.cardinals.path_n != NULL
+		|| game->map.cardinals.path_s != NULL
+		|| game->map.cardinals.path_e != NULL
+		|| game->map.cardinals.path_w != NULL)
 		free_crlds(&game->map);
 	free_txt(&game->map.txt);
 }

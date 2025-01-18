@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_crdls.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 17:17:40 by marco             #+#    #+#             */
-/*   Updated: 2025/01/14 17:31:40 by mapichec         ###   ########.fr       */
+/*   Updated: 2025/01/18 18:07:49 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,42 +15,42 @@
 // check sui percorsi dei cardinali
 static	int	check_paths_crld(t_crdls *crlds)
 {
-	crlds->path_NO = ft_strtrim2(crlds->path_NO, " \n");
-	crlds->path_SO = ft_strtrim2(crlds->path_SO, " \n");
-	crlds->path_EA = ft_strtrim2(crlds->path_EA, " \n");
-	crlds->path_WS = ft_strtrim2(crlds->path_WS, " \n");
-	if (file_path(crlds->path_NO) || file_path(crlds->path_SO)
-		|| file_path(crlds->path_EA) || file_path(crlds->path_WS))
+	crlds->path_n = ft_strtrim2(crlds->path_n, " \n");
+	crlds->path_s = ft_strtrim2(crlds->path_s, " \n");
+	crlds->path_e = ft_strtrim2(crlds->path_e, " \n");
+	crlds->path_w = ft_strtrim2(crlds->path_w, " \n");
+	if (file_path(crlds->path_n) || file_path(crlds->path_s)
+		|| file_path(crlds->path_e) || file_path(crlds->path_w))
 		return (1);
 	return (0);
 }
 
 // cicla finche allmeno una delle map->cardinals.path_* sono NULL e finche' la
 // la mtx esiste, controllando che non ci sia l'inizio della mappa di gioco
-int	 map_cardinal(t_map *map)
+int	map_cardinal(t_map *map)
 {
-	while(map->mtx[map->ht] && map->ht < map->lines_ind
-		&& (map->cardinals.path_NO == NULL || map->cardinals.path_SO == NULL
-		|| map->cardinals.path_EA == NULL || map->cardinals.path_WS == NULL))
+	while (map->mtx[map->ht] && map->ht < map->lines_ind
+		&& (map->cardinals.path_n == NULL || map->cardinals.path_s == NULL
+			|| map->cardinals.path_e == NULL || map->cardinals.path_w == NULL))
 	{
 		if (err_game_card(map))
 			return (1);
 		if (ft_strncmp(map->mtx[map->ht], "NO ", 2) == 0
-				&& map->cardinals.path_NO == NULL)
-			map->cardinals.path_NO = ft_strdup(map->mtx[map->ht] + 3);
+			&& map->cardinals.path_n == NULL)
+			map->cardinals.path_n = ft_strdup(map->mtx[map->ht] + 3);
 		if (ft_strncmp(map->mtx[map->ht], "SO ", 2) == 0
-				&& map->cardinals.path_SO == NULL)
-			map->cardinals.path_SO = ft_strdup(map->mtx[map->ht] + 3);
+			&& map->cardinals.path_s == NULL)
+			map->cardinals.path_s = ft_strdup(map->mtx[map->ht] + 3);
 		if (ft_strncmp(map->mtx[map->ht], "EA ", 2) == 0
-				&& map->cardinals.path_EA == NULL)
-			map->cardinals.path_EA = ft_strdup(map->mtx[map->ht] + 3);
+			&& map->cardinals.path_e == NULL)
+			map->cardinals.path_e = ft_strdup(map->mtx[map->ht] + 3);
 		if (ft_strncmp(map->mtx[map->ht], "WE ", 2) == 0
-				&& map->cardinals.path_WS == NULL)
-			map->cardinals.path_WS = ft_strdup(map->mtx[map->ht] + 3);
+			&& map->cardinals.path_w == NULL)
+			map->cardinals.path_w = ft_strdup(map->mtx[map->ht] + 3);
 		map->ht++;
 	}
-	if (map->cardinals.path_NO == NULL || map->cardinals.path_SO == NULL
-		|| map->cardinals.path_EA == NULL || map->cardinals.path_WS == NULL
+	if (map->cardinals.path_n == NULL || map->cardinals.path_s == NULL
+		|| map->cardinals.path_e == NULL || map->cardinals.path_w == NULL
 		|| check_paths_crld(&map->cardinals))
 		return (1);
 	return (0);

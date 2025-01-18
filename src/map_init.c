@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 16:41:59 by marco             #+#    #+#             */
-/*   Updated: 2025/01/17 17:33:48 by tschetti         ###   ########.fr       */
+/*   Updated: 2025/01/18 17:01:28 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ static	void	player_angle(float ang, t_play *player, t_map *map)
 
 void	switch_crdls(t_map *map)
 {
-	map->path_no = map->cardinals.path_NO;
-	map->path_so = map->cardinals.path_SO;
-	map->path_we = map->cardinals.path_WS;
-	map->path_ea = map->cardinals.path_EA;
+	map->path_no = map->cardinals.path_n;
+	map->path_so = map->cardinals.path_s;
+	map->path_we = map->cardinals.path_w;
+	map->path_ea = map->cardinals.path_e;
 }
 
 void	set_map_utils(t_map *map)
