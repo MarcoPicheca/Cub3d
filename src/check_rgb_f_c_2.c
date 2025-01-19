@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_rgb_f_c_2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 17:57:38 by marco             #+#    #+#             */
-/*   Updated: 2025/01/18 18:08:25 by marco            ###   ########.fr       */
+/*   Updated: 2025/01/19 16:06:22 by tschetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,46 @@ static	void	fill_txt(t_txt *txt, char **cl, char **fl)
 	txt->fl_r = ft_atoi(fl[0]);
 	txt->fl_g = ft_atoi(fl[1]);
 	txt->fl_b = ft_atoi(fl[2]);
+}
+
+// controlla che il numero sia nel limite rgb 
+static int	is_not_rgb(char *str)
+{
+	int	i;
+	int	sum_digit;
+	int	max_rgb;
+
+	sum_digit = 0;
+	i = 0;
+	max_rgb = '2' + '5' + '5';
+	if (str && ft_strlen(str) > 3)
+		return (1);
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (1);
+		sum_digit += str[i++];
+	}
+	if (sum_digit > max_rgb)
+		return (1);
+	return (0);
+}
+
+// conta il numero di componenti della matrice rgb
+static	int	count_colors(char **tmp)
+{
+	int	i;
+
+	i = 0;
+	while (tmp[i] != NULL)
+	{
+		if (is_not_rgb(tmp[i]))
+			return (1);
+		i++;
+	}
+	if (i != 3)
+		return (1);
+	return (0);
 }
 
 static	int	ft_check_rgb_txt_2(t_txt *txt)
