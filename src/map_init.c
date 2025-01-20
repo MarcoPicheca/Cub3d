@@ -6,7 +6,7 @@
 /*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 16:41:59 by marco             #+#    #+#             */
-/*   Updated: 2025/01/18 17:01:28 by marco            ###   ########.fr       */
+/*   Updated: 2025/01/20 11:53:38 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,6 @@ static	void	player_angle(float ang, t_play *player, t_map *map)
 	player->y = map->y + 0.5;
 	player->angle = ang * PI;
 }
-
-// void print_map_mtx2(t_map *map)
-// {
-//     int y = 0;
-//     while (map->mtx2[y] != NULL)
-//     {
-//         printf("[%d] %s\n", y, map->mtx2[y]);
-//         y++;
-//     }
-// }
 
 void	switch_crdls(t_map *map)
 {

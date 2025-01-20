@@ -6,7 +6,7 @@
 /*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 10:29:24 by mapichec          #+#    #+#             */
-/*   Updated: 2025/01/18 18:05:24 by marco            ###   ########.fr       */
+/*   Updated: 2025/01/20 11:55:42 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,12 @@ int	file_path(char *str)
 	fd = open(str, O_RDONLY | __O_DIRECTORY);
 	if (fd != -1)
 	{
-		ft_printf("Error\nInvalid file!\n");
 		close(fd);
 		return (1);
 	}
 	fd = open(str, O_RDONLY);
 	if (fd < 0)
 	{
-		ft_printf("Error\nInvalid open!\n");
 		return (1);
 	}
 	close(fd);
@@ -82,6 +80,17 @@ int	check_main(t_map *map, t_game *game)
 	return (0);
 }
 
+
+// void print_map_mtx2(t_map *map)
+// {
+//     int y = 0;
+//     while (map->mtx[y] != NULL)
+//     {
+//         printf("[%d] %s\n", y, map->mtx[y]);
+//         y++;
+//     }
+// }
+
 // parse mappa di gioco e definizione misure
 int	map_game(t_map *map, t_game *game)
 {
@@ -111,12 +120,13 @@ int	map_game(t_map *map, t_game *game)
 int	map_div(t_map *map, t_game *game)
 {
 	if (map_cardinal(map))
-		return (printf("Error!\nerr cardinals!\n"), 1);
+		return (printf("Error!\nCardinals problem!\n"), 1);
 	map->ht = 0;
 	if (map_texture_f_c(map))
-		return (printf("Error!\nerr texture!\n"), 1);
+		return (printf("Error!\nTexture problem!\n"), 1);
 	map->ht = 0;
 	if (map_game(map, game))
-		return (printf("Error!\nin game map!\n"), 1);
+		return (printf("Error!"
+				"\nUncorrect behavior in game map!\n"), 1);
 	return (0);
 }

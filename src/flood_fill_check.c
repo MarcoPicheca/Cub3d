@@ -6,7 +6,7 @@
 /*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 15:42:59 by marco             #+#    #+#             */
-/*   Updated: 2025/01/18 17:42:24 by marco            ###   ########.fr       */
+/*   Updated: 2025/01/20 11:21:28 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	check_flood(char **tmp, int len)
 		{
 			if (!ft_isspace(tmp[x][y]) && tmp[x][y] != '\0'
 				&& tmp[x][y] != 'C' && tmp[x][y] != '1')
-				return (printf("Error!\n"));
+				return (1);
 			y++;
 		}
 		x++;
