@@ -5,6 +5,7 @@ EA ./textures/pb.xpm
 SO ./textures/paint.xpm        
 EA        ./textures/rp.xpm
 
+F 33,33,33
 
 
 WE                                                                                   ./textures/rp.xpm 
@@ -15,7 +16,7 @@ SO ./textures/tt.xpm
 
 
 
-C                     155,206, 255
+C                     155,206,255
 
 
 

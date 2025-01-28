@@ -6,7 +6,7 @@
 /*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 02:05:05 by tschetti          #+#    #+#             */
-/*   Updated: 2025/01/08 02:06:28 by tschetti         ###   ########.fr       */
+/*   Updated: 2025/01/26 18:59:05 by tschetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,13 @@ void	update_position(t_play *player, t_map *map, float move_x, float move_y)
 	new_y = player->y + move_y / BLOCK;
 	radius = 0.03;
 	if (map->mtx2[(int)(new_y - radius)][(int)(new_x)] == '1'
+		|| map->mtx2[(int)(new_y - radius)][(int)(new_x)] == '2'
 		|| map->mtx2[(int)(new_y + radius)][(int)(new_x)] == '1'
+		|| map->mtx2[(int)(new_y + radius)][(int)(new_x)] == '2'
 		|| map->mtx2[(int)(new_y)][(int)(new_x - radius)] == '1'
-		|| map->mtx2[(int)(new_y)][(int)(new_x + radius)] == '1')
+		|| map->mtx2[(int)(new_y)][(int)(new_x - radius)] == '2'
+		|| map->mtx2[(int)(new_y)][(int)(new_x + radius)] == '1'
+		|| map->mtx2[(int)(new_y)][(int)(new_x + radius)] == '2')
 		return ;
 	player->x = new_x;
 	player->y = new_y;

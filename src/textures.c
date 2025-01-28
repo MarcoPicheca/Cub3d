@@ -1,16 +1,54 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   about_textures.c                                   :+:      :+:    :+:   */
+/*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 02:14:35 by tschetti          #+#    #+#             */
-/*   Updated: 2025/01/15 20:40:34 by tschetti         ###   ########.fr       */
+/*   Updated: 2025/01/26 19:37:24 by tschetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+void	toggle_door(t_game *game)
+{
+	double	newx;
+	double	newy;
+	int		tile_x;
+	int		tile_y;
+	char	cell;
+
+	newx = game->player.x + cos(game->player.angle);
+	newy = game->player.y + sin(game->player.angle);
+	tile_x = (int)newx;
+	tile_y = (int)newy;
+	cell = game->map.mtx2[tile_y][tile_x];
+	if (cell == '2')
+		game->map.mtx2[tile_y][tile_x] = '3';
+	else if (cell == '3')
+	{
+		if ((int)game->player.x == tile_x && (int)game->player.y == tile_y)
+			return ;
+		game->map.mtx2[tile_y][tile_x] = '2';
+	}
+}
+
+void	free_gun_frames(t_game *game)
+{
+	int	i;
+
+	i = 0;
+	while (i <= 4)
+	{
+		if (game->player.gun_frames[i].img != NULL)
+			mlx_destroy_image(game->mlx, game->player.gun_frames[i].img);
+		i++;
+	}
+	free(game->player.gun_frames);
+	game->player.gun_frames = NULL;
+}
 
 /*
 sceglie quale texture applicare al muro colpito dal raggio.
@@ -24,8 +62,10 @@ alla posizione del giocatore, [tenere a mente che coordinate negative non
 esistono in questo tipo di piano (minilibx/rendering grafico), quindi sono
 negative rispetto al giocatore])
 */
-t_tex	*pick_texture(t_game *game, t_3d_properties *prop)
+t_tex	*pick_texture(t_game *game, t_3d_properties *prop, char tile)
 {
+	if (tile == '2')
+		return (&game->door);
 	if (prop->side_local == 0)
 	{
 		if (prop->ray_dir_x > 0)

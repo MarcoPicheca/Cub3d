@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 16:41:59 by marco             #+#    #+#             */
-/*   Updated: 2025/01/20 11:53:38 by marco            ###   ########.fr       */
+/*   Updated: 2025/01/28 16:39:11 by mapichec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	set_map_utils(t_map *map)
 	count_map_dimensions(map);
 	map->y = 0;
 	switch_crdls(map);
-	map->path_hands = "./textures/gun5.xpm";
 	map->ceiling_color = (map->txt.cl_r << 16 | map->txt.cl_g << 8
 			| map->txt.cl_b);
 	map->floor_color = (map->txt.fl_r << 16 | map->txt.fl_g << 8

@@ -6,7 +6,7 @@
 /*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:13:42 by tschetti          #+#    #+#             */
-/*   Updated: 2025/01/17 17:35:56 by tschetti         ###   ########.fr       */
+/*   Updated: 2025/01/26 12:06:33 by tschetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	init_params_for_draw_single_3d_ray(t_draw_data *dd,
 	dd->wall_height = (int)((BLOCK * 420.0f) / dd->correct_dist);
 	dd->wall_top = (WIN_HEIGHT / 2) - (dd->wall_height / 2);
 	dd->wall_bot = dd->wall_top + dd->wall_height;
-	dd->used_tex = pick_texture(game, prop);
+	dd->used_tex = pick_texture(game, prop, result.tile);
 	dd->tex_x = compute_tex_x(dd->used_tex, prop);
 	dd->step = (float)dd->used_tex->height / (float)dd->wall_height;
 }

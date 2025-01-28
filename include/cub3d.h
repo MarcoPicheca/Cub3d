@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 18:21:13 by mapichec          #+#    #+#             */
-/*   Updated: 2025/01/18 17:41:44 by marco            ###   ########.fr       */
+/*   Updated: 2025/01/28 16:08:29 by mapichec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <math.h>
 # include <limits.h>
 # include <stdlib.h>
+# include <time.h>
 # include "./colors.h"
 # include "../libft/libft.h"
 # include "../minilibx-linux/mlx.h"
@@ -30,6 +31,8 @@
 # define ESC 65307
 # define V 118
 # define M 109
+# define E 101
+# define SPACE_KEY 32
 # define PI 3.141592653
 # define BLOCK 81
 # define LEFT 65361
@@ -40,6 +43,7 @@ typedef struct s_ray_result
 	float	hit_x;
 	float	hit_y;
 	int		side;
+	char	tile;
 }			t_ray_result;
 
 typedef struct s_ray_cast_params
@@ -55,6 +59,7 @@ typedef struct s_ray_cast_params
 	int		map_x;
 	int		map_y;
 	int		side_local;
+	char	hit_tile;
 	float	perp_wall_dist;
 	float	hit_x;
 	float	hit_y;
@@ -169,9 +174,12 @@ typedef struct s_play
 	int		key_right;
 	int		left_rotate;
 	int		right_rotate;
-	void	*hands;
+	// void	*hands;
 	int		render_mode;
 	int		minimap_view;
+	t_tex	*gun_frames;
+	int		gun_current_frame;
+	int		is_shooting;
 }			t_play;
 
 typedef struct s_render_2d
@@ -221,6 +229,15 @@ typedef struct s_mini
 	int		minimap_colors;
 }			t_mini;
 
+typedef struct s_gun_frames
+{
+	int	x;
+	int	y;
+	int	w;
+	int	h;
+	int	color;
+}	t_gun_frames;
+
 typedef struct s_map
 {
 	char	*path_no;
@@ -229,7 +246,7 @@ typedef struct s_map
 	char	*path_ea;
 	char	*pathxpm;
 	char	**mtx2;
-	char	*path_hands;
+	// char	*path_hands;
 	int		ceiling_color;
 	int		floor_color;
 	int		width;
@@ -262,11 +279,12 @@ typedef struct s_game
 	int		bpp;
 	int		line_size;
 	int		endian;
-	t_tex	tex_hands;
+	// t_tex	tex_hands;
 	t_tex	tex_no;
 	t_tex	tex_so;
 	t_tex	tex_we;
 	t_tex	tex_ea;
+	t_tex	door;
 	t_play	player;
 	t_map	map;
 	t_tex	my_tex;
@@ -325,6 +343,7 @@ char	**copy_map_in_mtx2(t_map *map);
 int		init_map(t_map *map, t_play *player);
 void	free_matrix2(char **map);
 void	count_map_dimensions(t_map *map);
+void	exit_game(t_game *game);
 
 void	put_pixel(int x, int y, int color, t_game *game);
 void	clear_image(t_game *game);
@@ -343,7 +362,7 @@ char	*get_next_line(int fd);
 void	load_textures(t_game *game);
 float	cast_ray_dda_side(t_game *game, float angle, t_ray_result *result);
 void	render_3d_view(t_game *game);
-void	draw_hands(t_game *game);
+// void	draw_hands(t_game *game);
 
 void	draw_map(t_game *game, t_render_2d *values);
 void	draw_player(t_game *game, t_render_2d *values);
@@ -359,11 +378,14 @@ void	draw_single_3d_ray(t_game *game, int screen_col,
 
 int		get_tex_color(t_tex *tex, int tx, int ty);
 
-t_tex	*pick_texture(t_game *game, t_3d_properties *prop);
+// t_tex	*pick_texture(t_game *game, t_3d_properties *prop);
 int		compute_tex_x(t_tex *used_tex, t_3d_properties *prop);
 void	init_render_3d_prop(t_3d_properties *prop, float angle);
 void	init_params_for_draw_single_3d_ray(t_draw_data *dd,
 			t_3d_properties *prop, t_game *game);
 float	cast_ray_dda_side(t_game *game, float angle, t_ray_result *result);
+void	free_gun_frames(t_game *game);
+t_tex	*pick_texture(t_game *game, t_3d_properties *prop, char tile);
+void	toggle_door(t_game *game);
 
 #endif

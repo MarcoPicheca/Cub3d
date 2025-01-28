@@ -6,21 +6,30 @@
 /*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 16:24:51 by tschetti          #+#    #+#             */
-/*   Updated: 2025/01/17 17:48:43 by tschetti         ###   ########.fr       */
+/*   Updated: 2025/01/23 15:44:06 by tschetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d_bonus.h"
 
+/*
+imposta il numero di celle, il valore in pixel di ogni cella,
+imposta l'offset orizzontale e verticale per la minimappa
+*/
 void	init_minimap_values(t_game *game)
 {
-	game->minimap.minimap_size = 12;
-	game->minimap.cell_size = 10;
+	game->minimap.minimap_size = 14;
+	game->minimap.cell_size = 11;
 	game->minimap.offset_x = WIN_WIDTH - game->minimap.minimap_size
 		* game->minimap.cell_size - 42;
 	game->minimap.offset_y = 20;
 }
 
+/*
+disegna la mappa attorno al giocatore, x e y servono per
+aggiornare la minimappa avendo il giocatore come centro,
+la moltiplicazione serve per convertire in coordinate pixel
+*/
 void	set_minimap_values(t_game *game,
 		t_rectangle_params *values, int *x, int *y)
 {
@@ -33,6 +42,12 @@ void	set_minimap_values(t_game *game,
 	values->color = game->minimap.minimap_colors;
 }
 
+/*
+disegna un rettangolo per ogni cella della minimappa,
+somma gli offset del giocatore e li casta a int perche siamo sulla griglia
+controllo per non eccedere i limiti della mappa, se e' muro colore blu
+se e' pavimento colore verde, se e' fuori mappa colore grigio
+*/
 void	draw_minimap_core(t_game *game, t_rectangle_params *rect, int x, int y)
 {
 	int	minimap_x;
@@ -58,6 +73,12 @@ void	draw_minimap_core(t_game *game, t_rectangle_params *rect, int x, int y)
 	draw_rectangle(rect, game);
 }
 
+/*
+disegna un rettangolo al centro della minimappa,
+imposta il colore rosso per tale rettangolo e lo disegna
+poi disegna un rettangolo interno leggermente piu piccolo
+dello stesso colore del pavimento della minimappa
+*/
 void	draw_minimap_player(t_game *game)
 {
 	t_rectangle_params	rect;
@@ -78,6 +99,11 @@ void	draw_minimap_player(t_game *game)
 	draw_rectangle(&rect, game);
 }
 
+/*
+itera in una griglia centrata sul giocatore e 
+disegna ogni rettangolo [cella] della minimappa
+poi chiama draw_minimap_player per disegnare il giocatore
+*/
 void	draw_minimap(t_game *game)
 {
 	int					x;

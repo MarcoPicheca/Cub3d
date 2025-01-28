@@ -6,12 +6,15 @@
 /*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 02:07:51 by tschetti          #+#    #+#             */
-/*   Updated: 2025/01/17 17:33:53 by tschetti         ###   ########.fr       */
+/*   Updated: 2025/01/26 11:54:34 by tschetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
+/*
+imposta larghezza massima e l'altezza [righe]
+*/
 void	count_map_dimensions(t_map *map)
 {
 	int	y;

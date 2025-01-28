@@ -6,7 +6,7 @@
 /*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:13:27 by mapichec          #+#    #+#             */
-/*   Updated: 2025/01/20 11:39:14 by marco            ###   ########.fr       */
+/*   Updated: 2025/01/18 17:37:51 by marco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,16 @@ int	file_cub_check(char *str)
 
 	i = ft_strlen(str);
 	fd = open(str, O_RDONLY | __O_DIRECTORY);
-	if (!ft_is_cub(str, i, ".cub") || fd != -1)
+	if (!ft_is_cub(str, i, ".cub") && fd != -1)
 	{
-		ft_printf("Error!\nIs a directory or not a .cub.\n");
+		ft_printf("Error\n");
 		close(fd);
 		return (1);
 	}
 	fd = open(str, O_RDONLY);
 	if (fd < 0)
 	{
-		ft_printf("Error!\nCan't open the file.\n");
+		ft_printf("Error\n");
 		close(fd);
 		return (1);
 	}

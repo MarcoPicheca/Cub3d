@@ -6,7 +6,7 @@
 /*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 02:00:58 by tschetti          #+#    #+#             */
-/*   Updated: 2025/01/16 09:57:56 by tschetti         ###   ########.fr       */
+/*   Updated: 2025/01/24 17:01:53 by tschetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,10 @@ void	clear_image(t_game *game)
 		}
 		y++;
 	}
+}
+
+int	close_window(t_game *game)
+{
+	exit_game(game);
+	return (0);
 }

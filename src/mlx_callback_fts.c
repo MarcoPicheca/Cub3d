@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_callback_fts.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 20:19:23 by tschetti          #+#    #+#             */
-/*   Updated: 2025/01/18 16:43:04 by marco            ###   ########.fr       */
+/*   Updated: 2025/01/28 12:24:31 by tschetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ void	end_clean(t_game *game)
 
 void	exit_game(t_game *game)
 {
-	if (game->player.hands != NULL)
-		mlx_destroy_image(game->mlx, game->player.hands);
-	if (game->tex_hands.img != NULL)
-		mlx_destroy_image(game->mlx, game->tex_hands.img);
+	if (game->door.img != NULL)
+		mlx_destroy_image(game->mlx, game->door.img);
+	if (game->player.gun_frames != NULL)
+		free_gun_frames(game);
 	if (game->tex_ea.img != NULL)
 		mlx_destroy_image(game->mlx, game->tex_ea.img);
 	if (game->tex_no.img != NULL)
@@ -51,10 +51,16 @@ void	exit_game(t_game *game)
 	end_clean(game);
 }
 
-int	close_window(t_game *game)
+void	manage_space_key(int keycode, t_play *player)
 {
-	exit_game(game);
-	return (0);
+	if (keycode == SPACE_KEY)
+	{
+		if (!player->is_shooting)
+		{
+			player->is_shooting = 1;
+			player->gun_current_frame = 0;
+		}
+	}
 }
 
 int	key_press(int keycode, t_play *player)
@@ -77,6 +83,9 @@ int	key_press(int keycode, t_play *player)
 		player->render_mode = !player->render_mode;
 	else if (keycode == M)
 		player->minimap_view = !player->minimap_view;
+	else if (keycode == E)
+		toggle_door(player->game);
+	manage_space_key(keycode, player);
 	return (0);
 }
 

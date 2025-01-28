@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marco <marco@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mapichec <mapichec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 16:04:54 by marco             #+#    #+#             */
-/*   Updated: 2025/01/20 11:15:17 by marco            ###   ########.fr       */
+/*   Updated: 2025/01/28 16:44:39 by mapichec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static	int	zero_no_wall(char **tmp, t_map *map)
 	i = 0;
 	while (tmp[map->ht][i] != '\0')
 	{
-		if (tmp[map->ht][i] == '0')
+		if (ft_strchr("20WSEN", tmp[map->ht][i]))
 		{
 			if (i == 0 || map->ht == 0 || map->ht == (map->len_map - 1))
 				return (1);

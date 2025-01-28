@@ -6,35 +6,89 @@
 /*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 08:22:52 by tschetti          #+#    #+#             */
-/*   Updated: 2025/01/14 11:32:29 by tschetti         ###   ########.fr       */
+/*   Updated: 2025/01/24 16:59:56 by tschetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d_bonus.h"
 
-void	draw_hands(t_game *game)
-{
-	int	x;
-	int	y;
-	int	h;
-	int	w;
-	int	color;
+/*
+funzione per disegnare le mani del giocatore.
+x e y calcolano l'offset orizzontale e verticale del giocare [lo centrano]
+h e w sono altezza e larghezza della texture da disegnare, quindi le coordinate
+in pixel. put_pixel viene chiamata solo per i pixel non 0 [ovvero 0x000000]
+e' un workaround per non disegnare lo sfondo nero della texture
+*/
+// void	draw_hands(t_game *game)
+// {
+// 	int	x;
+// 	int	y;
+// 	int	h;
+// 	int	w;
+// 	int	color;
 
-	x = (WIN_WIDTH / 2) - (game->tex_hands.width / 2);
-	y = WIN_HEIGHT - game->tex_hands.height - 24;
-	h = 0;
-	while (h < game->tex_hands.height)
+// 	x = (WIN_WIDTH / 2) - (game->tex_hands.width / 2);
+// 	y = WIN_HEIGHT - game->tex_hands.height - 24;
+// 	h = 0;
+// 	while (h < game->tex_hands.height)
+// 	{
+// 		w = 0;
+// 		while (w < game->tex_hands.width)
+// 		{
+// 			color = get_tex_color(&game->tex_hands, w, h);
+// 			if (color)
+// 				put_pixel(x + w, y + h, get_tex_color(&game->tex_hands,
+// 						w, h), game);
+// 			w++;
+// 		}
+// 		h++;
+// 	}
+// }
+
+void	update_gun_animation(t_game *game)
+{
+	static clock_t	last_time;
+	clock_t			current_time;
+	double			elapsed_time;
+
+	current_time = clock();
+	elapsed_time = (double)(current_time - last_time) / CLOCKS_PER_SEC;
+	if (game->player.is_shooting && elapsed_time > 0.2)
 	{
-		w = 0;
-		while (w < game->tex_hands.width)
+		game->player.gun_current_frame++;
+		if (game->player.gun_current_frame >= 5)
 		{
-			color = get_tex_color(&game->tex_hands, w, h);
-			if (color)
-				put_pixel(x + w, y + h, get_tex_color(&game->tex_hands,
-						w, h), game);
-			w++;
+			game->player.gun_current_frame = 0;
+			game->player.is_shooting = 0;
 		}
-		h++;
+		last_time = current_time;
+	}
+}
+
+void	draw_gun(t_game *game)
+{
+	t_tex			*current_frame;
+	t_gun_frames	values;
+
+	current_frame = &game->player.gun_frames[0];
+	if (game->player.is_shooting)
+		current_frame = &game->player.gun_frames[
+			game->player.gun_current_frame];
+	values.x = (WIN_WIDTH / 2) - (current_frame->width / 2);
+	values.y = WIN_HEIGHT - current_frame->height - 24;
+	values.h = 0;
+	while (values.h < current_frame->height)
+	{
+		values.w = 0;
+		while (values.w < current_frame->width)
+		{
+			values.color = get_tex_color(current_frame, values.w, values.h);
+			if (values.color)
+				put_pixel(values.x + values.w, values.y + values.h,
+					values.color, game);
+			values.w++;
+		}
+		values.h++;
 	}
 }
 

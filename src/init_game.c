@@ -6,7 +6,7 @@
 /*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:09:53 by tschetti          #+#    #+#             */
-/*   Updated: 2025/01/19 16:34:00 by tschetti         ###   ########.fr       */
+/*   Updated: 2025/01/24 15:05:20 by tschetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	init_player(t_play *player)
 	player->move_speed = 7.42;
 	player->render_mode = 1;
 	player->minimap_view = 0;
+	player->is_shooting = 0;
 }
 
 //bpp e' bit per pixel

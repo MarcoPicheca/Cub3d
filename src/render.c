@@ -6,7 +6,7 @@
 /*   By: tschetti <tschetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 02:20:15 by tschetti          #+#    #+#             */
-/*   Updated: 2025/01/14 11:31:59 by tschetti         ###   ########.fr       */
+/*   Updated: 2025/01/24 16:22:35 by tschetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,8 @@ void	render_3d_view(t_game *game)
 		draw_single_3d_ray(game, r, current_angle, &settings);
 		r++;
 	}
-	draw_hands(game);
+	update_gun_animation(game);
+	draw_gun(game);
 }
 
 #endif
